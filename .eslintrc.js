@@ -14,10 +14,24 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {
-    'no-console': 'off',
+    'no-console': 0,
     'import/no-unresolved': 0,
-    'react/jsx-filename-extension': {
-      extensions: ['.jsx', '.tsx'],
-    },
+    'import/extensions': 0,
+    'react/prop-types': 0,
+    'no-use-before-define': 0,
+    'react/jsx-props-no-spreading': 0,
+    '@typescript-eslint/no-use-before-define': ['error'],
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.tsx', '.ts'] }],
+    'jsx-a11y/anchor-is-valid': [
+      'error',
+      {
+        components: ['Link'],
+        specialLink: ['hrefLeft', 'hrefRight'],
+        aspects: ['invalidHref', 'preferButton'],
+      },
+    ],
+    // 'react/jsx-filename-extension': {
+    //   extensions: ['.jsx', '.tsx'],
+    // },
   },
 };
