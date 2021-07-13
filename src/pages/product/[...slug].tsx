@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { GetStaticProps, GetStaticPaths } from 'next';
-import fetchSingleProduct from '../../actions/hooks/homePage/userActionHooks';
+import fetchSingleProduct from '../../actions/hooks/shopping/userActionHooks';
 
 const ProductItem = ({ product }) => (
   <div>
