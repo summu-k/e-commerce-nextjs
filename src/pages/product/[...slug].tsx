@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { fetchSingleProduct } from '../../actions/hooks/homePage/userActionHooks';
+import { GetStaticProps, GetStaticPaths } from 'next';
+import fetchSingleProduct from '../../actions/hooks/homePage/userActionHooks';
 
 const ProductItem = ({ product }) => (
   <div>
@@ -77,11 +78,56 @@ const ProductItem = ({ product }) => (
 
 export default ProductItem;
 
-export async function getServerSideProps({ params: { id } }) {
+// using getServerSideProps generate page on demand
+// export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+// export async function getServerSideProps({ params: { id } }) {
+//   const productData = await fetchSingleProduct(id);
+//   return {
+//     props: { product: productData.data },
+//   };
+// }
+
+// TODO: using getStaticProps and getStaticPaths
+
+// using getStaticProps and getStaticPaths for static generation of dynamic routes
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const [id] = params.slug.slice(-1);
   const productData = await fetchSingleProduct(id);
   return {
     props: { product: productData.data },
   };
-}
+};
 
-// TODO: using getStaticProps and getStaticPaths
+// export async function getStaticProps({ params: { id, name } }) {
+// console.log('id, name ', id, name);
+// const productData = await fetchSingleProduct(id);
+// return {
+// props: { product: productData.data },
+// };
+// }
+
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: [
+    { params: { slug: ['rick-sanchez', '1'] } },
+    { params: { slug: ['morty-smith', '2'] } },
+    { params: { slug: ['summer-smith', '3'] } },
+    { params: { slug: ['beth-smith', '4'] } },
+    { params: { slug: ['jerry-smith', '5'] } },
+    { params: { slug: ['abadango-cluster-princess', '6'] } },
+    { params: { slug: ['abradolf-lincler', '7'] } },
+    { params: { slug: ['adjudicator-rick', '8'] } },
+    { params: { slug: ['agency-director', '9'] } },
+    { params: { slug: ['alan-rails', '10'] } },
+    { params: { slug: ['albert-einstein', '11'] } },
+    { params: { slug: ['alexander', '12'] } },
+    { params: { slug: ['alien-googah', '13'] } },
+    { params: { slug: ['alien-morty', '14'] } },
+    { params: { slug: ['alien-rick', '15'] } },
+    { params: { slug: ['amish-cyborg', '16'] } },
+    { params: { slug: ['annie', '17'] } },
+    { params: { slug: ['antenna-morty', '18'] } },
+    { params: { slug: ['antenna-rick', '19'] } },
+    { params: { slug: ['ants-in-my-eyes-johnson', '20'] } },
+  ],
+  fallback: false,
+});

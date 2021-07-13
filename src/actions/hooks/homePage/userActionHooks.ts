@@ -1,7 +1,8 @@
-import versionedWebAppAxios from '../../../axios';
-
+import versionedWebAppAxios from '../../../httpClient';
 
 export function fetchSingleProduct(data) {
-    const url = `/${data}`;
-    return versionedWebAppAxios.get(url)
+  const url = `/${data}`;
+  return versionedWebAppAxios.get(url);
 }
+
+export default fetchSingleProduct;
