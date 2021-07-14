@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { GetStaticProps } from 'next';
-import Link from 'next/link';
+// import Link from 'next/link';
+import ProductCard from '../component/ProductCard';
 
 export default function Home(productData) {
   const [productList, setProductList] = useState([]);
-  console.log('NEXT_PUBLIC_WEB_APP_URL ', process.env.NEXT_PUBLIC_WEB_APP_URL);
 
   React.useEffect(() => {
     interface IKeys {
@@ -16,12 +16,10 @@ export default function Home(productData) {
       species: string;
     }
 
-    const productListData = productData.searchResult.results.map((data: IKeys) => {
-      let slug = data.name;
-      slug = slug.replace(/\s+/g, '-').toLowerCase();
-      return (
-        <>
-          <div className="max-w-sm rounded overflow-hidden shadow-lg mg-5 mx-8 my-4" key={data.id}>
+    const productListData = productData.searchResult.results.map((data: IKeys) => (
+      <>
+        <ProductCard key={data.id} product={data} />
+        {/* <div className="max-w-sm rounded overflow-hidden shadow-lg mg-5 mx-8 my-4" key={data.id}>
             <img className="w-full" src={data.image} alt="Product images" />
             <div className="px-6 py-4">
               <Link href="/product/[name]/[id]" as={`/product/${slug}/${data.id}`}>
@@ -40,10 +38,9 @@ export default function Home(productData) {
                 {data.species}
               </span>
             </div>
-          </div>
-        </>
-      );
-    });
+          </div> */}
+      </>
+    ));
     setProductList(productListData);
   }, [productData]);
 
@@ -51,7 +48,7 @@ export default function Home(productData) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const url = `${process.env.NEXT_PUBLIC_WEB_APP_URL}`;
+  const url = `${process.env.NEXT_PUBLIC_WEB_APP_URL}character`;
   let searchResult = await fetch(url);
   searchResult = await searchResult.json();
   return {

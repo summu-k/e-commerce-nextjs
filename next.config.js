@@ -9,4 +9,7 @@ module.exports = {
     // Will be available on both server and client
     staticFolder: '/static',
   },
+  images: {
+    domains: ['rickandmortyapi.com'],
+  },
 };

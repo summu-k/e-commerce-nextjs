@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "name": "Rick Sanchez",
+    "category": "planet",
+    "image": "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+    "price": 36.49,
+    "status": "Dead",
+    "species": "Human"
+  },
+  {
+    "id": 2,
+    "name": "Morty Smith",
+    "category": "cluster",
+    "image": "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
+    "price": 21.99,
+    "status": "Dead",
+    "species": "Alien"
+  },
+  {
+    "id": 3,
+    "name": "Summer Smith",
+    "category": "space-station",
+    "image": "https://rickandmortyapi.com/api/character/avatar/3.jpeg",
+    "price": 49.99,
+    "status": "Alive",
+    "species": "Mythological Creature"
+  },
+  {
+    "id": 4,
+    "name": "Beth Smith",
+    "category": "cluster",
+    "image": "https://rickandmortyapi.com/api/character/avatar/4.jpeg",
+    "price": 5.09,
+    "status": "Dead",
+    "species": "Alien"
+  },
+  {
+    "id": 5,
+    "name": "Jerry Smith",
+    "category": "planet",
+    "image": "https://rickandmortyapi.com/api/character/avatar/5.jpeg",
+    "price": 17.49,
+    "status": "Alive",
+    "species": "Humanoid"
+  },
+  {
+    "id": 6,
+    "name": "Abadango Cluster Princess",
+    "category": "cluster",
+    "image": "https://rickandmortyapi.com/api/character/avatar/6.jpeg",
+    "price": 29.35,
+    "status": "Dead",
+    "species": "Mythological Creature"
+  },
+  {
+    "id": 7,
+    "name": "Abradolf Lincler",
+    "category": "planet",
+    "image": "https://rickandmortyapi.com/api/character/avatar/7.jpeg",
+    "price": 18.99,
+    "status": "Alive",
+    "species": "Human"
+  },
+  {
+    "id": 8,
+    "name": "Adjudicator Rick",
+    "category": "space-station",
+    "image": "https://rickandmortyapi.com/api/character/avatar/8.jpeg",
+    "price": 29.99,
+    "status": "Alive",
+    "species": "Humanoid"
+  },
+  {
+    "id": 9,
+    "name": "Agency Director",
+    "category": "tv",
+    "image": "https://rickandmortyapi.com/api/character/avatar/9.jpeg",
+    "price": 69.99,
+    "status": "Dead",
+    "species": "Alien"
+  },
+  {
+    "id": 10,
+    "name": "Alan Rails",
+    "category": "microverse",
+    "image": "https://rickandmortyapi.com/api/character/avatar/10.jpeg",
+    "price": 69.99,
+    "status": "Dead",
+    "species": "Human"
+  },
+  {
+    "id": 11,
+    "name": "Albert Einstein",
+    "category": "tv",
+    "image": "https://rickandmortyapi.com/api/character/avatar/11.jpeg",
+    "price": 29.99,
+    "status": "Dead",
+    "species": "Human"
+  },
+  {
+    "id": 12,
+    "name": "Alexander",
+    "category": "microverse",
+    "image": "https://rickandmortyapi.com/api/character/avatar/12.jpeg",
+    "price": 59.99,
+    "status": "Dead",
+    "species": "Alien"
+  },
+  {
+    "id": 13,
+    "name": "Alien Googah",
+    "category": "planet",
+    "image": "https://rickandmortyapi.com/api/character/avatar/13.jpeg",
+    "price": 59.99,
+    "status": "Dead",
+    "species": "Human"
+  },
+  {
+    "id": 14,
+    "name": "Alien Morty",
+    "category": "microverse",
+    "image": "https://rickandmortyapi.com/api/character/avatar/14.jpeg",
+    "price": 59.99,
+    "status": "Dead",
+    "species": "Human"
+  },
+  {
+    "id": 15,
+    "name": "Alien Rick",
+    "category": "microverse",
+    "image": "https://rickandmortyapi.com/api/character/avatar/15.jpeg",
+    "price": 59.99,
+    "status": "Dead",
+    "species": "Human"
+  },
+  {
+    "id": 16,
+    "name": "Amish Cyborg",
+    "category": "space-station",
+    "image": "https://rickandmortyapi.com/api/character/avatar/16.jpeg",
+    "price": 14.99,
+    "status": "Alive",
+    "species": "Alien"
+  },
+  {
+    "id": 17,
+    "name": "Annie",
+    "category": "cluster",
+    "image": "https://rickandmortyapi.com/api/character/avatar/17.jpeg",
+    "price": 59.99,
+    "status": "Dead",
+    "species": "Human"
+  },
+  {
+    "id": 18,
+    "name": "Antenna Morty",
+    "category": "planet",
+    "image": "https://rickandmortyapi.com/api/character/avatar/18.jpeg",
+    "price": 59.99,
+    "status": "Alive",
+    "species": "Human"
+  },
+  {
+    "id": 19,
+    "name": "Antenna Rick",
+    "category": "space-station",
+    "image": "https://rickandmortyapi.com/api/character/avatar/19.jpeg",
+    "price": 29.99,
+    "status": "Dead",
+    "species": "Human"
+  },
+  {
+    "id": 20,
+    "name": "Ants in my Eyes Johnson",
+    "category": "planet",
+    "image": "https://rickandmortyapi.com/api/character/avatar/20.jpeg",
+    "price": 39.99,
+    "status": "Dead",
+    "species": "Humanoid"
+  }
+]

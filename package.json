@@ -12,13 +12,14 @@
     "*.js": "eslint --cache --fix"
   },
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3002",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky install"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.0",
     "autoprefixer": "^10.3.0",
     "axios": "^0.21.1",
     "eslint-config-airbnb-typescript": "^12.3.1",
@@ -27,6 +28,7 @@
     "postcss-cli": "^8.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-redux": "^7.2.4",
     "tailwindcss": "^2.2.4"
   },
   "devDependencies": {

@@ -3,5 +3,5 @@ import { fetchSingleProduct } from '../../../actions/hooks/shopping/userActionHo
 export default async function fetchSingleProductApi(req, res) {
   const { id } = req.query;
   const productData = await fetchSingleProduct(id);
-  res.json(productData.data);
+  res.status(200).json(productData.data);
 }

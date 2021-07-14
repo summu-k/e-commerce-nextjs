@@ -20,6 +20,7 @@ module.exports = {
     'react/prop-types': 0,
     'no-use-before-define': 0,
     'react/jsx-props-no-spreading': 0,
+    'no-shadow': [2, { builtinGlobals: false, hoist: 'functions', allow: [] }],
     '@typescript-eslint/no-use-before-define': ['error'],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.tsx', '.ts'] }],
     'jsx-a11y/anchor-is-valid': [

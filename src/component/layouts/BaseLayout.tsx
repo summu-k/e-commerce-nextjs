@@ -1,15 +1,23 @@
-import Head from 'next/head';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-
+import { useSelector } from 'react-redux';
+let cartFromLocalStorage = [];
 const BaseLayout = ({ children }) => {
-  const router = useRouter();
+  const cart = useSelector((state) => state.cart);
+  const [cartCount, setCartCount] = useState(0);
 
-  const isActive = (route) => {
-    if (route === router.pathname) {
-      return 'active';
-    }
+  React.useEffect(() => {
+    cartFromLocalStorage = JSON.parse(localStorage.getItem('cart')) || [];
+    setCartCount(getItemsCount());
+  }, []);
+
+  const getItemsCount = () => {
+    return cart.reduce(
+      (sum, item) => sum + item.quantity,
+      cartFromLocalStorage.reduce((localSum, localItem) => localSum + localItem.quantity, 0)
+    );
   };
+
   return (
     <>
       <nav className="bg-gray-600">
@@ -47,39 +55,46 @@ const BaseLayout = ({ children }) => {
             </div>
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex-shrink-0 flex items-center">
-                <img
-                  className="block lg:hidden h-8 w-auto"
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg"
-                  alt="Shopify"
-                />
-                <img
-                  className="hidden lg:block h-8 w-auto"
-                  src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg"
-                  alt="Shopify"
-                />
+                <Link href="/">
+                  <a>
+                    <img
+                      className="block lg:hidden h-8 w-auto"
+                      src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg"
+                      alt="Shopify"
+                    />
+                    <img
+                      className="hidden lg:block h-8 w-auto"
+                      src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg"
+                      alt="Shopify"
+                    />
+                  </a>
+                </Link>
               </div>
               <div className="hidden sm:block sm:ml-6">
                 <div className="flex space-x-4">
-                  <Link href="#">
+                  <Link href="/">
                     <a className="active:bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
                   </Link>
 
-                  <Link href="#">
+                  <Link href="/shop">
                     <a className="active:bg-gray-900 text-gray-300 active hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                      Category
+                      Shop By category
                     </a>
                   </Link>
 
-                  <Link href="#">
+                  <Link href="/category">
                     <a className="active:bg-gray-900 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                      Pages
+                      Category
                     </a>
                   </Link>
                 </div>
               </div>
             </div>
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <button className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+              <button
+                type="button"
+                className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+              >
                 <span className="sr-only">View notifications</span>
                 <svg
                   className="h-6 w-6"
@@ -120,23 +135,35 @@ const BaseLayout = ({ children }) => {
                   aria-orientation="vertical"
                   aria-labelledby="user-menu-button"
                 >
-                  <Link href="#">
+                  <Link href="/">
                     <a className="block px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-0">
                       Your Profile
                     </a>
                   </Link>
-                  <Link href="#">
+                  <Link href="/">
                     <a className="block px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-1">
                       Settings
                     </a>
                   </Link>
-                  <Link href="#">
+                  <Link href="/">
                     <a className="block px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-2">
                       Sign out
                     </a>
                   </Link>
                 </div>
               </div>
+
+              <button
+                type="button"
+                className="bg-gray-800 ml-2 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+              >
+                <svg className="flex-1 w-6 h-6 fill-current" viewBox="0 0 24 24">
+                  <path d="M17,18C15.89,18 15,18.89 15,20A2,2 0 0,0 17,22A2,2 0 0,0 19,20C19,18.89 18.1,18 17,18M1,2V4H3L6.6,11.59L5.24,14.04C5.09,14.32 5,14.65 5,15A2,2 0 0,0 7,17H19V15H7.42A0.25,0.25 0 0,1 7.17,14.75C7.17,14.7 7.18,14.66 7.2,14.63L8.1,13H15.55C16.3,13 16.96,12.58 17.3,11.97L20.88,5.5C20.95,5.34 21,5.17 21,5A1,1 0 0,0 20,4H5.21L4.27,2M7,18C5.89,18 5,18.89 5,20A2,2 0 0,0 7,22A2,2 0 0,0 9,20C9,18.89 8.1,18 7,18Z" />
+                </svg>
+                <span className="absolute top-4 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+                  {cartCount}
+                </span>
+              </button>
             </div>
           </div>
         </div>

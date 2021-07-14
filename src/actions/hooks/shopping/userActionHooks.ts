@@ -1,7 +1,7 @@
 import versionedWebAppAxios from '../../../httpClient';
 
 export function fetchSingleProduct(data) {
-  const url = `/${data}`;
+  const url = `character/${data}`;
   return versionedWebAppAxios.get(url);
 }
 

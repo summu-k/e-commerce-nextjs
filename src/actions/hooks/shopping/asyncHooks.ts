@@ -1,5 +1,8 @@
-export function fetchHomePageData() {
-  return true;
+import versionedWebAppAxios from '../../../httpClient';
+
+export function fetchAllProduct() {
+  const url = `character/`;
+  return versionedWebAppAxios.get(url);
 }
 
-export default fetchHomePageData;
+export default fetchAllProduct;
