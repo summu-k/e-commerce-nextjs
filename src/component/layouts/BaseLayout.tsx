@@ -78,13 +78,7 @@ const BaseLayout = ({ children }) => {
 
                   <Link href="/shop">
                     <a className="active:bg-gray-900 text-gray-300 active hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                      Shop By category
-                    </a>
-                  </Link>
-
-                  <Link href="/category">
-                    <a className="active:bg-gray-900 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                      Category
+                      Shop By Category
                     </a>
                   </Link>
                 </div>
