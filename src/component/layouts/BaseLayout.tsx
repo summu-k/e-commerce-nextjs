@@ -1,22 +1,27 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
+import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
+
+import type { RootState, AppDispatch } from '../../../redux/store';
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
 let cartFromLocalStorage = [];
 const BaseLayout = ({ children }) => {
-  const cart = useSelector((state) => state.cart);
+  const cart = useAppSelector((state) => state && state.cart);
   const [cartCount, setCartCount] = useState(0);
+
+  const getItemsCount = () =>
+    cart.reduce(
+      (sum, item) => sum + item.quantity,
+      cartFromLocalStorage.reduce((localSum, localItem) => localSum + localItem.quantity, 0)
+    );
 
   React.useEffect(() => {
     cartFromLocalStorage = JSON.parse(localStorage.getItem('cart')) || [];
     setCartCount(getItemsCount());
   }, []);
-
-  const getItemsCount = () => {
-    return cart.reduce(
-      (sum, item) => sum + item.quantity,
-      cartFromLocalStorage.reduce((localSum, localItem) => localSum + localItem.quantity, 0)
-    );
-  };
 
   return (
     <>
