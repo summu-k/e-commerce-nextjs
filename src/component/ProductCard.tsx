@@ -20,7 +20,7 @@ const ProductCard = ({ product }) => {
       <div className="max-w-sm rounded overflow-hidden shadow-lg mg-5 mx-8 my-4">
         <Image className="w-full" src={product.image} height={300} width={300} alt="Product images" />
         <div className="px-6 py-4">
-          <Link href="/product/[name]/[id]" as={`/product/${slug}/${product.id}`}>
+          <Link href={`/product/${slug}/${product.id}`}>
             <a>
               <h1 className="font-bold text-xl mb-2">{product.name}</h1>
             </a>
