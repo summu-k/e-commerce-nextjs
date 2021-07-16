@@ -10,6 +10,6 @@ module.exports = {
     staticFolder: '/static',
   },
   images: {
-    domains: ['rickandmortyapi.com'],
+    domains: ['rickandmortyapi.com', 'upload.wikimedia.org', 'images.unsplash.com'],
   },
 };

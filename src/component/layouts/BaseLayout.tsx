@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
 import { addToCart } from '../../../redux/cartSlice';
 
@@ -75,15 +76,12 @@ const BaseLayout = ({ children }) => {
               <div className="flex-shrink-0 flex items-center">
                 <Link href="/">
                   <a>
-                    <img
+                    <Image
                       className="block lg:hidden h-8 w-auto"
                       src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg"
                       alt="Shopify"
-                    />
-                    <img
-                      className="hidden lg:block h-8 w-auto"
-                      src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg"
-                      alt="Shopify"
+                      height={32}
+                      width={105}
                     />
                   </a>
                 </Link>
@@ -134,10 +132,12 @@ const BaseLayout = ({ children }) => {
                     aria-haspopup="true"
                   >
                     <span className="sr-only">Open user menu</span>
-                    <img
+                    <Image
                       className="h-8 w-8 rounded-full"
                       src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      alt=""
+                      alt="Avatar"
+                      width={32}
+                      height={32}
                     />
                   </button>
                 </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import fetchSingleProduct from '../../actions/hooks/shopping/userActionHooks';
 import fetchAllProduct from '../../actions/hooks/shopping/asyncHooks';
@@ -16,10 +17,12 @@ const ProductItem = ({ product }) => (
         <div className="w-96">
           <div className="shadow hover:shadow-lg transition duration-300 ease-in-out xl:mb-0 lg:mb-0 md:mb-0 mb-6 cursor-pointer group">
             <div className="overflow-hidden relative">
-              <img
+              <Image
                 className="w-full transition duration-700 ease-in-out group-hover:opacity-60"
                 src={product.image}
                 alt={product.name}
+                height={350}
+                width={350}
               />
               <div className="flex justify-center">
                 <div className="absolute bottom-4 transition duration-500 ease-in-out opacity-0 group-hover:opacity-100">
