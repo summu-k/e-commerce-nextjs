@@ -1,15 +1,12 @@
-module.exports = {
+const withPWA = require('next-pwa');
+
+module.exports = withPWA({
   reactStrictMode: true,
-  serverRuntimeConfig: {
-    // Will only be available on the server side
-    mySecret: 'secret',
-    secondSecret: process.env.SECOND_SECRET, // Pass through env variables
-  },
-  publicRuntimeConfig: {
-    // Will be available on both server and client
-    staticFolder: '/static',
+  pwa: {
+    dest: 'public',
+    swSrc: 'service-worker.js',
   },
   images: {
     domains: ['rickandmortyapi.com', 'upload.wikimedia.org', 'images.unsplash.com'],
   },
-};
+});

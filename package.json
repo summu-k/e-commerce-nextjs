@@ -15,14 +15,7 @@
     "dev": "next dev -p 3002",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "prepare": "husky install",
-    "pre-commit": "lint-staged",
-    "check-types": "tsc --pretty --noEmit",
-    "check-format": "prettier --check .",
-    "check-lint": "eslint . --ext ts --ext tsx --ext js",
-    "format": "prettier --write .",
-    "test-all": "npm run check-format && npm run check-lint && npm run check-types && npm run build"
+    "lint": "next lint"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.0",
@@ -30,6 +23,7 @@
     "axios": "^0.21.1",
     "eslint-config-airbnb-typescript": "^12.3.1",
     "next": "11.0.1",
+    "next-pwa": "^5.2.23",
     "postcss": "^8.3.5",
     "postcss-cli": "^8.1.0",
     "react": "17.0.2",
@@ -49,14 +43,8 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "husky": "^7.0.1",
     "lint-staged": "^11.0.0",
     "prettier": "^2.3.2",
     "typescript": "^4.3.5"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run test-all"
-    }
   }
 }
