@@ -2,10 +2,7 @@ import React from 'react';
 import { GetStaticProps } from 'next';
 import CategoryCard from '../component/CategoryCard';
 
-export default function Shop({ category }) {
-  console.log('category data ');
-  console.log(category);
-
+export default function Shop() {
   return (
     <main className="container">
       <div className="small">

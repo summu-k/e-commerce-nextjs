@@ -24,32 +24,35 @@ const CartPage = () => {
               <th className="bg-blue-100 border text-left px-8 py-4">Quantity</th>
               <th className="bg-blue-100 border text-left px-8 py-4">Actions</th>
             </tr>
-            {cart.map((item) => (
-              <tr>
-                <td className="border px-8 py-4">
-                  <Image src={item.image} height="90" width="65" />
-                </td>
-                <td className="border px-8 py-4">{item.name}</td>
-                <td className="border px-8 py-4">{item.quantity}</td>
-                <td className="border px-8 py-4">
-                  {' '}
-                  <button
-                    type="button"
-                    className="w-7 h-6 bg-black text-white"
-                    onClick={() => dispatch(incrementQuantity(item.id))}
-                  >
-                    +
-                  </button>
-                  <button
-                    type="button"
-                    className="w-7 h-6 bg-black text-white ml-2"
-                    onClick={() => dispatch(decrementQuantity(item.id))}
-                  >
-                    -
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {cart.map((item) => {
+              const { id, image, quantity, name } = item;
+              return (
+                <tr key={id}>
+                  <td className="border px-8 py-4">
+                    <Image src={image} height="90" width="65" />
+                  </td>
+                  <td className="border px-8 py-4">{name}</td>
+                  <td className="border px-8 py-4">{quantity}</td>
+                  <td className="border px-8 py-4">
+                    {' '}
+                    <button
+                      type="button"
+                      className="w-7 h-6 bg-black text-white"
+                      onClick={() => dispatch(incrementQuantity(id))}
+                    >
+                      +
+                    </button>
+                    <button
+                      type="button"
+                      className="w-7 h-6 bg-black text-white ml-2"
+                      onClick={() => dispatch(decrementQuantity(id))}
+                    >
+                      -
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </table>
         </>
       )}

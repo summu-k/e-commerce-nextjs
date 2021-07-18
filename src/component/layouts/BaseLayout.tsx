@@ -8,32 +8,31 @@ import type { RootState, AppDispatch } from '../../../redux/store';
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+type MyComponentProps = React.PropsWithChildren<{}>;
 
-let cartFromLocalStorage = [];
-const BaseLayout = ({ children }) => {
+const BaseLayout = ({ children }: MyComponentProps) => {
+  let cartFromLocalStorage: any[] = [];
   const dispatch = useDispatch();
   const cart = useAppSelector((state) => state && state.cart);
   const [cartCount, setCartCount] = useState(0);
 
-  const getItemsCount = () => {
-    console.log('in here getItemsCount ');
-
-    return (
-      cart.reduce((sum, item) => sum + item.quantity, 0) ||
-      cartFromLocalStorage.reduce((localSum, localItem) => localSum + localItem.quantity, 0)
-    );
-  };
+  const getItemsCount = () =>
+    cart.reduce((sum, { quantity }) => sum + quantity, 0) ||
+    cartFromLocalStorage.reduce((localSum, localItem) => localSum + localItem.quantity, 0);
 
   React.useEffect(() => {
-    cartFromLocalStorage = JSON.parse(localStorage.getItem('cart')) || [];
+    const returnUrl = localStorage.getItem('cart');
+    if (returnUrl) {
+      cartFromLocalStorage = JSON.parse(returnUrl);
+    } else {
+      cartFromLocalStorage = [];
+    }
     cartFromLocalStorage.forEach((cartItem) => {
       dispatch(addToCart(cartItem));
     });
   }, []);
 
   React.useEffect(() => {
-    console.log('cartCount useEffect ', cartCount);
-    console.log('cart useEffect ', cart);
     setCartCount(getItemsCount());
   }, [cart]);
 

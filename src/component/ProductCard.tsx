@@ -1,12 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addToCart } from '../../redux/cartSlice';
+import { ProductI } from '../utils/interfaces';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product: { id, image, name, status, species }, product }: { product: ProductI }) => {
   const dispatch = useDispatch();
-  let slug = product.name;
+  let slug = name;
   slug = slug.replace(/\s+/g, '-').toLowerCase();
 
   const setCartItem = () => {
@@ -18,20 +19,20 @@ const ProductCard = ({ product }) => {
   return (
     <div>
       <div className="max-w-sm rounded overflow-hidden shadow-lg mg-5 mx-8 my-4">
-        <Image className="w-full" src={product.image} height={300} width={300} alt="Product images" />
+        <Image className="w-full" src={image} height={300} width={300} alt="Product images" />
         <div className="px-6 py-4">
-          <Link href={`/product/${slug}/${product.id}`}>
+          <Link href={`/product/${slug}/${id}`}>
             <a>
-              <h1 className="font-bold text-xl mb-2">{product.name}</h1>
+              <h1 className="font-bold text-xl mb-2">{name}</h1>
             </a>
           </Link>
         </div>
         <div className="px-6 py-4">
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-800">
-            {product.status}
+            {status}
           </span>
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-800">
-            {product.species}
+            {species}
           </span>
         </div>
         <button

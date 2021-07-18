@@ -8,6 +8,5 @@ const Product = () => (
       <a>Go to Home Page</a>
     </Link>
   </div>
-);  
-
+);
 export default Product;

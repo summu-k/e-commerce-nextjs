@@ -2,12 +2,16 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { GetStaticProps, GetStaticPaths } from 'next';
+// import { AxiosResponse } from 'axios';
 import fetchSingleProduct from '../../actions/hooks/shopping/userActionHooks';
 import fetchAllProduct from '../../actions/hooks/shopping/asyncHooks';
+import { ProductI } from '../../utils/interfaces';
 
-const ProductItem = ({ product }) => (
+// const Foo: FunctionComponent<{}> = () => <div>Foobar</div>;
+
+const ProductItem = ({ product: { name, image, gender, species, status, type } }: { product: ProductI }) => (
   <div>
-    <h1 className="center">{product.name}</h1>
+    <h1 className="center">{name}</h1>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
@@ -19,8 +23,8 @@ const ProductItem = ({ product }) => (
             <div className="overflow-hidden relative">
               <Image
                 className="w-full transition duration-700 ease-in-out group-hover:opacity-60"
-                src={product.image}
-                alt={product.name}
+                src={image}
+                alt={name}
                 height={350}
                 width={350}
               />
@@ -48,17 +52,17 @@ const ProductItem = ({ product }) => (
               <Link href="/">
                 <a>
                   <h1 className="text-gray-800 font-semibold text-lg hover:text-red-500 transition duration-300 ease-in-out">
-                    {product.name}
+                    {name}
                   </h1>
                 </a>
               </Link>
               <h2 className="text-gray-800 font-semibold text-lg hover:text-red-500 transition duration-300 ease-in-out">
-                {product.gender}
+                {gender}
               </h2>
               <div className="flex py-2">
-                <p className="mr-2 text-xs text-gray-600">{product.status}</p>
-                <p className="mr-2 text-xs text-red-600">{product.species}</p>
-                <p className="mr-2 text-xs text-red-600">{product.type}</p>
+                <p className="mr-2 text-xs text-gray-600">{status}</p>
+                <p className="mr-2 text-xs text-red-600">{species}</p>
+                <p className="mr-2 text-xs text-red-600">{type}</p>
               </div>
               <div className="flex">
                 <div className="">
@@ -95,8 +99,10 @@ export default ProductItem;
 
 // using getStaticProps and getStaticPaths for static generation of dynamic routes
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const [id] = params.slug.slice(-1);
-  const productData = await fetchSingleProduct(id);
+  const check = params?.slug;
+  // let productData: AxiosResponse<any> | undefined;
+  const id = check?.slice(-1);
+  const productData: { data: ProductI } = await fetchSingleProduct(id);
   return {
     props: { product: productData.data },
   };
@@ -104,7 +110,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const allProducts = await fetchAllProduct();
-  const paths = allProducts.data.results.map((post) => {
+  const paths = allProducts.data.results.map((post: ProductI) => {
     let slugVal = `${post.name}`;
     slugVal = slugVal.replace(/\s+/g, '-').toLowerCase();
     const dataSlug = [slugVal, `${post.id}`];

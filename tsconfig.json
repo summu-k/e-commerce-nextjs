@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
+    "strict": true,
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -15,6 +15,14 @@
     "downlevelIteration": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "service-worker.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "next.config.js",
+    "**/src/**/*.ts",
+    "**/test/**/*.ts",
+    "redux/cartSlice.js"
+  ],
   "exclude": ["node_modules"]
 }

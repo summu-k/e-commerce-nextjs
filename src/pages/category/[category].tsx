@@ -2,8 +2,9 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import ProductCard from '../../component/ProductCard';
 import { getProductsByCategory } from '../api/category/[category]';
+import { ProductI } from '../../utils/interfaces';
 
-const CategoryPage = ({ products }) => {
+const CategoryPage = ({ products }: { products: ProductI[] }) => {
   const router = useRouter();
 
   return (
@@ -20,7 +21,7 @@ const CategoryPage = ({ products }) => {
 
 export default CategoryPage;
 
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps(ctx: { query: { category: any } }) {
   const { category } = ctx.query;
   const products = await getProductsByCategory(category);
   return { props: { products } };

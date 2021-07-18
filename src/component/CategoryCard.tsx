@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const CategoryCard = ({ image, name }) => (
+interface Props {
+  image: string;
+  name: string;
+}
+
+const CategoryCard: FC<Props> = ({ image, name }) => (
   <div className="card">
     <Image className="image" src={image} height={700} width={1300} />
     <Link href={`/category/${name.replace(/\s+/g, '-').toLowerCase()}`}>

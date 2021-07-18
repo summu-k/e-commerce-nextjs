@@ -1,6 +1,7 @@
+import { AxiosResponse } from 'axios';
 import versionedWebAppAxios from '../../../httpClient';
 
-export function fetchAllProduct() {
+function fetchAllProduct(): Promise<AxiosResponse> {
   const url = `character/`;
   return versionedWebAppAxios.get(url);
 }
