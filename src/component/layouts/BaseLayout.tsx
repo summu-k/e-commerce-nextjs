@@ -108,7 +108,7 @@ const BaseLayout = ({ children }: MyComponentProps) => {
               </a>
             </Link>
 
-            <Link href="/cart">
+            <Link href="/carts">
               <a className="pl-3 inline-block no-underline hover:text-black">
                 <svg
                   className="fill-current hover:text-black"

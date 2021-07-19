@@ -11,10 +11,7 @@ import { ProductI } from '../../utils/interfaces';
 
 const ProductItem = ({ product: { name, image, gender, species, status, type } }: { product: ProductI }) => (
   <div>
-    <h1 className="center">{name}</h1>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-
     <div className="text-gray-800 text-xl text-center pt-4">Ecommerce Product Details</div>
     <div className="w-full h-screen flex justify-center items-center">
       <div>
