@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
 import { addToCart } from '../../../redux/cartSlice';
 
@@ -38,150 +37,98 @@ const BaseLayout = ({ children }: MyComponentProps) => {
 
   return (
     <>
-      <nav className="bg-gray-600">
-        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-          <div className="relative flex items-center justify-between h-16">
-            <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-              <button
-                type="button"
-                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                aria-controls="mobile-menu"
-                aria-expanded="false"
-              >
-                <span className="sr-only">Open main menu</span>
-                <svg
-                  className="block h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-                <svg
-                  className="hidden h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-            <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-              <div className="flex-shrink-0 flex items-center">
-                <Link href="/">
-                  <a>
-                    <Image
-                      className="block lg:hidden h-8 w-auto"
-                      src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg"
-                      alt="Shopify"
-                      height={32}
-                      width={105}
-                    />
-                  </a>
-                </Link>
-              </div>
-              <div className="hidden sm:block sm:ml-6">
-                <div className="flex space-x-4">
-                  <Link href="/">
-                    <a className="active:bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                  </Link>
+      <nav id="header" className="w-full z-30 top-0 py-1">
+        <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3">
+          <label htmlFor="menu-toggle" className="cursor-pointer md:hidden block">
+            <svg
+              className="fill-current text-gray-900"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+            >
+              <title>menu</title>
+              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+            </svg>
+            <input className="hidden" type="checkbox" id="menu-toggle" />
+          </label>
 
+          <div className="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1" id="menu">
+            <nav>
+              <ul className="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
+                <li>
+                  <Link href="/">
+                    <a className="inline-block no-underline hover:text-black hover:underline py-2 px-4">Home</a>
+                  </Link>
+                </li>
+                <li>
                   <Link href="/shop">
-                    <a className="active:bg-gray-900 text-gray-300 active hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                      Shop By Category
-                    </a>
+                    <a className="inline-block no-underline hover:text-black hover:underline py-2 px-4">Category</a>
                   </Link>
-                </div>
-              </div>
-            </div>
-            <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <button
-                type="button"
-                className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-              >
-                <span className="sr-only">View notifications</span>
-                <svg
-                  className="h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                  />
-                </svg>
-              </button>
-              <div className="ml-3 relative dropdown group">
-                <div>
-                  <button
-                    type="button"
-                    className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                    id="user-menu-button"
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                  >
-                    <span className="sr-only">Open user menu</span>
-                    <Image
-                      className="h-8 w-8 rounded-full"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      alt="Avatar"
-                      width={32}
-                      height={32}
-                    />
-                  </button>
-                </div>
-                <div
-                  className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none opacity-0 group-hover:opacity-100 dropdown-menu"
-                  role="menu"
-                  aria-orientation="vertical"
-                  aria-labelledby="user-menu-button"
-                >
+                </li>
+                <li>
                   <Link href="/">
-                    <a className="block px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-0">
-                      Your Profile
-                    </a>
+                    <a className="inline-block no-underline hover:text-black hover:underline py-2 px-4">About</a>
                   </Link>
-                  <Link href="/">
-                    <a className="block px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-1">
-                      Settings
-                    </a>
-                  </Link>
-                  <Link href="/">
-                    <a className="block px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-2">
-                      Sign out
-                    </a>
-                  </Link>
-                </div>
-              </div>
+                </li>
+              </ul>
+            </nav>
+          </div>
 
-              <Link href="/cart">
-                <button
-                  type="button"
-                  className="bg-gray-800 ml-2 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+          <div className="order-1 md:order-2">
+            <Link href="/">
+              <a className="flex items-center tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl ">
+                <svg
+                  className="fill-current text-gray-800 mr-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
                 >
-                  <svg className="flex-1 w-6 h-6 fill-current" viewBox="0 0 24 24">
-                    <path d="M17,18C15.89,18 15,18.89 15,20A2,2 0 0,0 17,22A2,2 0 0,0 19,20C19,18.89 18.1,18 17,18M1,2V4H3L6.6,11.59L5.24,14.04C5.09,14.32 5,14.65 5,15A2,2 0 0,0 7,17H19V15H7.42A0.25,0.25 0 0,1 7.17,14.75C7.17,14.7 7.18,14.66 7.2,14.63L8.1,13H15.55C16.3,13 16.96,12.58 17.3,11.97L20.88,5.5C20.95,5.34 21,5.17 21,5A1,1 0 0,0 20,4H5.21L4.27,2M7,18C5.89,18 5,18.89 5,20A2,2 0 0,0 7,22A2,2 0 0,0 9,20C9,18.89 8.1,18 7,18Z" />
-                  </svg>
-                  <span className="absolute top-4 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
-                    {cartCount}
-                  </span>
-                </button>
-              </Link>
-            </div>
+                  <path d="M5,22h14c1.103,0,2-0.897,2-2V9c0-0.553-0.447-1-1-1h-3V7c0-2.757-2.243-5-5-5S7,4.243,7,7v1H4C3.447,8,3,8.447,3,9v11 C3,21.103,3.897,22,5,22z M9,7c0-1.654,1.346-3,3-3s3,1.346,3,3v1H9V7z M5,10h2v2h2v-2h6v2h2v-2h2l0.002,10H5V10z" />
+                </svg>
+                NORDICS
+              </a>
+            </Link>
+          </div>
+
+          <div className="order-2 md:order-3 flex items-center" id="nav-content">
+            <Link href="/">
+              <a className="inline-block no-underline hover:text-black">
+                <svg
+                  className="fill-current hover:text-black"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <circle fill="none" cx="12" cy="7" r="3" />
+                  <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5S14.757 2 12 2zM12 10c-1.654 0-3-1.346-3-3s1.346-3 3-3 3 1.346 3 3S13.654 10 12 10zM21 21v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h2v-1c0-2.757 2.243-5 5-5h4c2.757 0 5 2.243 5 5v1H21z" />
+                </svg>
+              </a>
+            </Link>
+
+            <Link href="/cart">
+              <a className="pl-3 inline-block no-underline hover:text-black">
+                <svg
+                  className="fill-current hover:text-black"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M21,7H7.462L5.91,3.586C5.748,3.229,5.392,3,5,3H2v2h2.356L9.09,15.414C9.252,15.771,9.608,16,10,16h8 c0.4,0,0.762-0.238,0.919-0.606l3-7c0.133-0.309,0.101-0.663-0.084-0.944C21.649,7.169,21.336,7,21,7z M17.341,14h-6.697L8.371,9 h11.112L17.341,14z" />
+                  <circle cx="10.5" cy="18.5" r="1.5" />
+                  <circle cx="17.5" cy="18.5" r="1.5" />
+                </svg>
+                <span className="absolute top-6 right-50 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+                  {cartCount}
+                </span>
+              </a>
+            </Link>
           </div>
         </div>
       </nav>
-
       {children}
     </>
   );

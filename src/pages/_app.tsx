@@ -26,7 +26,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
         <Head>
           <title>Shop Forever</title>
         </Head>
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </BaseLayout>
     </Provider>
   </html>

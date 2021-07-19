@@ -1,13 +1,7 @@
 import data from './data.json';
 
 export function getProductsByCategory(category: string) {
-  // const products = data.filter((product: ProductI) => product.category === category);
-  const products = data.map((product) => {
-    if (product.category === category) {
-      return product;
-    }
-    return undefined;
-  });
+  const products = data.filter((product) => product.category === category);
   return products;
 }
 
