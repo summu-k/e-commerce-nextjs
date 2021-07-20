@@ -11,10 +11,12 @@ const cartSlice = createSlice({
       } else if (!itemExists) {
         state.push({ ...action.payload, quantity: 1 });
       }
+      localStorage.setItem('cart', JSON.stringify(state));
     },
     incrementQuantity: (state, action) => {
       const itemIncFind = state.find((itemInc) => itemInc.id === action.payload);
       itemIncFind.quantity += 1;
+      localStorage.setItem('cart', JSON.stringify(state));
     },
     decrementQuantity: (state, action) => {
       const itemDecFind = state.find((item) => item.id === action.payload);
@@ -24,6 +26,7 @@ const cartSlice = createSlice({
       } else {
         itemDecFind.quantity -= 1;
       }
+      localStorage.setItem('cart', JSON.stringify(state));
     },
     removeFromCart: (state, action) => {
       const index = state.findIndex((item) => item.id === action.payload);
