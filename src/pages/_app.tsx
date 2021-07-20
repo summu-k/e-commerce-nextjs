@@ -16,7 +16,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
         content="This is e-commerce app fontend is build using NEXTJS, TS and it is also a PWA"
       />
       {/* Responsive meta tag */}
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1 ,shrink-to-fit=no" />
       <link rel="manifest" href="/manifest.json" />
       <link rel="apple-touch-icon" href="/assets/images/logo.png" />
       <meta name="theme-color" content="#fff" />
