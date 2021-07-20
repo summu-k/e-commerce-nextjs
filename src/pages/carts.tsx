@@ -14,7 +14,9 @@ const CartPage = () => {
   return (
     <>
       {cart.length === 0 ? (
-        <h1>Your Cart is Empty!</h1>
+        <span className="text-gray-800 text-xl text-center pt-4">
+          <h1>Your Cart is Empty!</h1>
+        </span>
       ) : (
         <>
           <body className="bg-gray-100">

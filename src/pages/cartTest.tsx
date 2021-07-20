@@ -26,7 +26,7 @@ const CartPage = () => {
                   <div className="w-full p-4 px-5 py-5">
                     <div className="md:grid md:grid-cols-3 gap-2 ">
                       <div className="col-span-2 p-5">
-                        <h1 className="text-xl font-medium">Shopping Cart</h1>
+                        <h1 className="text-xl font-medium ">Shopping Cart</h1>
                         {cart.map((item) => {
                           const { id, image, quantity, name, species } = item;
                           return (

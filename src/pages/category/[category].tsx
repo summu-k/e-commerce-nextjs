@@ -9,7 +9,7 @@ const CategoryPage = ({ products }: { products: ProductI[] }) => {
 
   return (
     <div className="container">
-      <h1 className="search-title">Results for {router.query.category}</h1>
+      <h1 className="text-xl font-medium text-center mt-4">Results for {router.query.category}</h1>
       <div className="cards flex flex-wrap">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />

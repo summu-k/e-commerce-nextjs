@@ -50,8 +50,8 @@ const BaseLayout = ({ children }: MyComponentProps) => {
               <title>menu</title>
               <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
             </svg>
-            <input className="hidden" type="checkbox" id="menu-toggle" />
           </label>
+          <input className="hidden" type="checkbox" id="menu-toggle" />
 
           <div className="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1" id="menu">
             <nav>
@@ -75,7 +75,7 @@ const BaseLayout = ({ children }: MyComponentProps) => {
             </nav>
           </div>
 
-          <div className="order-1 md:order-2">
+          <div className="order-1 md:order-2 mr-2">
             <Link href="/">
               <a className="flex items-center tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl ">
                 <svg
@@ -108,7 +108,7 @@ const BaseLayout = ({ children }: MyComponentProps) => {
               </a>
             </Link>
 
-            <Link href="/carts">
+            <Link href="/cart">
               <a className="pl-3 inline-block no-underline hover:text-black">
                 <svg
                   className="fill-current hover:text-black"

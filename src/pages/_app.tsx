@@ -10,10 +10,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
   <html lang="en">
     <Head>
       <title>Blog build using NEXT, TS, NODE,</title>
-      <meta property="og:title" content="Blog build using NEXT, TS, NODE," key="blog" />
+      <meta property="og:title" content="E-commerce build using NEXT, TS" key="e-commerce" />
       <meta
         name="description"
-        content="This is MERN stack blog app fontent is build using NEXTJS, TS and it is also a PWA and Backend is build in NODE, TYPESCRIPT, MONGODB"
+        content="This is e-commerce app fontend is build using NEXTJS, TS and it is also a PWA"
       />
       {/* Responsive meta tag */}
       <meta name="viewport" content="width=device-width, initial-scale=1" />
