@@ -40,10 +40,10 @@ const CartPage = () => {
                                   <span className="text-xs font-light text-gray-400">{species}</span>{' '}
                                 </div>
                               </div>
-                              <div className="flex justify-center items-center">
-                                <div className="pr-8 flex ">
+                              <div className="xl:flex md:flex justify-center items-center">
+                                <div className="xl:pr-8 md:pr-8 pb-4 xl:pb-0 md:pb-0 xl:inline-block xl:no-underline xl:hover:text-black md:inline-block md:no-underline md:hover:text-black">
                                   <svg
-                                    className="fill-current text-gray-600 w-3"
+                                    className="fill-current text-gray-600 w-3 custom-svg"
                                     viewBox="0 0 448 512"
                                     onClick={() => dispatch(decrementQuantity(id))}
                                   >
@@ -55,7 +55,7 @@ const CartPage = () => {
                                     value={quantity}
                                   />{' '}
                                   <svg
-                                    className="fill-current text-gray-600 w-3"
+                                    className="fill-current text-gray-600 w-3 custom-svg"
                                     viewBox="0 0 448 512"
                                     onClick={() => dispatch(incrementQuantity(id))}
                                   >
@@ -78,9 +78,6 @@ const CartPage = () => {
                         <div className="flex justify-between items-center mt-6 pt-6 border-t">
                           <div className="flex items-center">
                             <a href="/" className="flex font-semibold text-indigo-600 text-sm mt-10">
-                              <svg className="fill-current mr-2 text-indigo-600 w-4" viewBox="0 0 448 512">
-                                <path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z" />
-                              </svg>
                               Continue Shopping
                             </a>
                           </div>

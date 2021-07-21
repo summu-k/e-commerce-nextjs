@@ -178,5 +178,95 @@
     "price": 39.99,
     "status": "Dead",
     "species": "Humanoid"
+  },
+  {
+    "id": 21,
+    "name": "Aqua Morty",
+    "category": "planet",
+    "image": "https://rickandmortyapi.com/api/character/avatar/21.jpeg",
+    "price": 39.99,
+    "status": "unknown",
+    "species": "Humanoid"
+  },
+  {
+    "id": 22,
+    "name": "Aqua Rick",
+    "category": "planet",
+    "image": "https://rickandmortyapi.com/api/character/avatar/22.jpeg",
+    "price": 39.99,
+    "status": "unknown",
+    "species": "Humanoid"
+  },
+  {
+    "id": 23,
+    "name": "Arcade Alien",
+    "category": "planet",
+    "image": "https://rickandmortyapi.com/api/character/avatar/23.jpeg",
+    "price": 39.99,
+    "status": "unknown",
+    "species": "Alien"
+  },
+  {
+    "id": 24,
+    "name": "Armagheadon",
+    "category": "planet",
+    "image": "https://rickandmortyapi.com/api/character/avatar/24.jpeg",
+    "price": 39.99,
+    "status": "Alive",
+    "species": "Alien"
+  },
+  {
+    "id": 25,
+    "name": "Armothy",
+    "category": "planet",
+    "image": "https://rickandmortyapi.com/api/character/avatar/25.jpeg",
+    "price": 39.99,
+    "status": "Dead",
+    "species": "unknown"
+  },
+  {
+    "id": 26,
+    "name": "Arthricia",
+    "category": "planet",
+    "image": "https://rickandmortyapi.com/api/character/avatar/26.jpeg",
+    "price": 39.99,
+    "status": "Alive",
+    "species": "Alien"
+  },
+  {
+    "id": 27,
+    "name": "Artist Morty",
+    "category": "planet",
+    "image": "https://rickandmortyapi.com/api/character/avatar/27.jpeg",
+    "price": 39.99,
+    "status": "Alive",
+    "species": "Human"
+  },
+  {
+    "id": 28,
+    "name": "Attila Starwar",
+    "category": "planet",
+    "image": "https://rickandmortyapi.com/api/character/avatar/28.jpeg",
+    "price": 39.99,
+    "status": "Alive",
+    "species": "Human"
+  },
+  {
+    "id": 29,
+    "name": "Baby Legs",
+    "category": "planet",
+    "image": "https://rickandmortyapi.com/api/character/avatar/29.jpeg",
+    "price": 39.99,
+    "status": "Alive",
+    "species": "Human"
+  },
+  {
+    "id": 30,
+    "name": "Baby Poopybutthole",
+    "category": "planet",
+    "image": "https://rickandmortyapi.com/api/character/avatar/30.jpeg",
+    "price": 39.99,
+    "status": "Alive",
+    "species": "Poopybutthole"
   }
 ]

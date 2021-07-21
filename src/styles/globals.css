@@ -107,4 +107,8 @@
   text-transform: uppercase;
   margin: 2rem 1rem 1rem;
 }
+
+.custom-svg{
+  display: inline-block;
+}
 @tailwind utilities;
