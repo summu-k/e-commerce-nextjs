@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { GetStaticProps, GetStaticPaths } from 'next';
 // import { AxiosResponse } from 'axios';
-import fetchSingleProduct from '../../actions/hooks/shopping/userActionHooks';
+import { fetchSingleProduct } from '../../actions/hooks/shopping/userActionHooks';
 import fetchAllProduct from '../../actions/hooks/shopping/asyncHooks';
 import { ProductI } from '../../utils/interfaces';
 

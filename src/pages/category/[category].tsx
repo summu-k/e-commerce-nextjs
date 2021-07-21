@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import ProductCard from '../../component/ProductCard';
+import ProductCardTheme from '../../component/ProductCardTheme';
 import { getProductsByCategory, getProductCount } from '../api/category/[category]';
 import { ProductI } from '../../utils/interfaces';
 
 const CategoryPage = ({ products, productCount }: { products: ProductI[]; productCount: number }) => {
   const router = useRouter();
-  console.log('products test first ', products.length);
 
   const [data, setData] = useState(products);
   const [hasMore, setHasMore] = useState(true);
@@ -43,7 +42,7 @@ const CategoryPage = ({ products, productCount }: { products: ProductI[]; produc
       >
         <div className="cards flex flex-wrap">
           {data.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCardTheme key={product.id} product={product} />
           ))}
         </div>
       </InfiniteScroll>
@@ -56,7 +55,6 @@ export default CategoryPage;
 export async function getServerSideProps(ctx: { query: { category: string } }) {
   const { category } = ctx.query;
   const products = await getProductsByCategory(category, 0, 6);
-  console.log('products length first ', products.length);
   const productCount = await getProductCount(category);
   return { props: { products, productCount: +productCount } };
 }

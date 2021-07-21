@@ -14,8 +14,6 @@ const ProductCard = ({ product: { id, image, name, status, species }, product }:
     dispatch(addToCart(product));
   };
 
-  React.useEffect(() => {}, [dispatch]);
-
   return (
     <div>
       <div className="max-w-sm rounded overflow-hidden shadow-lg mg-5 mx-8 my-4">

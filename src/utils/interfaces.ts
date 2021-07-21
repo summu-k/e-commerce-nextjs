@@ -15,3 +15,10 @@ export interface ProductI {
   results: ProductI[];
   category: string;
 }
+
+export interface ProductInfo {
+  count: number;
+  pages: number;
+  next: string;
+  prev: any;
+}

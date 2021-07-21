@@ -108,7 +108,39 @@
   margin: 2rem 1rem 1rem;
 }
 
-.custom-svg{
+.custom-svg {
   display: inline-block;
+}
+
+.paginationBtns {
+  width: 80%;
+  height: 40px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.paginationBtns a {
+  padding: 10px;
+  margin: 8px;
+  border-radius: 5px;
+  border: 1px solid black;
+  color: black;
+  cursor: pointer;
+}
+
+.paginationBtns:not(.paginationDisabled) a:hover {
+  color: white;
+  background-color: rgba(31, 41, 55, var(--tw-bg-opacity));
+}
+
+.paginationActive a {
+  color: white;
+  background-color: rgba(31, 41, 55, var(--tw-bg-opacity));
+}
+
+.paginationDisabled a {
+  color: rgba(207, 204, 204, 0.452);
+  background-color: rgba(207, 204, 204, 0.452);
 }
 @tailwind utilities;

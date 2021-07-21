@@ -62,13 +62,13 @@ const BaseLayout = ({ children }: MyComponentProps) => {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/shop">
+                  <Link href="/category">
                     <a className="inline-block no-underline hover:text-black hover:underline py-2 px-4">Category</a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/">
-                    <a className="inline-block no-underline hover:text-black hover:underline py-2 px-4">About</a>
+                  <Link href="/shop">
+                    <a className="inline-block no-underline hover:text-black hover:underline py-2 px-4">Shop</a>
                   </Link>
                 </li>
               </ul>

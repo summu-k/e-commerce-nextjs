@@ -1,4 +1,4 @@
-import fetchSingleProduct from '../../../actions/hooks/shopping/userActionHooks';
+import { fetchSingleProduct } from '../../../actions/hooks/shopping/userActionHooks';
 
 export default async function fetchSingleProductApi(req: any, res: any): Promise<void> {
   const { id } = req.query;

@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../../redux/cartSlice';
 import { ProductI } from '../utils/interfaces';
 
-const ProductCard = ({ product: { id, image, name, status, species }, product }: { product: ProductI }) => {
+const ProductCardTheme = ({ product: { id, image, name, status, species }, product }: { product: ProductI }) => {
   const dispatch = useDispatch();
   let slug = name;
   slug = slug.replace(/\s+/g, '-').toLowerCase();
@@ -13,8 +13,6 @@ const ProductCard = ({ product: { id, image, name, status, species }, product }:
   const setCartItem = () => {
     dispatch(addToCart(product));
   };
-
-  React.useEffect(() => {}, [dispatch]);
 
   return (
     <>
@@ -55,4 +53,4 @@ const ProductCard = ({ product: { id, image, name, status, species }, product }:
   );
 };
 
-export default ProductCard;
+export default ProductCardTheme;
