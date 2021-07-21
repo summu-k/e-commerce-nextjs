@@ -61,6 +61,7 @@ export default function Home({ results, info }: { results: ProductI[]; info: Pro
           breakClassName="break-me"
           pageCount={pageCount}
           marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
           onPageChange={changePage}
           containerClassName="paginationBtns"
           pageClassName="page-item"
