@@ -112,35 +112,28 @@
   display: inline-block;
 }
 
-.paginationBtns {
-  width: 80%;
-  height: 40px;
-  list-style: none;
+.pagination-active {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgba(238, 242, 255, var(--tw-bg-opacity)) !important;
+  --tw-border-opacity: 1 !important;
+  border-color: rgba(99, 102, 241, var(--tw-border-opacity)) !important;
+}
+
+.paginationDisabled {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgba(249, 250, 251, var(--tw-bg-opacity)) !important;
+}
+
+.pagination {
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
 }
 
-.paginationBtns a {
-  padding: 10px;
-  margin: 8px;
-  border-radius: 5px;
-  border: 1px solid black;
-  color: black;
-  cursor: pointer;
-}
-
-.paginationBtns:not(.paginationDisabled) a:hover {
-  color: white;
-  background-color: rgba(31, 41, 55, var(--tw-bg-opacity));
-}
-
-.paginationActive a {
-  color: white;
-  background-color: rgba(31, 41, 55, var(--tw-bg-opacity));
-}
-
-.paginationDisabled a {
-  color: rgba(207, 204, 204, 0.452);
-  background-color: rgba(207, 204, 204, 0.452);
+.justify-content-center {
+  -ms-flex-pack: center !important;
+  justify-content: center !important;
 }
 @tailwind utilities;

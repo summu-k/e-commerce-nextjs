@@ -5,10 +5,13 @@ import ReactPaginate from 'react-paginate';
 import ProductCardTheme from '../component/ProductCardTheme';
 import { ProductI, ProductInfo } from '../utils/interfaces';
 import fetchAllProduct from '../actions/hooks/shopping/asyncHooks';
+import { getQueryString, apiQueryInterface } from '../utils/commonUtility';
 
 export default function Home({ results, info }: { results: ProductI[]; info: ProductInfo }) {
   const [productList, setProductList] = useState([] as any);
   const [pageNumber, setPageNumber] = useState(0 as number);
+  const [next, setNext] = useState(0 as number);
+  const [prev, setPrev] = useState(0 as number);
   const [productData, setProductData] = useState<ProductI[]>();
   const usersPerPage = 20;
 
@@ -27,10 +30,24 @@ export default function Home({ results, info }: { results: ProductI[]; info: Pro
     }
   }, [productData]);
 
+  React.useEffect(() => {
+    if (info.next) {
+      setNext(getQueryString(info.next));
+    }
+    if (info.prev) {
+      setPrev(getQueryString(info.prev));
+    }
+  }, [info]);
+
   const pageCount = Math.ceil(info.count / usersPerPage);
 
   const changePage = ({ selected }: { selected: number }) => {
     setPageNumber(selected + 1);
+  };
+
+  const mobileChangePage = (e: any, pgNum: number) => {
+    e.preventDefault();
+    setPageNumber(pgNum);
   };
 
   const getMorePaginatedProducts = async (pageNo: number) => {
@@ -39,8 +56,14 @@ export default function Home({ results, info }: { results: ProductI[]; info: Pro
     const url = `${process.env.NEXT_PUBLIC_WEB_APP_URL}character`;
     // const { data } = await fetchPagingProduct(usp.toString());
     const searchResult = await fetch(`${url}?${usp.toString()}`);
-    const res: { results: [] } = await searchResult.json();
+    const res: { results: []; info: apiQueryInterface } = await searchResult.json();
     setProductData(res.results);
+    if (res.info.next) {
+      setNext(getQueryString(res.info.next));
+    }
+    if (res.info.prev) {
+      setPrev(getQueryString(res.info.prev));
+    }
     window.scrollTo(0, 0);
   };
 
@@ -52,27 +75,51 @@ export default function Home({ results, info }: { results: ProductI[]; info: Pro
 
   return (
     <>
-      <div className="root-card flex flex-wrap">
-        {productList}
-        <ReactPaginate
-          previousLabel="Previous"
-          nextLabel="Next"
-          breakLabel="..."
-          breakClassName="break-me"
-          pageCount={pageCount}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          onPageChange={changePage}
-          containerClassName="paginationBtns"
-          pageClassName="page-item"
-          activeClassName="paginationActive"
-          pageLinkClassName="page-link"
-          previousLinkClassName="previousBtn"
-          nextLinkClassName="nextBttn"
-          disabledClassName="paginationDisabled"
-          previousClassName="page-item"
-          nextClassName="page-item"
-        />
+      <div className="root-card flex flex-wrap">{productList}</div>
+      <div className="flex-1 flex justify-between sm:hidden">
+        {(prev || next) && (
+          <>
+            <a
+              href="/"
+              custom-attr={prev}
+              onClick={(e) => mobileChangePage(e, prev)}
+              className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+            >
+              Previous
+            </a>
+            <a
+              href="/"
+              custom-attr={next}
+              onClick={(e) => mobileChangePage(e, next)}
+              className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+            >
+              Next
+            </a>
+          </>
+        )}
+      </div>
+      <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between pagination justify-content-center">
+        <div className="max-w-full flex-wrap">
+          <ReactPaginate
+            previousLabel="Previous"
+            nextLabel="Next"
+            breakLabel="..."
+            breakClassName="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700"
+            pageCount={pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={changePage}
+            containerClassName="dummy"
+            pageClassName="bg-white border-gray-300 text-gray-500 cursor-pointer hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+            activeClassName="pagination-active"
+            pageLinkClassName="page-link"
+            previousLinkClassName="previousBtn"
+            nextLinkClassName="nextBttn"
+            disabledClassName="paginationDisabled"
+            previousClassName="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 cursor-pointer hover:bg-gray-50"
+            nextClassName="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 cursor-pointer hover:bg-gray-50"
+          />
+        </div>
       </div>
     </>
   );
