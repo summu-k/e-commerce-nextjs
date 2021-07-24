@@ -1,4 +1,5 @@
 {
+  "noEmitOnError": true,
   "compilerOptions": {
     "strict": true,
     "target": "es5",
