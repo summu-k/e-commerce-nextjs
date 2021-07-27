@@ -75,7 +75,7 @@ export default function Home({ results, info }: { results: ProductI[]; info: Pro
 
   return (
     <>
-      <div className="root-card flex flex-wrap">{productList}</div>
+      <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12">{productList}</div>
       <div className="flex-1 flex justify-between sm:hidden">
         {(prev || next) && (
           <>

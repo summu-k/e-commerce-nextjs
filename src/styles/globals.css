@@ -110,6 +110,7 @@
 
 .custom-svg {
   display: inline-block;
+  cursor: pointer;
 }
 
 .pagination-active {

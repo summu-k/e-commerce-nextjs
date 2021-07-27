@@ -57,7 +57,7 @@ const CartPage = () => {
                         </div>
                         <div className="flex justify-center w-1/5">
                           <svg
-                            className="fill-current text-gray-600 w-3"
+                            className="fill-current text-gray-600 w-3 cursor-pointer"
                             viewBox="0 0 448 512"
                             onClick={() => dispatch(decrementQuantity(id))}
                           >
@@ -67,7 +67,7 @@ const CartPage = () => {
                           <input className="mx-2 border text-center w-8" type="text" value={`${quantity}`} />
 
                           <svg
-                            className="fill-current text-gray-600 w-3"
+                            className="fill-current text-gray-600 w-3 cursor-pointer"
                             viewBox="0 0 448 512"
                             onClick={() => dispatch(incrementQuantity(id))}
                           >

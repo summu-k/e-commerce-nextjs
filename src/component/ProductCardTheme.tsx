@@ -20,7 +20,7 @@ const ProductCardTheme = ({ product: { id, image, name, status, species }, produ
         <Image className="hover:grow hover:shadow-lg" src={image} height={300} width={300} alt="Product images" />
         <div className="pt-3 flex items-center justify-between">
           <Link href={`/product/${slug}/${id}`}>
-            <a>
+            <a className="w-full">
               <h1 className="font-bold text-xl mb-2">{name}</h1>
             </a>
           </Link>
@@ -33,7 +33,7 @@ const ProductCardTheme = ({ product: { id, image, name, status, species }, produ
           </svg>
         </div>
         <p className="pt-1 text-gray-900">£9.99</p>
-        <div className="px-6 py-4">
+        <div className="py-4 space-x-2">
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-800">
             {status}
           </span>

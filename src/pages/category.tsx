@@ -4,7 +4,7 @@ import CategoryCard from '../component/CategoryCard';
 
 export default function Shop() {
   return (
-    <main className="container">
+    <main className="container mx-auto flex items-center flex-wrap pt-4 pb-12">
       <div className="small">
         <CategoryCard image="https://rickandmortyapi.com/api/character/avatar/20.jpeg" name="Planet" />
         <CategoryCard image="https://rickandmortyapi.com/api/character/avatar/54.jpeg" name="Cluster" />

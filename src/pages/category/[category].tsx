@@ -35,9 +35,11 @@ const CategoryPage = ({ products, productCount }: { products: ProductI[]; produc
         hasMore={hasMore}
         loader={<h4>loading...</h4>}
         endMessage={
-          <p style={{ textAlign: 'center' }}>
-            <b>Thats all folks !!!</b>
-          </p>
+          <div className="cards text-center	">
+            <p>
+              <b>Thats all folks !!!</b>
+            </p>
+          </div>
         }
       >
         <div className="cards flex flex-wrap">

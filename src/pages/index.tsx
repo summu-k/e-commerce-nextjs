@@ -46,10 +46,10 @@ export default function Home({ res }: { res: ProductI }) {
                 </div>
               </div>
             </section>
-            <section className="bg-white py-8">
-              <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12">
+            <section className="bg-white">
+              <div className="container mx-auto flex items-center flex-wrap">
                 <nav id="store" className="w-full z-30 top-0 px-6 py-1">
-                  <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3">
+                  <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 pt-6">
                     <a
                       className="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl "
                       href="/"
@@ -87,7 +87,7 @@ export default function Home({ res }: { res: ProductI }) {
               </div>
             </section>
           </div>
-          <div className="root-card flex flex-wrap">{productList}</div>
+          <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12">{productList}</div>
         </>
       )}
     </>
