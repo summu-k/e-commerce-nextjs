@@ -37,4 +37,9 @@ module.exports = {
     //   extensions: ['.jsx', '.tsx'],
     // },
   },
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
 };
