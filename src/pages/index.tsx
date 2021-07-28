@@ -27,7 +27,7 @@ export default function Home({ res }: { res: ProductI }) {
         <amp-img width="300" height="300" src="/vercel.svg" alt="shopping website" layout="fixed" />
       ) : (
         <>
-          <div className="w-full z-30 top-0 py-1">
+          <div className="w-full z-30 top-0 pb-1">
             <section
               className="w-full mx-auto bg-nordic-gray-light flex pt-12 md:pt-0 md:items-center bg-cover bg-right xl h-98"
               style={{
