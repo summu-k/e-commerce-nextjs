@@ -28,14 +28,16 @@ const CategoryPage = ({ products, productCount }: { products: ProductI[]; produc
 
   return (
     <div className="container">
-      <h1 className="text-xl font-medium text-center mt-4">Results for {queryParams}</h1>
+      <h1 className="text-xl container mx-auto flex items-center flex-wrap font-medium mt-4">
+        Results for {queryParams}
+      </h1>
       <InfiniteScroll
         dataLength={data.length}
         next={getMoreResults}
         hasMore={hasMore}
         loader={<h4>loading...</h4>}
         endMessage={
-          <div className="cards text-center	">
+          <div className="cards text-center py-6">
             <p>
               <b>Thats all folks !!!</b>
             </p>
