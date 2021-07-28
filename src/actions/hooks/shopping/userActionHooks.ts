@@ -7,7 +7,6 @@ export function fetchSingleProduct(data: any): Promise<AxiosResponse<any>> {
 }
 
 export function fetchPagingProduct(params: string): Promise<AxiosResponse<any>> {
-  console.log('params test1 ', params);
   const url = `character?${params}`;
   return versionedWebAppAxios.get(url);
 }
