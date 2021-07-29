@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 import type { AppProps } from 'next/app';
 import Router from 'next/router';
-import BaseLayout from '../component/layouts/BaseLayout';
+import Header from '../component/baseLayouts/Header';
+import Footer from '../component/baseLayouts/Footer';
 import '../styles/globals.css';
 import store from '../../redux/store';
 import Loader from '../component/Loader';
@@ -36,12 +37,13 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           <meta name="theme-color" content="#fff" />
         </Head>
         <Provider store={store}>
-          <BaseLayout>
+          <Header>
             <Head>
               <title>Shop Forever</title>
             </Head>
             <Component {...pageProps} />
-          </BaseLayout>
+          </Header>
+          <Footer />
         </Provider>
       </html>
     </>
