@@ -41,7 +41,6 @@ export default ProductItem;
 // using getStaticProps and getStaticPaths for static generation of dynamic routes
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const check = params?.slug;
-  // let productData: AxiosResponse<any> | undefined;
   const id = check?.slice(-1);
   const productData: { data: ProductI } = await fetchSingleProduct(id);
   return {
