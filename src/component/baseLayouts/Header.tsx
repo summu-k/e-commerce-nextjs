@@ -1,25 +1,33 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
+import Router from 'next/router';
+import { isTablet, isDesktop } from 'react-device-detect';
 import { addToCart } from '../../../redux/cartSlice';
 import { addNotification } from '../../../redux/notificationSlice';
 import Notification from '../Notification';
+import HeaderNav from '../HeaderNav';
 
 import type { RootState, AppDispatch } from '../../../redux/store';
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-type MyComponentProps = React.PropsWithChildren<{}>;
+type ComponentProps = React.PropsWithChildren<{}>;
 
-const BaseLayout = ({ children }: MyComponentProps) => {
+const Header = ({ children }: ComponentProps) => {
   let cartFromLocalStorage: any[] = [];
   const dispatch = useDispatch();
   const cart = useAppSelector((state) => state && state.cart);
   const [cartCount, setCartCount] = useState(0);
+  const [hideMenu, setHideMenu] = useState(true as boolean);
 
   const getItemsCount = () =>
     cart.reduce((sum, { quantity }) => sum + quantity, 0) ||
     cartFromLocalStorage.reduce((localSum, localItem) => localSum + localItem.quantity, 0);
+
+  Router.events.on('routeChangeStart', () => {
+    setHideMenu(true);
+  });
 
   React.useEffect(() => {
     const returnUrl = localStorage.getItem('cart');
@@ -53,35 +61,25 @@ const BaseLayout = ({ children }: MyComponentProps) => {
               width="20"
               height="20"
               viewBox="0 0 20 20"
+              onClick={() => setHideMenu(!hideMenu)}
             >
               <title>menu</title>
               <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
             </svg>
           </label>
           <input className="hidden" type="checkbox" id="menu-toggle" />
-
-          <div className="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1" id="menu">
-            <nav>
-              <ul className="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
-                <li>
-                  <Link href="/">
-                    <a className="inline-block no-underline hover:text-black hover:underline py-2 px-4">Home</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/category">
-                    <a className="inline-block no-underline hover:text-black hover:underline py-2 px-4">Category</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/shop">
-                    <a className="inline-block no-underline hover:text-black hover:underline py-2 px-4">Shop</a>
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
-
+          {isDesktop || isTablet ? (
+            <div className="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1">
+              <HeaderNav />
+            </div>
+          ) : (
+            <div
+              className="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1"
+              style={{ display: hideMenu ? 'none' : 'block' }}
+            >
+              <HeaderNav />
+            </div>
+          )}
           <div className="order-1 md:order-2 mr-2">
             <Link href="/">
               <a className="flex items-center tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl ">
@@ -98,7 +96,6 @@ const BaseLayout = ({ children }: MyComponentProps) => {
               </a>
             </Link>
           </div>
-
           <div className="order-2 md:order-3 flex items-center" id="nav-content">
             <Link href="/">
               <a className="inline-block no-underline hover:text-black">
@@ -141,4 +138,4 @@ const BaseLayout = ({ children }: MyComponentProps) => {
   );
 };
 
-export default BaseLayout;
+export default Header;

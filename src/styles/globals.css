@@ -5,9 +5,9 @@
   font-family: 'Work Sans', sans-serif;
 }
 
-#menu-toggle:checked + #menu {
+/* #menu-toggle:checked + #menu {
   display: block;
-}
+} */
 
 .hover\:grow {
   transition: all 0.3s;
@@ -248,4 +248,8 @@ svg:not(:root) {
   }
 }
 
+.text-palette-primary {
+  --tw-text-opacity: 1;
+  color: rgba(91, 33, 182, var(--tw-text-opacity));
+}
 @tailwind utilities;
