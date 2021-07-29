@@ -22,3 +22,12 @@ export interface ProductInfo {
   next: string;
   prev: any;
 }
+
+export interface ProductProps {
+  title: any;
+  description: string;
+  price: any;
+  gender: string;
+  status: string;
+  type: string;
+}

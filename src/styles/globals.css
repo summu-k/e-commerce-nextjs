@@ -248,4 +248,8 @@ svg:not(:root) {
   }
 }
 
+.text-palette-primary {
+  --tw-text-opacity: 1;
+  color: rgba(91, 33, 182, var(--tw-text-opacity));
+}
 @tailwind utilities;
