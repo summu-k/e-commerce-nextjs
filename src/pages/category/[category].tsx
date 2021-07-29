@@ -27,7 +27,7 @@ const CategoryPage = ({ products, productCount }: { products: ProductI[]; produc
   }, [data]);
 
   return (
-    <div className="container">
+    <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12">
       <h1 className="text-xl container mx-auto flex items-center flex-wrap font-medium mt-4">
         Results for {queryParams}
       </h1>
