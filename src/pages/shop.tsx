@@ -6,12 +6,14 @@ import ProductCardTheme from '../component/ProductCardTheme';
 import { ProductI, ProductInfo } from '../utils/interfaces';
 import fetchAllProduct from '../actions/hooks/shopping/asyncHooks';
 import { getQueryString, apiQueryInterface } from '../utils/commonUtility';
+import Loading from '../component/Loader';
 
 export default function Home({ results, info }: { results: ProductI[]; info: ProductInfo }) {
   const [productList, setProductList] = useState([] as any);
   const [pageNumber, setPageNumber] = useState(0 as number);
   const [next, setNext] = useState(0 as number);
   const [prev, setPrev] = useState(0 as number);
+  const [loading, setLoading] = useState(false as boolean);
   const [productData, setProductData] = useState<ProductI[]>();
   const usersPerPage = 20;
 
@@ -43,10 +45,12 @@ export default function Home({ results, info }: { results: ProductI[]; info: Pro
 
   const changePage = ({ selected }: { selected: number }) => {
     setPageNumber(selected + 1);
+    setLoading(true);
   };
 
   const mobileChangePage = (e: any, pgNum: number) => {
     e.preventDefault();
+    setLoading(true);
     setPageNumber(pgNum);
   };
 
@@ -64,6 +68,11 @@ export default function Home({ results, info }: { results: ProductI[]; info: Pro
     if (res.info.prev) {
       setPrev(getQueryString(res.info.prev));
     }
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
     window.scrollTo(0, 0);
   };
 
@@ -75,8 +84,10 @@ export default function Home({ results, info }: { results: ProductI[]; info: Pro
 
   return (
     <>
-      <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12">{productList}</div>
-      <div className="flex-1 flex justify-between sm:hidden">
+      <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12">
+        {loading ? <Loading /> : productList}
+      </div>
+      <div className="my-0 mx-auto w-1/2 sm:hidden">
         {(prev || next) && (
           <>
             <a
@@ -109,10 +120,10 @@ export default function Home({ results, info }: { results: ProductI[]; info: Pro
             marginPagesDisplayed={2}
             pageRangeDisplayed={5}
             onPageChange={changePage}
-            containerClassName="dummy"
-            pageClassName="bg-white border-gray-300 text-gray-500 cursor-pointer hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+            containerClassName="pagination justify-content-center"
+            pageClassName="page-navigation"
             activeClassName="pagination-active"
-            pageLinkClassName="page-link"
+            pageLinkClassName="bg-white border-gray-300 text-gray-500 cursor-pointer hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
             previousLinkClassName="previousBtn"
             nextLinkClassName="nextBttn"
             disabledClassName="paginationDisabled"

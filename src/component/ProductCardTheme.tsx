@@ -19,7 +19,11 @@ const ProductCardTheme = ({ product: { id, image, name, status, species }, produ
   return (
     <>
       <div className="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-        <Image className="hover:grow hover:shadow-lg" src={image} height={300} width={300} alt="Product images" />
+        <Link href={`/product/${slug}/${id}`}>
+          <a>
+            <Image className="hover:grow hover:shadow-lg" src={image} height={300} width={300} alt="Product images" />
+          </a>
+        </Link>
         <div className="pt-3 flex items-center justify-between">
           <Link href={`/product/${slug}/${id}`}>
             <a className="w-full">

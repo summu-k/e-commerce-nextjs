@@ -7,12 +7,7 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 const Notification = () => {
   const notification = useAppSelector((state) => state.notification);
-  const dispatch = useDispatch();
-  console.log('dispatch:: ', dispatch);
 
-  React.useEffect(() => {
-    console.log('notification useEffect ', notification);
-  }, [notification]);
   return (
     <>
       {notification && notification.type ? (

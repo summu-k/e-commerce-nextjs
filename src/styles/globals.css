@@ -113,7 +113,7 @@
   cursor: pointer;
 }
 
-.pagination-active {
+li.pagination-active a {
   --tw-bg-opacity: 1 !important;
   background-color: rgba(238, 242, 255, var(--tw-bg-opacity)) !important;
   --tw-border-opacity: 1 !important;
@@ -222,6 +222,30 @@ svg:not(:root) {
 
 .anticon > * {
   line-height: 1;
+}
+
+.loader {
+  border-top-color: #3498db;
+  -webkit-animation: spinner 1.5s linear infinite;
+  animation: spinner 1.5s linear infinite;
+}
+
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @tailwind utilities;
