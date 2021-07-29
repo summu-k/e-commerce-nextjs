@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../redux/cartSlice';
+import { addNotification } from '../../redux/notificationSlice';
 import { ProductI } from '../utils/interfaces';
 
 const ProductCardTheme = ({ product: { id, image, name, status, species }, product }: { product: ProductI }) => {
@@ -12,6 +13,7 @@ const ProductCardTheme = ({ product: { id, image, name, status, species }, produ
 
   const setCartItem = () => {
     dispatch(addToCart(product));
+    dispatch(addNotification({ message: 'Item has been added successfully', type: 'success' }));
   };
 
   return (

@@ -148,4 +148,80 @@
   box-shadow: 0px 0px 16px 0px rgba(0 0 0 / 25%);
 }
 
+.ant-message {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 13px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  -webkit-font-feature-settings: 'tnum', 'tnum';
+  font-feature-settings: 'tnum', 'tnum';
+  position: fixed;
+  top: 8px;
+  left: 0;
+  z-index: 1010;
+  width: 100%;
+  pointer-events: none;
+  opacity: 1;
+  transition: 200ms opacity ease-in-out;
+}
+
+.ant-message-notice {
+  padding: 8px;
+  text-align: center;
+}
+
+.ant-message-notice-content {
+  display: inline-block;
+  padding: 10px 16px;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 3px 6px -4px rgb(0 0 0 / 12%), 0 6px 16px 0 rgb(0 0 0 / 8%), 0 9px 28px 8px rgb(0 0 0 / 5%);
+  pointer-events: all;
+}
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+
+.ant-message .anticon {
+  position: relative;
+  top: 1px;
+  margin-right: 8px;
+  font-size: 15px;
+}
+
+.ant-message-success .anticon {
+  color: green;
+}
+
+.anticon {
+  display: inline-block;
+  color: inherit;
+  font-style: normal;
+  line-height: 0;
+  text-align: center;
+  text-transform: none;
+  vertical-align: -0.125em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.anticon svg {
+  display: inline-block;
+}
+svg:not(:root) {
+  overflow: hidden;
+}
+
+.anticon > * {
+  line-height: 1;
+}
+
 @tailwind utilities;

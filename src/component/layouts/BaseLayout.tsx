@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
 import { addToCart } from '../../../redux/cartSlice';
+import { addNotification } from '../../../redux/notificationSlice';
+import Notification from '../Notification';
 
 import type { RootState, AppDispatch } from '../../../redux/store';
 
@@ -29,6 +31,10 @@ const BaseLayout = ({ children }: MyComponentProps) => {
     cartFromLocalStorage.forEach((cartItem) => {
       dispatch(addToCart(cartItem));
     });
+
+    setTimeout(() => {
+      dispatch(addNotification({ message: '', type: '' }));
+    }, 10000);
   }, []);
 
   React.useEffect(() => {
@@ -37,6 +43,7 @@ const BaseLayout = ({ children }: MyComponentProps) => {
 
   return (
     <>
+      <Notification />
       <nav id="header" className="w-full z-30 top-0 py-1">
         <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3">
           <label htmlFor="menu-toggle" className="cursor-pointer md:hidden block">
