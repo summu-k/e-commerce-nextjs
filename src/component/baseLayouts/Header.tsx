@@ -6,15 +6,15 @@ import { isTablet, isDesktop } from 'react-device-detect';
 import { addToCart } from '../../../redux/cartSlice';
 import { addNotification } from '../../../redux/notificationSlice';
 import Notification from '../Notification';
-import HeaderNav from '../../component/HeaderNav';
+import HeaderNav from '../HeaderNav';
 
 import type { RootState, AppDispatch } from '../../../redux/store';
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-type MyComponentProps = React.PropsWithChildren<{}>;
+type ComponentProps = React.PropsWithChildren<{}>;
 
-const BaseLayout = ({ children }: MyComponentProps) => {
+const Header = ({ children }: ComponentProps) => {
   let cartFromLocalStorage: any[] = [];
   const dispatch = useDispatch();
   const cart = useAppSelector((state) => state && state.cart);
@@ -138,4 +138,4 @@ const BaseLayout = ({ children }: MyComponentProps) => {
   );
 };
 
-export default BaseLayout;
+export default Header;
