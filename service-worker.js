@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { skipWaiting, clientsClaim } from 'workbox-core';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { NetworkOnly, NetworkFirst, CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
@@ -10,8 +11,8 @@ clientsClaim();
 // must include following lines when using inject manifest module from workbox
 // https://developers.google.com/web/tools/workbox/guides/precache-files/workbox-build#add_an_injection_point
 // eslint-disable-next-line no-restricted-globals
-// eslint-disable-next-line no-underscore-dangle
 const WB_MANIFEST = window.self.__WB_MANIFEST;
+window.self.__WB_DISABLE_DEV_LOGS = true;
 // Precache fallback route and image
 WB_MANIFEST.push({
   url: '/fallback',
