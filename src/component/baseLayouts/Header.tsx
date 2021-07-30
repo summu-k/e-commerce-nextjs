@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
 import Router from 'next/router';
 import { isTablet, isDesktop } from 'react-device-detect';
 import { addToCart } from '../../../redux/cartSlice';
 import { addNotification } from '../../../redux/notificationSlice';
-import Notification from '../Notification';
-import HeaderNav from '../HeaderNav';
 
 import type { RootState, AppDispatch } from '../../../redux/store';
+
+const Notification = dynamic(() => import('../Notification'));
+const HeaderNav = dynamic(() => import('../HeaderNav'));
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

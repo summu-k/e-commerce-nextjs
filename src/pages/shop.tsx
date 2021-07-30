@@ -1,13 +1,15 @@
 /* eslint-disable react/jsx-curly-brace-presence */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { GetStaticProps } from 'next';
 import ReactPaginate from 'react-paginate';
-import ProductCardTheme from '../component/ProductCardTheme';
 import { ProductI, ProductInfo } from '../utils/interfaces';
 import fetchAllProduct from '../actions/hooks/shopping/asyncHooks';
 import { getQueryString, apiQueryInterface } from '../utils/commonUtility';
-import Loading from '../component/Loader';
+
+const ProductCardTheme = dynamic(() => import('../component/ProductCardTheme'));
+const Loader = dynamic(() => import('../component/Loader'));
 
 export default function Home({ results, info }: { results: ProductI[]; info: ProductInfo }) {
   const [productList, setProductList] = useState([] as any);
@@ -88,7 +90,7 @@ export default function Home({ results, info }: { results: ProductI[]; info: Pro
   return (
     <>
       <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12">
-        {loading ? <Loading /> : productList}
+        {loading ? <Loader /> : productList}
       </div>
       <div className="my-0 mx-auto w-1/2 sm:hidden">
         {(prev || next) && (

@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { GetStaticProps } from 'next';
 import { useAmp } from 'next/amp';
-import ProductCardTheme from '../component/ProductCardTheme';
 import { ProductI } from '../utils/interfaces';
 
 export const config = { amp: 'hybrid' };
+const ProductCardTheme = dynamic(() => import('../component/ProductCardTheme'));
 
 export default function Home({ res }: { res: ProductI }) {
   const isAmp = useAmp();

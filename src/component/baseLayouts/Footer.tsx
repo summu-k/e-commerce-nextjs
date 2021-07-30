@@ -1,5 +1,5 @@
 import React from 'react';
-// import Link from 'next/link';
+
 type ComponentProps = React.PropsWithChildren<{}>;
 
 const Footer = ({ children }: ComponentProps) => (

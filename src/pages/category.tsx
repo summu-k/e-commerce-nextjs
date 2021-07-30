@@ -1,6 +1,8 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 import { GetStaticProps } from 'next';
-import CategoryCard from '../component/CategoryCard';
+
+const CategoryCard = dynamic(() => import('../component/CategoryCard'));
 
 export default function Shop() {
   return (

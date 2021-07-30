@@ -1,13 +1,15 @@
 import { Provider } from 'react-redux';
+import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 import Head from 'next/head';
 import type { AppProps } from 'next/app';
 import Router from 'next/router';
-import Header from '../component/baseLayouts/Header';
-import Footer from '../component/baseLayouts/Footer';
 import '../styles/globals.css';
 import store from '../../redux/store';
-import Loader from '../component/Loader';
+
+const Header = dynamic(() => import('../component/baseLayouts/Header'));
+const Footer = dynamic(() => import('../component/baseLayouts/Footer'));
+const Loader = dynamic(() => import('../component/Loader'));
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const [loading, setLoading] = useState(false as boolean);
