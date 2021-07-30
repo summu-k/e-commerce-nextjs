@@ -1,6 +1,5 @@
 import React from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
-// import ProductImage from '../../component/ProductImage';
 import Image from 'next/image';
 import { fetchSingleProduct } from '../../actions/hooks/shopping/userActionHooks';
 import fetchAllProduct from '../../actions/hooks/shopping/asyncHooks';
