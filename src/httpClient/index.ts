@@ -13,5 +13,3 @@ const config = {
 const versionedWebAppAxios = axios.create({ ...config, baseURL: versionedBaseUrl });
 
 export default versionedWebAppAxios;
-
-// change this to generic
