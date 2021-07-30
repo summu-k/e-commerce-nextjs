@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-curly-brace-presence */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { GetStaticProps } from 'next';
@@ -50,8 +51,10 @@ export default function Home({ results, info }: { results: ProductI[]; info: Pro
 
   const mobileChangePage = (e: any, pgNum: number) => {
     e.preventDefault();
-    setLoading(true);
-    setPageNumber(pgNum);
+    if (pgNum !== 0) {
+      setLoading(true);
+      setPageNumber(pgNum);
+    }
   };
 
   const getMorePaginatedProducts = async (pageNo: number) => {
@@ -94,7 +97,9 @@ export default function Home({ results, info }: { results: ProductI[]; info: Pro
               href="/"
               custom-attr={prev}
               onClick={(e) => mobileChangePage(e, prev)}
-              className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+              className={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 ${
+                prev === 0 ? 'cursor-default' : 'cursor-pointer'
+              }`}
             >
               Previous
             </a>
@@ -102,7 +107,9 @@ export default function Home({ results, info }: { results: ProductI[]; info: Pro
               href="/"
               custom-attr={next}
               onClick={(e) => mobileChangePage(e, next)}
-              className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+              className={`ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 ${
+                next === 0 ? 'cursor-default' : 'cursor-pointer'
+              }`}
             >
               Next
             </a>
