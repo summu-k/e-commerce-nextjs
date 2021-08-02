@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, FC } from 'react';
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
-import Link from 'next/link';
+// import Image from 'next/image';
+// import Link from 'next/link';
 import { GetStaticProps } from 'next';
 import { useAmp } from 'next/amp';
 import { ProductDataProps } from '../utils/interfaces';
