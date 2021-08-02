@@ -11,7 +11,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     res.setHeader('Allow', ['GET']);
     res.status(405).json({ message: `Method ${req.method} is not allowed` });
   } else {
-    console.log('req.query:: ', req.query);
     const { category, start, limit } = req.query;
     if (typeof category === 'string' && typeof start === 'number' && typeof limit === 'number') {
       const products = getProductsByCategory(category, start, limit);

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Link from 'next/link';
 
 type ComponentProps = React.PropsWithChildren<{}>;
 
-const Footer = ({ children }: ComponentProps) => (
+const Footer: FC<ComponentProps> = ({ children }) => (
   <>
     <footer className="container mx-auto bg-white py-8 mt-8 border-t border-gray-400">
       <div className="container flex px-3 py-8 ">

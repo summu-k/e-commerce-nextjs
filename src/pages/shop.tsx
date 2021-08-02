@@ -43,7 +43,6 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
 
   React.useEffect(() => {
     if (info) {
-      console.log('info useEffect ', info);
       if (info.next) {
         setNext(getQueryString(info.next));
       }
