@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
-import dynamic from 'next/dynamic';
 import { GetStaticProps } from 'next';
-
-const CategoryCard = dynamic(() => import('../component/CategoryCard'));
+import CategoryCard from '../component/CategoryCard';
 
 const Category: FC = () => (
   <main className="container mx-auto flex items-center flex-wrap pt-4 pb-12">
