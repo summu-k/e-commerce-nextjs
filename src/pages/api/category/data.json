@@ -268,5 +268,41 @@
     "price": 39.99,
     "status": "Alive",
     "species": "Poopybutthole"
+  },
+  {
+    "id": 31,
+    "name": "Baby Wizard",
+    "category": "tv",
+    "image": "https://rickandmortyapi.com/api/character/avatar/31.jpeg",
+    "price": 29.99,
+    "status": "Dead",
+    "species": "Alien"
+  },
+  {
+    "id": 32,
+    "name": "Bearded Lady",
+    "category": "tv",
+    "image": "https://rickandmortyapi.com/api/character/avatar/32.jpeg",
+    "price": 29.99,
+    "status": "Alive",
+    "species": "Alien"
+  },
+  {
+    "id": 33,
+    "name": "Beebo",
+    "category": "tv",
+    "image": "https://rickandmortyapi.com/api/character/avatar/33.jpeg",
+    "price": 29.99,
+    "status": "Dead",
+    "species": "Alien"
+  },
+  {
+    "id": 34,
+    "name": "Beebo",
+    "category": "tv",
+    "image": "https://rickandmortyapi.com/api/character/avatar/34.jpeg",
+    "price": 49.99,
+    "status": "Dead",
+    "species": "Human"
   }
 ]

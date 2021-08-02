@@ -1,4 +1,4 @@
-export interface ProductI {
+export interface ProductDataProps {
   id: number;
   image: string;
   name: string;
@@ -12,24 +12,25 @@ export interface ProductI {
   origin: { name: string; url: string };
   location: { name: string; url: string };
   episode: string[];
-  results: ProductI[];
+  results: ProductDataProps[];
   category: string;
 }
 
-export interface ProductInfo {
+export interface ProductDataPropsnfo {
   count: number;
   pages: number;
   next: string;
-  prev: any;
+  prev: string;
 }
 
 export interface ProductProps {
-  title: any;
+  title: string;
   description: string;
-  price: any;
+  price: number;
   gender: string;
   status: string;
   type: string;
+  products: ProductDataProps;
 }
 
 export interface SeoProps {

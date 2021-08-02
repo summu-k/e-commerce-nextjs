@@ -1,10 +1,15 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { ProductI } from '../utils/interfaces';
+import { ProductDataProps } from '../utils/interfaces';
 import { addToCart } from '../../redux/cartSlice';
 import { addNotification } from '../../redux/notificationSlice';
 
-const ProductInfo = ({ product: { name, gender, species, status }, product }: { product: ProductI }) => {
+const ProductDataPropsnfo = ({
+  product: { name, gender, species, status },
+  product,
+}: {
+  product: ProductDataProps;
+}) => {
   const dispatch = useDispatch();
   const setCartItem = () => {
     dispatch(addToCart(product));
@@ -43,4 +48,4 @@ const ProductInfo = ({ product: { name, gender, species, status }, product }: { 
   );
 };
 
-export default ProductInfo;
+export default ProductDataPropsnfo;

@@ -4,9 +4,14 @@ import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../redux/cartSlice';
 import { addNotification } from '../../redux/notificationSlice';
-import { ProductI } from '../utils/interfaces';
+import { ProductDataProps } from '../utils/interfaces';
 
-const ProductCardTheme = ({ product: { id, image, name, status, species }, product }: { product: ProductI }) => {
+const ProductCardTheme = ({
+  product: { id, image, name, status, species },
+  product,
+}: {
+  product: ProductDataProps;
+}) => {
   const dispatch = useDispatch();
   let slug = name;
   slug = slug.replace(/\s+/g, '-').toLowerCase();

@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import versionedWebAppAxios from '../../../httpClient/index';
 
-export async function fetchSingleProduct(id: string | undefined) {
-  const url = `character/${id}`;
-  const productData = await versionedWebAppAxios.get(url);
-  return productData.data;
+export async function fetchAllProduct() {
+  const url = `character/`;
+  const allProducts = await versionedWebAppAxios.get(url);
+  return allProducts.data;
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -12,10 +12,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     res.setHeader('Allow', ['GET']);
     res.status(405).json({ message: `Method ${req.method} is not allowed` });
   } else {
-    const { productId } = req.query;
-    if (typeof productId === 'string') {
-      const products = fetchSingleProduct(productId);
-      res.status(200).json(products);
-    }
+    const products = fetchAllProduct();
+    res.status(200).json(products);
   }
 }

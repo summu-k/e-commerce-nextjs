@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { getProductsByCategory, getProductCount } from '../api/category/[category]';
-import { ProductI } from '../../utils/interfaces';
+import { ProductDataProps } from '../../utils/interfaces';
 
-const ProductCardTheme = dynamic(() => import('../../component/ProductCardTheme'));
-const InfiniteScroll = dynamic(() => import('react-infinite-scroll-component'));
+const ProductCardTheme = dynamic(() => import('../../component/ProductCardTheme'), {
+  loading: () => <p>Loading...</p>,
+});
 
-const CategoryPage = ({ products, productCount }: { products: ProductI[]; productCount: number }) => {
+const CategoryPage = ({ products, productCount }: { products: ProductDataProps[]; productCount: number }) => {
   const router = useRouter();
 
   const [data, setData] = useState(products);
@@ -60,7 +62,7 @@ export default CategoryPage;
 // export async function getServerSideProps(ctx: { query: { category: string; start: number; limit: number } }) {
 export async function getServerSideProps(ctx: { query: { category: string } }) {
   const { category } = ctx.query;
-  const products = await getProductsByCategory(category, 0, 6);
-  const productCount = await getProductCount(category);
+  const products = getProductsByCategory(category, 0, 6);
+  const productCount = getProductCount(category);
   return { props: { products, productCount: +productCount, pageTitle: category.toUpperCase() } };
 }

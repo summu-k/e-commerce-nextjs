@@ -4,17 +4,17 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { GetStaticProps } from 'next';
 import { useAmp } from 'next/amp';
-import { ProductI } from '../utils/interfaces';
+import { ProductDataProps } from '../utils/interfaces';
 
 export const config = { amp: 'hybrid' };
 const ProductCardTheme = dynamic(() => import('../component/ProductCardTheme'));
 
-const Home: FC<ProductI> = ({ results }) => {
+const Home: FC<ProductDataProps> = ({ results }) => {
   const isAmp = useAmp();
   const [productList, setProductList] = useState([] as any);
 
   React.useEffect(() => {
-    const productListData = results.map((data: ProductI) => <ProductCardTheme key={data.id} product={data} />);
+    const productListData = results.map((data: ProductDataProps) => <ProductCardTheme key={data.id} product={data} />);
     setProductList(productListData);
   }, [results]);
 
