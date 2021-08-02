@@ -43,7 +43,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const id = check?.slice(-1);
   const productData: { data: ProductI } = await fetchSingleProduct(id);
   return {
-    props: { product: productData.data },
+    props: { product: productData.data, pageTitle: check?.slice(0) },
   };
 };
 

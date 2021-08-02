@@ -62,5 +62,5 @@ export async function getServerSideProps(ctx: { query: { category: string } }) {
   const { category } = ctx.query;
   const products = await getProductsByCategory(category, 0, 6);
   const productCount = await getProductCount(category);
-  return { props: { products, productCount: +productCount } };
+  return { props: { products, productCount: +productCount, pageTitle: category.toUpperCase() } };
 }

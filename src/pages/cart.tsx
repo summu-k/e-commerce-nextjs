@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { GetServerSideProps } from 'next';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
 import { incrementQuantity, decrementQuantity } from '../../redux/cartSlice';
 import type { RootState, AppDispatch } from '../../redux/store';
@@ -145,5 +146,11 @@ const CartPage = () => {
     </>
   );
 };
+
+export const getServerSideProps: GetServerSideProps = async () => ({
+  props: {
+    pageTitle: 'Shop Forever Cart Page',
+  },
+});
 
 export default CartPage;

@@ -31,3 +31,7 @@ export interface ProductProps {
   status: string;
   type: string;
 }
+
+export interface SeoProps {
+  pageTitle: string;
+}

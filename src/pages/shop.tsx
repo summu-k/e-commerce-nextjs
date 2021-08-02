@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-curly-brace-presence */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import dynamic from 'next/dynamic';
 import { GetStaticProps } from 'next';
 import ReactPaginate from 'react-paginate';
@@ -11,12 +11,20 @@ import { getQueryString, apiQueryInterface } from '../utils/commonUtility';
 const ProductCardTheme = dynamic(() => import('../component/ProductCardTheme'));
 const Loader = dynamic(() => import('../component/Loader'));
 
-export default function Home({ results, info }: { results: ProductI[]; info: ProductInfo }) {
-  const [productList, setProductList] = useState([] as any);
-  const [pageNumber, setPageNumber] = useState(0 as number);
-  const [next, setNext] = useState(0 as number);
-  const [prev, setPrev] = useState(0 as number);
-  const [loading, setLoading] = useState(false as boolean);
+type ProductListingProps = {
+  results: ProductI[];
+  info: ProductInfo;
+};
+
+// export default function ProductListing({ results, info }: { results: ProductI[]; info: ProductInfo }) {
+// { results, info }
+const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
+  const [productList, setProductList] = useState<Object[]>();
+  const [pageNumber, setPageNumber] = useState<number>(0);
+  const [next, setNext] = useState<number>(0);
+  const [prev, setPrev] = useState<number>(0);
+  const [pageCount, setPageCount] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
   const [productData, setProductData] = useState<ProductI[]>();
   const usersPerPage = 20;
 
@@ -26,25 +34,23 @@ export default function Home({ results, info }: { results: ProductI[]; info: Pro
 
   React.useEffect(() => {
     if (productData) {
-      const productListData = productData.map((data: ProductI) => (
-        <>
-          <ProductCardTheme key={data.id} product={data} />
-        </>
-      ));
+      const productListData = productData.map((data: ProductI) => <ProductCardTheme key={data.id} product={data} />);
       setProductList(productListData);
     }
   }, [productData]);
 
   React.useEffect(() => {
-    if (info.next) {
-      setNext(getQueryString(info.next));
-    }
-    if (info.prev) {
-      setPrev(getQueryString(info.prev));
+    if (info) {
+      console.log('info useEffect ', info);
+      if (info.next) {
+        setNext(getQueryString(info.next));
+      }
+      if (info.prev) {
+        setPrev(getQueryString(info.prev));
+      }
+      setPageCount(Math.ceil(info.count / usersPerPage));
     }
   }, [info]);
-
-  const pageCount = Math.ceil(info.count / usersPerPage);
 
   const changePage = ({ selected }: { selected: number }) => {
     setPageNumber(selected + 1);
@@ -62,9 +68,9 @@ export default function Home({ results, info }: { results: ProductI[]; info: Pro
   const getMorePaginatedProducts = async (pageNo: number) => {
     const usp = new URLSearchParams();
     usp.set('page', `${pageNo}`);
-    const url = `${process.env.NEXT_PUBLIC_WEB_APP_URL}character`;
+    const productListUrl = `${process.env.NEXT_PUBLIC_WEB_APP_URL}character`;
     // const { data } = await fetchPagingProduct(usp.toString());
-    const searchResult = await fetch(`${url}?${usp.toString()}`);
+    const searchResult = await fetch(`${productListUrl}?${usp.toString()}`);
     const res: { results: []; info: apiQueryInterface } = await searchResult.json();
     setProductData(res.results);
     if (res.info.next) {
@@ -95,8 +101,8 @@ export default function Home({ results, info }: { results: ProductI[]; info: Pro
       <div className="my-0 mx-auto w-1/2 sm:hidden">
         {(prev || next) && (
           <>
-            <a
-              href="/"
+            <button
+              type="button"
               custom-attr={prev}
               onClick={(e) => mobileChangePage(e, prev)}
               className={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 ${
@@ -104,9 +110,9 @@ export default function Home({ results, info }: { results: ProductI[]; info: Pro
               }`}
             >
               Previous
-            </a>
-            <a
-              href="/"
+            </button>
+            <button
+              type="button"
               custom-attr={next}
               onClick={(e) => mobileChangePage(e, next)}
               className={`ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 ${
@@ -114,44 +120,50 @@ export default function Home({ results, info }: { results: ProductI[]; info: Pro
               }`}
             >
               Next
-            </a>
+            </button>
           </>
         )}
       </div>
       <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between pagination justify-content-center">
         <div className="max-w-full flex-wrap">
-          <ReactPaginate
-            previousLabel="Previous"
-            nextLabel="Next"
-            breakLabel="..."
-            breakClassName="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700"
-            pageCount={pageCount}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={5}
-            onPageChange={changePage}
-            containerClassName="pagination justify-content-center"
-            pageClassName="page-navigation"
-            activeClassName="pagination-active"
-            pageLinkClassName="bg-white border-gray-300 text-gray-500 cursor-pointer hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-            previousLinkClassName="previousBtn"
-            nextLinkClassName="nextBttn"
-            disabledClassName="paginationDisabled"
-            previousClassName="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 cursor-pointer hover:bg-gray-50"
-            nextClassName="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 cursor-pointer hover:bg-gray-50"
-          />
+          {pageCount && (
+            <ReactPaginate
+              previousLabel="Previous"
+              nextLabel="Next"
+              breakLabel="..."
+              breakClassName="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700"
+              pageCount={pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={changePage}
+              containerClassName="pagination justify-content-center"
+              pageClassName="page-navigation"
+              activeClassName="pagination-active"
+              pageLinkClassName="bg-white border-gray-300 text-gray-500 cursor-pointer hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+              previousLinkClassName="previousBtn"
+              nextLinkClassName="nextBttn"
+              disabledClassName="paginationDisabled"
+              previousClassName="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 cursor-pointer hover:bg-gray-50"
+              nextClassName="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 cursor-pointer hover:bg-gray-50"
+            />
+          )}
         </div>
       </div>
     </>
   );
-}
+};
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await fetchAllProduct();
-  const { results, info } = data;
+  const { data: productListing } = await fetchAllProduct();
+  console.log('data products ', productListing);
+  const { results, info } = productListing;
   return {
     props: {
       results,
       info,
+      pageTitle: 'Product Listing Shop',
     },
   };
 };
+
+export default ProductListing;
