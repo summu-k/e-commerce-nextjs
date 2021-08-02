@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import { GetServerSideProps } from 'next';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
@@ -78,9 +79,9 @@ const CartPage = () => {
 
                         <div className="flex justify-between items-center mt-6 pt-6 border-t">
                           <div className="flex items-center">
-                            <a href="/" className="flex font-semibold text-indigo-600 text-sm mt-10">
-                              Continue Shopping
-                            </a>
+                            <Link href="/shop">
+                              <a className="flex font-semibold text-indigo-600 text-sm mt-10">Continue Shopping</a>
+                            </Link>
                           </div>
                           <div className="flex justify-center items-end">
                             {' '}

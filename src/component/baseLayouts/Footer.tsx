@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 type ComponentProps = React.PropsWithChildren<{}>;
 
@@ -21,14 +22,15 @@ const Footer = ({ children }: ComponentProps) => (
               <h3 className="font-bold text-gray-900">Social</h3>
               <ul className="list-reset items-center pt-3">
                 <li>
-                  <a
-                    className="inline-block no-underline hover:text-black hover:underline py-1"
-                    href="https://www.proximity.tech/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Proximity Tech
-                  </a>
+                  <Link href="https://www.proximity.tech/">
+                    <a
+                      className="inline-block no-underline hover:text-black hover:underline py-1"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Proximity Tech
+                    </a>
+                  </Link>
                 </li>
               </ul>
             </div>

@@ -1,12 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ProductI } from '../src/utils/interfaces';
+import { ProductDataProps } from '../src/utils/interfaces';
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState: [],
   reducers: {
-    addToCart: (state: ProductI[], action) => {
-      const itemExists: ProductI | undefined = state.find((item: ProductI) => item.id === action.payload.id);
+    addToCart: (state: ProductDataProps[], action) => {
+      const itemExists: ProductDataProps | undefined = state.find(
+        (item: ProductDataProps) => item.id === action.payload.id
+      );
       if (itemExists) {
         itemExists.quantity += 1;
       } else if (!itemExists) {
@@ -14,18 +16,22 @@ const cartSlice = createSlice({
       }
       localStorage.setItem('cart', JSON.stringify(state));
     },
-    incrementQuantity: (state: ProductI[], action) => {
-      const itemIncFind: ProductI | undefined = state.find((itemInc: ProductI) => itemInc.id === action.payload);
+    incrementQuantity: (state: ProductDataProps[], action) => {
+      const itemIncFind: ProductDataProps | undefined = state.find(
+        (itemInc: ProductDataProps) => itemInc.id === action.payload
+      );
       if (itemIncFind) {
         itemIncFind.quantity += 1;
         localStorage.setItem('cart', JSON.stringify(state));
       }
     },
-    decrementQuantity: (state: ProductI[], action) => {
-      const itemDecFind: ProductI | undefined = state.find((item: ProductI) => item.id === action.payload);
+    decrementQuantity: (state: ProductDataProps[], action) => {
+      const itemDecFind: ProductDataProps | undefined = state.find(
+        (item: ProductDataProps) => item.id === action.payload
+      );
       if (itemDecFind) {
         if (itemDecFind.quantity === 1) {
-          const index = state.findIndex((item: ProductI) => item.id === action.payload);
+          const index = state.findIndex((item: ProductDataProps) => item.id === action.payload);
           state.splice(index, 1);
         } else {
           itemDecFind.quantity -= 1;
@@ -34,7 +40,7 @@ const cartSlice = createSlice({
       }
     },
     removeFromCart: (state, action) => {
-      const index = state.findIndex((item: ProductI) => item.id === action.payload);
+      const index = state.findIndex((item: ProductDataProps) => item.id === action.payload);
       state.splice(index, 1);
     },
   },
