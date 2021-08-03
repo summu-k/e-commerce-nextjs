@@ -3,7 +3,10 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['plugin:react/recommended', 'airbnb', 'prettier'],
+  globals: {
+    cy: true,
+  },
+  extends: ['plugin:react/recommended', 'airbnb', 'prettier', 'plugin:cypress/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -16,6 +19,7 @@ module.exports = {
   rules: {
     'no-console': 0,
     'import/no-unresolved': 0,
+    'no-undef': 0,
     'import/extensions': 0,
     'react/prop-types': 0,
     'no-use-before-define': 0,

@@ -255,7 +255,7 @@ svg:not(:root) {
 }
 
 .productListWrapper {
-  /* width: 1024px; */
-  height: 2550px;
+  /* height: 2550px; */
+  height: 280vh;
 }
 @tailwind utilities;

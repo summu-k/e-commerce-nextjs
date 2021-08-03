@@ -1,0 +1,7 @@
+{
+  "baseUrl": "https://e-commerce-nextjs-sigma.vercel.app/",
+  "env": {
+    "productListingUrl": "https://e-commerce-nextjs-sigma.vercel.app/shop",
+    "productUrl": "https://e-commerce-nextjs-sigma.vercel.app/product/albert-einstein/11"
+  }
+}

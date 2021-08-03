@@ -42,7 +42,7 @@ const CategoryPage = ({ products, productCount }: { products: ProductDataProps[]
         loader={<h4>loading...</h4>}
         endMessage={
           <div className="cards text-center py-6">
-            <p>
+            <p data-test-py="productEnd">
               <b>Thats all folks !!!</b>
             </p>
           </div>
