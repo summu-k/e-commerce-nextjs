@@ -253,4 +253,9 @@ svg:not(:root) {
   --tw-text-opacity: 1;
   color: rgba(91, 33, 182, var(--tw-text-opacity));
 }
+
+.productListWrapper {
+  width: 1024px;
+  height: 3675px;
+}
 @tailwind utilities;

@@ -7,8 +7,9 @@ import '../styles/globals.css';
 import store from '../../redux/store';
 import Seo from '../component/Seo';
 import Header from '../component/baseLayouts/Header';
+import Footer from '../component/baseLayouts/Footer';
 
-const Footer = dynamic(() => import('../component/baseLayouts/Footer'));
+// const Footer = dynamic(() => import('../component/baseLayouts/Footer'));
 const Loader = dynamic(() => import('../component/Loader'));
 
 const MyApp = ({ Component, pageProps }: AppProps) => {

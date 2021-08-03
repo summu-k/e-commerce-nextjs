@@ -5,7 +5,7 @@ import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
 import Router from 'next/router';
 import { isTablet, isDesktop } from 'react-device-detect';
 import { addToCart } from '../../../redux/cartSlice';
-import { addNotification } from '../../../redux/notificationSlice';
+// import { addNotification } from '../../../redux/notificationSlice';
 import HeaderNav from '../HeaderNav';
 
 import type { RootState, AppDispatch } from '../../../redux/store';
@@ -42,9 +42,9 @@ const Header = ({ children }: ComponentProps) => {
       dispatch(addToCart(cartItem));
     });
 
-    setTimeout(() => {
-      dispatch(addNotification({ message: '', type: '' }));
-    }, 10000);
+    // setTimeout(() => {
+    //   dispatch(addNotification({ message: '', type: '' }));
+    // }, 10000);
   }, []);
 
   React.useEffect(() => {

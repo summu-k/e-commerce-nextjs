@@ -81,9 +81,9 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
       setPrev(getQueryString(res.info.prev));
     }
 
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+    // setTimeout(() => {
+    //   setLoading(false);
+    // }, 1000);
 
     window.scrollTo(0, 0);
   };
@@ -96,7 +96,7 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
 
   return (
     <>
-      <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12">
+      <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12 productListWrapper">
         {loading ? <Loader /> : productList}
       </div>
       <div className="my-0 mx-auto w-1/2 sm:hidden">
@@ -127,27 +127,25 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
       </div>
       <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between pagination justify-content-center">
         <div className="max-w-full flex-wrap">
-          {pageCount && (
-            <ReactPaginate
-              previousLabel="Previous"
-              nextLabel="Next"
-              breakLabel="..."
-              breakClassName="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700"
-              pageCount={pageCount}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={changePage}
-              containerClassName="pagination justify-content-center"
-              pageClassName="page-navigation"
-              activeClassName="pagination-active"
-              pageLinkClassName="bg-white border-gray-300 text-gray-500 cursor-pointer hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-              previousLinkClassName="previousBtn"
-              nextLinkClassName="nextBttn"
-              disabledClassName="paginationDisabled"
-              previousClassName="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 cursor-pointer hover:bg-gray-50"
-              nextClassName="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 cursor-pointer hover:bg-gray-50"
-            />
-          )}
+          <ReactPaginate
+            previousLabel="Previous"
+            nextLabel="Next"
+            breakLabel="..."
+            breakClassName="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700"
+            pageCount={pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={changePage}
+            containerClassName="pagination justify-content-center"
+            pageClassName="page-navigation"
+            activeClassName="pagination-active"
+            pageLinkClassName="bg-white border-gray-300 text-gray-500 cursor-pointer hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+            previousLinkClassName="previousBtn"
+            nextLinkClassName="nextBttn"
+            disabledClassName="paginationDisabled"
+            previousClassName="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 cursor-pointer hover:bg-gray-50"
+            nextClassName="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 cursor-pointer hover:bg-gray-50"
+          />
         </div>
       </div>
     </>

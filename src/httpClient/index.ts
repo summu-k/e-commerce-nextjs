@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const baseUrl = process.env.NEXT_PUBLIC_WEB_APP_URL;
-const versionedBaseUrl = `${baseUrl}`;
 
 const config = {
   withCredentials: true,
@@ -10,6 +9,6 @@ const config = {
   },
 };
 
-const versionedWebAppAxios = axios.create({ ...config, baseURL: versionedBaseUrl });
+const webAppAxios = axios.create({ ...config, baseURL: baseUrl });
 
-export default versionedWebAppAxios;
+export default webAppAxios;
