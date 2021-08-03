@@ -85,7 +85,9 @@ const Home: FC<ProductDataProps> = ({ results }) => {
               </div>
             </section>
           </div>
-          <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12">{productList}</div>
+          <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12 productListWrapper">
+            {productList}
+          </div>
         </>
       )}
     </>

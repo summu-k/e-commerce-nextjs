@@ -96,8 +96,8 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
 
   return (
     <>
-      <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12 productListWrapper">
-        {loading ? <Loader /> : productList}
+      <div className="productListWrapper mx-auto pt-4 pb-12 container">
+        <div className="flex items-center flex-wrap">{loading ? <Loader /> : productList}</div>
       </div>
       <div className="my-0 mx-auto w-1/2 sm:hidden">
         {(prev || next) && (
