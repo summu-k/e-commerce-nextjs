@@ -254,8 +254,8 @@ svg:not(:root) {
   color: rgba(91, 33, 182, var(--tw-text-opacity));
 }
 
-.productListWrapper {
-  /* height: 2550px; */
-  height: 280vh;
-}
+/* .productListWrapper { */
+/* height: 2550px; */
+/* height: 280vh; */
+/* } */
 @tailwind utilities;
