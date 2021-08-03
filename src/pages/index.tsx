@@ -1,14 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, FC } from 'react';
-import dynamic from 'next/dynamic';
-// import Image from 'next/image';
-// import Link from 'next/link';
+import Link from 'next/link';
 import { GetStaticProps } from 'next';
 import { useAmp } from 'next/amp';
 import { ProductDataProps } from '../utils/interfaces';
+import ProductCardTheme from '../component/ProductCardTheme';
 
 export const config = { amp: 'hybrid' };
-const ProductCardTheme = dynamic(() => import('../component/ProductCardTheme'));
 
 const Home: FC<ProductDataProps> = ({ results }) => {
   const isAmp = useAmp();
@@ -25,16 +23,14 @@ const Home: FC<ProductDataProps> = ({ results }) => {
         <amp-img width="300" height="300" src="/vercel.svg" alt="shopping website" layout="fixed" />
       ) : (
         <>
-          {/* <div className="w-full z-30 top-0 pb-1">
-            <div className="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right">
-              <div className="mx-auto md:h-full lg:h-full">
-                <Image
-                  className="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right"
-                  src="https://images.unsplash.com/photo-1422190441165-ec2956dc9ecc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80"
-                  height={384}
-                  width={1425}
-                  alt="Grocery Banner"
-                />
+          <div className="w-full z-30 top-0 pb-1">
+            <section
+              className="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right"
+              style={{
+                backgroundImage: `url(https://images.unsplash.com/photo-1422190441165-ec2956dc9ecc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80)`,
+              }}
+            >
+              <div className="container mx-auto md:h-96 lg:h-96">
                 <div className="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
                   <p className="text-black text-2xl my-4">Stripy Zig Zag Jigsaw Pillow and Duvet Set</p>
                   <Link href="/shop">
@@ -44,7 +40,7 @@ const Home: FC<ProductDataProps> = ({ results }) => {
                   </Link>
                 </div>
               </div>
-            </div>
+            </section>
             <section className="bg-white">
               <div className="container mx-auto flex items-center flex-wrap">
                 <nav id="store" className="w-full z-30 top-0 px-6 py-1">
@@ -88,7 +84,7 @@ const Home: FC<ProductDataProps> = ({ results }) => {
                 </nav>
               </div>
             </section>
-          </div> */}
+          </div>
           <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12">{productList}</div>
         </>
       )}
