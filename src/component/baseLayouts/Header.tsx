@@ -5,8 +5,9 @@ import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
 import Router from 'next/router';
 import { isTablet, isDesktop } from 'react-device-detect';
 import { addToCart } from '../../../redux/cartSlice';
-// import { addNotification } from '../../../redux/notificationSlice';
+import { ProductDataProps } from '../../utils/interfaces';
 import HeaderNav from '../HeaderNav';
+import { addNotification } from '../../../redux/notificationSlice';
 
 import type { RootState, AppDispatch } from '../../../redux/store';
 
@@ -17,7 +18,7 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 type ComponentProps = React.PropsWithChildren<{}>;
 
 const Header = ({ children }: ComponentProps) => {
-  let cartFromLocalStorage: any[] = [];
+  let cartFromLocalStorage: ProductDataProps[] = [];
   const dispatch = useDispatch();
   const cart = useAppSelector((state) => state && state.cart);
   const [cartCount, setCartCount] = useState(0);
@@ -29,6 +30,9 @@ const Header = ({ children }: ComponentProps) => {
 
   Router.events.on('routeChangeStart', () => {
     setHideMenu(true);
+    setTimeout(() => {
+      dispatch(addNotification({ message: '', type: '' }));
+    }, 10000);
   });
 
   React.useEffect(() => {
@@ -41,10 +45,6 @@ const Header = ({ children }: ComponentProps) => {
     cartFromLocalStorage.forEach((cartItem) => {
       dispatch(addToCart(cartItem));
     });
-
-    // setTimeout(() => {
-    //   dispatch(addNotification({ message: '', type: '' }));
-    // }, 10000);
   }, []);
 
   React.useEffect(() => {

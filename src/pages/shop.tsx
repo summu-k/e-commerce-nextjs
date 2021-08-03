@@ -58,7 +58,7 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
     setLoading(true);
   };
 
-  const mobileChangePage = (e: any, pgNum: number) => {
+  const mobileChangePage = (e: React.MouseEvent<HTMLButtonElement>, pgNum: number) => {
     e.preventDefault();
     if (pgNum !== 0) {
       setLoading(true);
