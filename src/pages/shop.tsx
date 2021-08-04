@@ -5,11 +5,11 @@ import dynamic from 'next/dynamic';
 import { GetStaticProps } from 'next';
 import ReactPaginate from 'react-paginate';
 import { ProductDataProps, ProductDataPropsnfo } from '../utils/interfaces';
-// import fetchAllProduct from '../actions/shopping/asyncHooks';
+import CardSkeleton from '../component/Skeleton';
 import { fetchAllProduct } from '../pages/api/product';
 import { getQueryString, apiQueryInterface } from '../utils/commonUtility';
 
-const Loader = dynamic(() => import('../component/Loader'));
+// const Loader = dynamic(() => import('../component/Loader'));
 const ProductCardTheme = dynamic(() => import('../component/ProductCardTheme'));
 
 type ProductListingProps = {
@@ -97,7 +97,7 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
   return (
     <>
       <div className="productListWrapper mx-auto pt-4 pb-12 container">
-        <div className="flex items-center flex-wrap">{loading ? <Loader /> : productList}</div>
+        <div className="flex items-center flex-wrap">{loading ? <CardSkeleton /> : productList}</div>
       </div>
       <div className="my-0 mx-auto w-1/2 sm:hidden">
         {(prev || next) && (
