@@ -76,7 +76,6 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
     const usp = new URLSearchParams();
     usp.set('page', `${pageNo}`);
     const productListUrl = `${process.env.NEXT_PUBLIC_WEB_APP_URL}character`;
-    // const { data } = await fetchPagingProduct(usp.toString());
     const searchResult = await fetch(`${productListUrl}?${usp.toString()}`);
     const res: { results: []; info: apiQueryInterface } = await searchResult.json();
     setProductData(res.results);
