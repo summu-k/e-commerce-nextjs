@@ -16,16 +16,15 @@ const Home: FC<ProductDataProps> = ({ results }) => {
 
   React.useEffect(() => {
     setLoading(true);
-    const timer = setTimeout(() => {
-      const productListData = results.map((data: ProductDataProps) => (
-        <ProductCardTheme key={data.id} product={data} />
-      ));
-      setProductList(productListData);
-      setLoading(false);
-      // Cancel the timer while unmounting
-      return () => clearTimeout(timer);
-    }, 2000);
+    const productListData = results.map((data: ProductDataProps) => <ProductCardTheme key={data.id} product={data} />);
+    setProductList(productListData);
   }, []);
+
+  React.useEffect(() => {
+    if (productList?.length !== 0) {
+      setLoading(false);
+    }
+  }, [productList]);
 
   return (
     <>
