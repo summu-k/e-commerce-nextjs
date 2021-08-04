@@ -24,7 +24,7 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
   const [next, setNext] = useState<number>(0);
   const [prev, setPrev] = useState<number>(0);
   const [pageCount, setPageCount] = useState<number>(0);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [productData, setProductData] = useState<ProductDataProps[]>();
   const usersPerPage = 20;
 
@@ -42,6 +42,12 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
   }, [productData]);
 
   React.useEffect(() => {
+    if (productList && productList.length > 0) {
+      setLoading(false);
+    }
+  }, [productList]);
+
+  React.useEffect(() => {
     if (info) {
       if (info.next) {
         setNext(getQueryString(info.next));
@@ -55,13 +61,13 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
 
   const changePage = ({ selected }: { selected: number }) => {
     setPageNumber(selected + 1);
-    setLoading(true);
+    // setLoading(false);
   };
 
   const mobileChangePage = (e: React.MouseEvent<HTMLButtonElement>, pgNum: number) => {
     e.preventDefault();
     if (pgNum !== 0) {
-      setLoading(true);
+      // setLoading(false);
       setPageNumber(pgNum);
     }
   };
@@ -91,6 +97,7 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
   React.useEffect(() => {
     if (pageNumber) {
       getMorePaginatedProducts(pageNumber);
+      setLoading(true);
     }
   }, [pageNumber]);
 
