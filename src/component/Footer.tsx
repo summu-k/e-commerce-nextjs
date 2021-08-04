@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import Link from 'next/link';
+import LinkComponent from '../component/actionableButtons/LinkComponent';
 
 type ComponentProps = React.PropsWithChildren<{}>;
 
@@ -24,15 +24,14 @@ const Footer: FC<ComponentProps> = ({ children }) => (
               <p className="font-bold text-gray-900">Social</p>
               <ul className="list-reset items-center pt-3">
                 <li>
-                  <Link href="https://www.proximity.tech/">
-                    <a
-                      className="inline-block no-underline hover:text-black hover:underline py-1"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Proximity Tech
-                    </a>
-                  </Link>
+                  <LinkComponent
+                    linkHref="https://www.proximity.tech/"
+                    anchorClassName="inline-block no-underline hover:text-black hover:underline py-1"
+                    linkName="Proximity Tech"
+                    dataTest="back-to-products"
+                    ariaLabel="back-to-products"
+                    target="_blank"
+                  />
                 </li>
               </ul>
             </div>

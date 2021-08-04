@@ -1,17 +1,17 @@
 import React from 'react';
-import Link from 'next/link';
+import LinkComponent from '../component/actionableButtons/LinkComponent';
 
 function BackToProductButton() {
   return (
-    <Link href="/shop">
-      <a
-        aria-label="back-to-products"
-        className="border border-palette-primary text-palette-primary text-lg font-primary font-semibold pt-2 pb-1 leading-relaxed flex 
+    <LinkComponent
+      linkHref="/shop"
+      anchorClassName="border border-palette-primary text-palette-primary text-lg font-primary font-semibold pt-2 pb-1 leading-relaxed flex 
       justify-center items-center focus:ring-1 focus:ring-palette-light focus:outline-none w-full hover:bg-palette-lighter rounded-sm"
-      >
-        Back To All Products
-      </a>
-    </Link>
+      linkName="Back To All Products"
+      dataTest="back-to-products"
+      ariaLabel="back-to-products"
+      target="_self"
+    />
   );
 }
 

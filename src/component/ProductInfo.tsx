@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { ProductDataProps } from '../utils/interfaces';
 import { addToCart } from '../../redux/cartSlice';
 import { addNotification } from '../../redux/notificationSlice';
+import Button from './actionableButtons/Button';
 
 const ProductDataPropsnfo = ({
   product: { name, gender, species, status },
@@ -37,13 +38,12 @@ const ProductDataPropsnfo = ({
       <div className="text-xl text-palette-primary font-medium py-4 px-1">
         $<span className="text-1xl">{15.99}</span>
       </div>
-      <button
-        type="button"
-        className="bg-white-500 w-full hover:bg-gray-800 hover:text-white py-3 text-black font-bold py-2 px-4 border border-black-900 rounded"
-        onClick={setCartItem}
-      >
-        Add to Cart
-      </button>
+      <Button
+        buttonClass="bg-white-500 w-full hover:bg-gray-800 hover:text-white py-3 text-black font-bold py-2 px-4 border border-black-900 rounded"
+        submitFunction={setCartItem}
+        buttonText="Add to Cart"
+        dataTest="addToCart"
+      />
     </div>
   );
 };

@@ -2,15 +2,16 @@
 import React, { useState, FC } from 'react';
 import Link from 'next/link';
 import { GetStaticProps } from 'next';
-import { useAmp } from 'next/amp';
+// import { useAmp } from 'next/amp';
 import { ProductDataProps } from '../utils/interfaces';
 import ProductCardTheme from '../component/ProductCardTheme';
 import CardSkeleton from '../component/Skeleton';
+import LinkComponent from '../component/actionableButtons/LinkComponent';
 
-export const config = { amp: 'hybrid' };
+// export const config = { amp: 'hybrid' };
 
 const Home: FC<ProductDataProps> = ({ results }) => {
-  const isAmp = useAmp();
+  // const isAmp = useAmp();
   const [loading, setLoading] = useState<boolean>(true);
   const [productList, setProductList] = useState<Object[]>();
 
@@ -27,9 +28,7 @@ const Home: FC<ProductDataProps> = ({ results }) => {
 
   return (
     <>
-      {isAmp ? (
-        <amp-img width="300" height="300" src="/vercel.svg" alt="shopping website" layout="fixed" />
-      ) : (
+      {
         <>
           {/* <div className="w-full z-30 top-0 pb-1 h-2/5"> */}
           <div className="index-height carousel relative mx-auto">
@@ -42,11 +41,14 @@ const Home: FC<ProductDataProps> = ({ results }) => {
               <div className="container mx-auto md:h-96 lg:h-96">
                 <div className="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
                   <p className="text-black text-2xl my-4">Stripy Zig Zag Jigsaw Pillow and Duvet Set</p>
-                  <Link href="/shop">
-                    <a className="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black mb-4">
-                      Explore Products
-                    </a>
-                  </Link>
+                  <LinkComponent
+                    linkHref="/shop"
+                    anchorClassName="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black mb-4"
+                    linkName="Explore Products"
+                    dataTest="Explore Products"
+                    ariaLabel="Explore Products"
+                    target="_self"
+                  />
                 </div>
               </div>
             </section>
@@ -54,11 +56,14 @@ const Home: FC<ProductDataProps> = ({ results }) => {
               <div className="container mx-auto flex items-center flex-wrap">
                 <nav id="store" className="w-full z-30 top-0 px-6 py-1">
                   <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 pt-6">
-                    <Link href="/">
-                      <a className="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl ">
-                        Store
-                      </a>
-                    </Link>
+                    <LinkComponent
+                      linkHref="/"
+                      anchorClassName="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl"
+                      linkName="Store"
+                      dataTest="Store"
+                      ariaLabel="Explore Store"
+                      target="_self"
+                    />
 
                     <div className="flex items-center" id="store-nav-content">
                       <Link href="/">
@@ -104,7 +109,7 @@ const Home: FC<ProductDataProps> = ({ results }) => {
             </div>
           )}
         </>
-      )}
+      }
     </>
   );
 };

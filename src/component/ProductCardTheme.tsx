@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../../redux/cartSlice';
 import { addNotification } from '../../redux/notificationSlice';
 import { ProductDataProps } from '../utils/interfaces';
+import Button from '../component/actionableButtons/Button';
 
 const ProductCardTheme = ({
   product: { id, image, name, status, species },
@@ -59,14 +60,12 @@ const ProductCardTheme = ({
             {species}
           </span>
         </div>
-        <button
-          type="button"
-          className="bg-white-500 w-full hover:bg-gray-800 hover:text-white py-3 text-black font-bold py-2 px-4 border border-black-900 rounded"
-          onClick={setCartItem}
-          data-test-py="addToCart"
-        >
-          Add to Cart
-        </button>
+        <Button
+          buttonClass="bg-white-500 w-full hover:bg-gray-800 hover:text-white py-3 text-black font-bold py-2 px-4 border border-black-900 rounded"
+          submitFunction={setCartItem}
+          buttonText="Add to Cart"
+          dataTest="addToCart"
+        />
       </div>
     </>
   );
