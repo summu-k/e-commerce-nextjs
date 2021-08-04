@@ -257,8 +257,14 @@ svg:not(:root) {
 .index-height {
   height: 65vh;
 }
-/* .productListWrapper { */
-/* height: 2550px; */
-/* height: 280vh; */
-/* } */
+.productListWrapper {
+  /* height: 2550px; */
+  height: 470vh;
+}
+
+@media only screen and (max-width: 600px) {
+  .productListWrapper {
+    height: 1250vh;
+  }
+}
 @tailwind utilities;
