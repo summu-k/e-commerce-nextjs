@@ -90,14 +90,13 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
     // setTimeout(() => {
     //   setLoading(false);
     // }, 1000);
-
-    window.scrollTo(0, 0);
   };
 
   React.useEffect(() => {
     if (pageNumber) {
       getMorePaginatedProducts(pageNumber);
       setLoading(true);
+      window.scrollTo(0, 0);
     }
   }, [pageNumber]);
 
