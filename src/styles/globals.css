@@ -254,6 +254,9 @@ svg:not(:root) {
   color: rgba(91, 33, 182, var(--tw-text-opacity));
 }
 
+.index-height {
+  height: 50vh;
+}
 /* .productListWrapper { */
 /* height: 2550px; */
 /* height: 280vh; */

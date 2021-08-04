@@ -31,7 +31,8 @@ const Home: FC<ProductDataProps> = ({ results }) => {
         <amp-img width="300" height="300" src="/vercel.svg" alt="shopping website" layout="fixed" />
       ) : (
         <>
-          <div className="w-full z-30 top-0 pb-1">
+          {/* <div className="w-full z-30 top-0 pb-1 h-2/5"> */}
+          <div className="index-height carousel relative mx-auto">
             <section
               className="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right"
               style={{
@@ -95,7 +96,7 @@ const Home: FC<ProductDataProps> = ({ results }) => {
           </div>
           {loading && <CardSkeleton />}
           {!loading && (
-            <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12 productListWrapper">
+            <div className="container mx-auto flex items-center flex-wrap pt-16 pb-12 productListWrapper">
               {productList}
             </div>
           )}
