@@ -12,7 +12,9 @@ export default function HeaderNav() {
         </li>
         <li>
           <Link href="/category">
-            <a className="inline-block no-underline hover:text-black hover:underline py-2 px-4">Category</a>
+            <a data-test-py="category" className="inline-block no-underline hover:text-black hover:underline py-2 px-4">
+              Category
+            </a>
           </Link>
         </li>
         <li>

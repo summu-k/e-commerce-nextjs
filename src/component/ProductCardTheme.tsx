@@ -26,7 +26,14 @@ const ProductCardTheme = ({
       <div className="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
         <Link href={`/product/${slug}/${id}`}>
           <a>
-            <Image className="hover:grow hover:shadow-lg" src={image} height={300} width={300} alt="Product images" />
+            <Image
+              data-test-py="categoryProducts"
+              className="hover:grow hover:shadow-lg"
+              src={image}
+              height={300}
+              width={300}
+              alt="Product images"
+            />
           </a>
         </Link>
         <div className="pt-3 flex items-center justify-between">
@@ -56,6 +63,7 @@ const ProductCardTheme = ({
           type="button"
           className="bg-white-500 w-full hover:bg-gray-800 hover:text-white py-3 text-black font-bold py-2 px-4 border border-black-900 rounded"
           onClick={setCartItem}
+          data-test-py="addToCart"
         >
           Add to Cart
         </button>
