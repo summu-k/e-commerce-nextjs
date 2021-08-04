@@ -11,11 +11,10 @@ export const config = { amp: 'hybrid' };
 
 const Home: FC<ProductDataProps> = ({ results }) => {
   const isAmp = useAmp();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [productList, setProductList] = useState<Object[]>();
 
   React.useEffect(() => {
-    setLoading(true);
     const productListData = results.map((data: ProductDataProps) => <ProductCardTheme key={data.id} product={data} />);
     setProductList(productListData);
   }, []);
