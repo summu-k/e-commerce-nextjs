@@ -31,7 +31,7 @@ describe('Visit Desktop homepage and load all products', () => {
       .first()
       .dblclick()
       .should(() => {
-        expect(JSON.parse(localStorage.getItem('cart'))[0].quantity).to.eq(2);
+        expect(JSON.parse(localStorage.getItem('cart') || '[]')[0].quantity).to.eq(2);
       });
   });
 });
