@@ -101,7 +101,7 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
 
   return (
     <>
-      <div className="productListWrapper mx-auto pt-4 pb-12 container">
+      <div className="productListingWrapper mx-auto pt-4 pb-12 container">
         <div className="flex items-center flex-wrap">{loading ? <CardSkeleton /> : productList}</div>
       </div>
       <div className="my-0 mx-auto w-1/2 sm:hidden">

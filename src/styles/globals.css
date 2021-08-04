@@ -258,12 +258,16 @@ svg:not(:root) {
   height: 65vh;
 }
 .productListWrapper {
-  /* height: 2550px; */
-  height: 470vh;
+  height: 330vh;
+}
+
+.productListingWrapper {
+  height: 330vh;
 }
 
 @media only screen and (max-width: 600px) {
-  .productListWrapper {
+  .productListWrapper,
+  .productListingWrapper {
     height: 1250vh;
   }
 }
