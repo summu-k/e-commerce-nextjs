@@ -96,7 +96,10 @@ const Home: FC<ProductDataProps> = ({ results }) => {
           </div>
           {loading && <CardSkeleton />}
           {!loading && (
-            <div className="container mx-auto flex items-center flex-wrap pt-16 pb-12 productListWrapper">
+            <div
+              className="container mx-auto flex items-center flex-wrap pt-16 pb-12 productListWrapper"
+              data-test-py="productListing"
+            >
               {productList}
             </div>
           )}
