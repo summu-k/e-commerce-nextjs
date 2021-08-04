@@ -5,16 +5,26 @@ import { GetStaticProps } from 'next';
 import { useAmp } from 'next/amp';
 import { ProductDataProps } from '../utils/interfaces';
 import ProductCardTheme from '../component/ProductCardTheme';
+import CardSkeleton from '../component/Skeleton';
 
 export const config = { amp: 'hybrid' };
 
 const Home: FC<ProductDataProps> = ({ results }) => {
   const isAmp = useAmp();
+  const [loading, setLoading] = useState(false);
   const [productList, setProductList] = useState<Object[]>();
 
   React.useEffect(() => {
-    const productListData = results.map((data: ProductDataProps) => <ProductCardTheme key={data.id} product={data} />);
-    setProductList(productListData);
+    setLoading(true);
+    const timer = setTimeout(() => {
+      const productListData = results.map((data: ProductDataProps) => (
+        <ProductCardTheme key={data.id} product={data} />
+      ));
+      setProductList(productListData);
+      setLoading(false);
+      // Cancel the timer while unmounting
+      return () => clearTimeout(timer);
+    }, 2000);
   }, []);
 
   return (
@@ -85,9 +95,12 @@ const Home: FC<ProductDataProps> = ({ results }) => {
               </div>
             </section>
           </div>
-          <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12 productListWrapper">
-            {productList}
-          </div>
+          {loading && <CardSkeleton />}
+          {!loading && (
+            <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12 productListWrapper">
+              {productList}
+            </div>
+          )}
         </>
       )}
     </>

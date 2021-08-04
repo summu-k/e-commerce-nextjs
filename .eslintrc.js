@@ -21,6 +21,7 @@ module.exports = {
     'import/no-unresolved': 0,
     'no-undef': 0,
     'import/extensions': 0,
+    'import/no-extraneous-dependencies': 0,
     'react/prop-types': 0,
     'no-use-before-define': 0,
     'react/jsx-props-no-spreading': 0,
