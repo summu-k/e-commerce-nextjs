@@ -1,6 +1,5 @@
 import { expect } from '@jest/globals';
 import axios from 'axios';
-// import { fetchAllProduct } from '../src/pages/api/product';
 
 const DEBUG = true;
 
