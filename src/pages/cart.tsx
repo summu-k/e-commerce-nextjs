@@ -3,6 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import { GetServerSideProps } from 'next';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
+import Button from '../component/actionableButtons/Button';
 import LinkComponent from '../component/actionableButtons/LinkComponent';
 import { incrementQuantity, decrementQuantity } from '../../redux/cartSlice';
 import type { RootState, AppDispatch } from '../../redux/store';
@@ -66,12 +67,10 @@ const CartPage = () => {
                                   </svg>
                                 </div>
                                 <div className="pr-8 ">
-                                  {' '}
-                                  <span className="text-xs font-medium">$10.50</span>{' '}
+                                  <span className="text-xs font-medium">$10.50</span>
                                 </div>
                                 <div>
-                                  {' '}
-                                  <i className="fa fa-close text-xs font-medium" />{' '}
+                                  <i className="fa fa-close text-xs font-medium" />
                                 </div>
                               </div>
                             </div>
@@ -123,23 +122,21 @@ const CartPage = () => {
                           </label>
                           <input type="text" id="promo" placeholder="Enter your code" className="p-2 text-sm w-full" />
                         </div>
-                        <button
-                          type="button"
-                          className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase"
-                        >
-                          Apply
-                        </button>
+                        <Button
+                          buttonClass="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase"
+                          buttonText="Apply"
+                          datatest="Apply Coupon"
+                        />
                         <div className="border-t mt-8">
                           <div className="flex font-semibold text-xs text-gray-400 justify-between py-6 text-sm uppercase">
                             <span>Total cost</span>
                             <span>$600</span>
                           </div>
-                          <button
-                            type="button"
-                            className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full"
-                          >
-                            Checkout
-                          </button>
+                          <Button
+                            buttonClass="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full"
+                            buttonText="Checkout"
+                            datatest="Checkout Order"
+                          />
                         </div>
                       </div>
                     </div>

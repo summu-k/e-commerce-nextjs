@@ -1,9 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import versionedWebAppAxios from '../../../httpClient/index';
+import webAppAxios from '../../../httpClient/index';
 
 export async function fetchSingleProduct(id: string | undefined) {
   const url = `character/${id}`;
-  const productData = await versionedWebAppAxios.get(url);
+  const productData = await webAppAxios.get(url);
   return productData.data;
 }
 

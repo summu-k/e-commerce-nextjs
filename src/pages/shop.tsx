@@ -4,6 +4,7 @@ import React, { useState, FC } from 'react';
 import dynamic from 'next/dynamic';
 import { GetStaticProps } from 'next';
 import ReactPaginate from 'react-paginate';
+import Button from '../component/actionableButtons/Button';
 import { ProductDataProps, ProductDataPropsnfo } from '../utils/interfaces';
 import CardSkeleton from '../component/Skeleton';
 import { fetchAllProduct } from '../pages/api/product';
@@ -64,7 +65,7 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
     // setLoading(false);
   };
 
-  const mobileChangePage = (e: React.MouseEvent<HTMLButtonElement>, pgNum: number) => {
+  const mobileChangePage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, pgNum: number) => {
     e.preventDefault();
     if (pgNum !== 0) {
       // setLoading(false);
@@ -103,26 +104,22 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
       <div className="my-0 mx-auto w-1/2 sm:hidden">
         {(prev || next) && (
           <>
-            <button
-              type="button"
-              custom-attr={prev}
-              onClick={(e) => mobileChangePage(e, prev)}
-              className={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 ${
+            <Button
+              buttonClass={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 ${
                 prev === 0 ? 'cursor-default' : 'cursor-pointer'
               }`}
-            >
-              Previous
-            </button>
-            <button
-              type="button"
-              custom-attr={next}
-              onClick={(e) => mobileChangePage(e, next)}
-              className={`ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 ${
+              submitFunction={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => mobileChangePage(e, prev)}
+              buttonText="Previous"
+              datatest="Previous button"
+            />
+            <Button
+              buttonClass={`ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 ${
                 next === 0 ? 'cursor-default' : 'cursor-pointer'
               }`}
-            >
-              Next
-            </button>
+              submitFunction={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => mobileChangePage(e, next)}
+              buttonText="Next"
+              datatest="Next button"
+            />
           </>
         )}
       </div>
@@ -154,9 +151,7 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  // const { data: productListing } = await fetchAllProduct();
   const { results, info } = await fetchAllProduct();
-  // const { results, info } = productListing;
   return {
     props: {
       results,
