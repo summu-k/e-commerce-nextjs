@@ -2,21 +2,19 @@ import React, { FC } from 'react';
 import Link from 'next/link';
 
 interface LinkProps {
-  linkHref: string;
-  anchorClassName: string;
-  linkName: string;
-  dataTest: string;
-  ariaLabel: string;
+  linkhref: string;
+  classname: string;
+  linkname: string;
+  datatest: string;
   target: string;
 }
-type ComponentProps = React.PropsWithChildren<{}>;
 
-const LinkComponent: FC<LinkProps & ComponentProps> = (props, { children }) => {
-  const { linkHref, anchorClassName, linkName, dataTest, ariaLabel } = props;
+const LinkComponent: FC<LinkProps> = (props) => {
+  const { linkhref, classname, linkname, datatest, children } = props;
   return (
-    <Link href={linkHref}>
-      <a {...props} data-test-py={dataTest} className={anchorClassName} aria-label={ariaLabel}>
-        {linkName}
+    <Link href={linkhref}>
+      <a data-test-py={datatest} className={classname}>
+        {linkname}
         {children}
       </a>
     </Link>

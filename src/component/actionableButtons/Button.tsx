@@ -5,12 +5,12 @@ import React, { FC } from 'react';
 interface ButtonProps {
   buttonText: string;
   buttonClass: string;
-  dataTest: string;
+  datatest: string;
   submitFunction: any;
 }
 
-const Button: FC<ButtonProps> = ({ buttonText = '', buttonClass = '', dataTest, submitFunction }) => (
-  <button type="button" onClick={(e) => submitFunction(e)} className={buttonClass} data-test-py={dataTest}>
+const Button: FC<ButtonProps> = ({ buttonText = '', buttonClass = '', datatest, submitFunction }) => (
+  <button type="button" onClick={(e) => submitFunction(e)} className={buttonClass} data-test-py={datatest}>
     {buttonText}
   </button>
 );

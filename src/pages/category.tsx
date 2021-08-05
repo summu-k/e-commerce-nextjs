@@ -16,16 +16,10 @@ const Category: FC = () => (
   </main>
 );
 
-export const getStaticProps: GetStaticProps = async () => {
-  const url = `${process.env.NEXT_PUBLIC_WEB_APP_URL}location`;
-  let searchResult = await fetch(url);
-  searchResult = await searchResult.json();
-  return {
-    props: {
-      category: searchResult,
-      pageTitle: 'Category Listing Shop',
-    },
-  };
-};
+export const getStaticProps: GetStaticProps = async () => ({
+  props: {
+    pageTitle: 'Category Listing Shop',
+  },
+});
 
 export default Category;

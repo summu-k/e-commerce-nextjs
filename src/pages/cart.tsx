@@ -1,8 +1,9 @@
 import React from 'react';
-import Link from 'next/link';
+
 import Image from 'next/image';
 import { GetServerSideProps } from 'next';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
+import LinkComponent from '../component/actionableButtons/LinkComponent';
 import { incrementQuantity, decrementQuantity } from '../../redux/cartSlice';
 import type { RootState, AppDispatch } from '../../redux/store';
 
@@ -79,9 +80,14 @@ const CartPage = () => {
 
                         <div className="flex justify-between items-center mt-6 pt-6 border-t">
                           <div className="flex items-center">
-                            <Link href="/shop">
-                              <a className="flex font-semibold text-indigo-600 text-sm mt-10">Continue Shopping</a>
-                            </Link>
+                            <LinkComponent
+                              linkhref="/shop"
+                              classname="flex font-semibold text-indigo-600 text-sm mt-10"
+                              linkname="Continue Shopping"
+                              datatest="Continue Shopping"
+                              aria-label="Continue Shopping"
+                              target="_self"
+                            />
                           </div>
                           <div className="flex justify-center items-end">
                             {' '}

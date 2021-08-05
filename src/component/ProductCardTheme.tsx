@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useDispatch } from 'react-redux';
+import LinkComponent from './actionableButtons/LinkComponent';
 import { addToCart } from '../../redux/cartSlice';
 import { addNotification } from '../../redux/notificationSlice';
 import { ProductDataProps } from '../utils/interfaces';
@@ -25,24 +25,34 @@ const ProductCardTheme = ({
   return (
     <>
       <div className="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-        <Link href={`/product/${slug}/${id}`}>
-          <a>
-            <Image
-              data-test-py="categoryProducts"
-              className="hover:grow hover:shadow-lg"
-              src={image}
-              height={300}
-              width={300}
-              alt="Product images"
-            />
-          </a>
-        </Link>
+        <LinkComponent
+          linkhref={`/product/${slug}/${id}`}
+          classname=""
+          linkname=""
+          datatest="Catalog Image"
+          aria-label="Catalog Image"
+          target="_self"
+        >
+          <Image
+            data-test-py="categoryProducts"
+            className="hover:grow hover:shadow-lg"
+            src={image}
+            height={300}
+            width={300}
+            alt="Product images"
+          />
+        </LinkComponent>
         <div className="pt-3 flex items-center justify-between">
-          <Link href={`/product/${slug}/${id}`}>
-            <a className="w-full">
-              <h1 className="font-bold text-xl mb-2">{name}</h1>
-            </a>
-          </Link>
+          <LinkComponent
+            linkhref={`/product/${slug}/${id}`}
+            classname="w-full"
+            linkname=""
+            datatest="Product Name"
+            aria-label="Product Name"
+            target="_self"
+          >
+            <h1 className="font-bold text-xl mb-2">{name}</h1>
+          </LinkComponent>
           <svg
             className="h-6 w-6 fill-current text-gray-500 hover:text-black"
             xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +74,7 @@ const ProductCardTheme = ({
           buttonClass="bg-white-500 w-full hover:bg-gray-800 hover:text-white py-3 text-black font-bold py-2 px-4 border border-black-900 rounded"
           submitFunction={setCartItem}
           buttonText="Add to Cart"
-          dataTest="addToCart"
+          datatest="addToCart"
         />
       </div>
     </>

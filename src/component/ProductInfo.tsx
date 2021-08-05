@@ -42,7 +42,7 @@ const ProductDataPropsnfo = ({
         buttonClass="bg-white-500 w-full hover:bg-gray-800 hover:text-white py-3 text-black font-bold py-2 px-4 border border-black-900 rounded"
         submitFunction={setCartItem}
         buttonText="Add to Cart"
-        dataTest="addToCart"
+        datatest="addToCart"
       />
     </div>
   );

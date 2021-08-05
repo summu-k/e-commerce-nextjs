@@ -25,11 +25,11 @@ const Footer: FC<ComponentProps> = ({ children }) => (
               <ul className="list-reset items-center pt-3">
                 <li>
                   <LinkComponent
-                    linkHref="https://www.proximity.tech/"
-                    anchorClassName="inline-block no-underline hover:text-black hover:underline py-1"
-                    linkName="Proximity Tech"
-                    dataTest="back-to-products"
-                    ariaLabel="back-to-products"
+                    linkhref="https://www.proximity.tech/"
+                    classname="inline-block no-underline hover:text-black hover:underline py-1"
+                    linkname="Proximity Tech"
+                    datatest="back-to-products"
+                    aria-label="back-to-products"
                     target="_blank"
                   />
                 </li>

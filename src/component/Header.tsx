@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
 import Router from 'next/router';
 import { isTablet, isDesktop } from 'react-device-detect';
+import LinkComponent from '../component/actionableButtons/LinkComponent';
 import { addToCart } from '../../redux/cartSlice';
 import { ProductDataProps } from '../utils/interfaces';
 import HeaderNav from './HeaderNav';
@@ -83,55 +83,69 @@ const Header = ({ children }: ComponentProps) => {
             </div>
           )}
           <div className="order-1 md:order-2 mr-2">
-            <Link href="/">
-              <a className="flex items-center tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl ">
-                <svg
-                  className="fill-current text-gray-800 mr-2"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M5,22h14c1.103,0,2-0.897,2-2V9c0-0.553-0.447-1-1-1h-3V7c0-2.757-2.243-5-5-5S7,4.243,7,7v1H4C3.447,8,3,8.447,3,9v11 C3,21.103,3.897,22,5,22z M9,7c0-1.654,1.346-3,3-3s3,1.346,3,3v1H9V7z M5,10h2v2h2v-2h6v2h2v-2h2l0.002,10H5V10z" />
-                </svg>
-                NORDICS
-              </a>
-            </Link>
+            <LinkComponent
+              linkhref="/"
+              classname="flex items-center tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl"
+              linkname="NORDICS"
+              datatest="Store Front"
+              aria-label="Store Front"
+              target="_self"
+            >
+              <svg
+                className="fill-current text-gray-800 mr-2"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path d="M5,22h14c1.103,0,2-0.897,2-2V9c0-0.553-0.447-1-1-1h-3V7c0-2.757-2.243-5-5-5S7,4.243,7,7v1H4C3.447,8,3,8.447,3,9v11 C3,21.103,3.897,22,5,22z M9,7c0-1.654,1.346-3,3-3s3,1.346,3,3v1H9V7z M5,10h2v2h2v-2h6v2h2v-2h2l0.002,10H5V10z" />
+              </svg>
+            </LinkComponent>
           </div>
           <div className="order-2 md:order-3 flex items-center" id="nav-content">
-            <Link href="/">
-              <a className="inline-block no-underline hover:text-black">
-                <svg
-                  className="fill-current hover:text-black"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <circle fill="none" cx="12" cy="7" r="3" />
-                  <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5S14.757 2 12 2zM12 10c-1.654 0-3-1.346-3-3s1.346-3 3-3 3 1.346 3 3S13.654 10 12 10zM21 21v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h2v-1c0-2.757 2.243-5 5-5h4c2.757 0 5 2.243 5 5v1H21z" />
-                </svg>
-              </a>
-            </Link>
+            <LinkComponent
+              linkhref="/"
+              classname="inline-block no-underline hover:text-black"
+              linkname=""
+              datatest="Profile"
+              aria-label="Profile"
+              target="_self"
+            >
+              <svg
+                className="fill-current hover:text-black"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <circle fill="none" cx="12" cy="7" r="3" />
+                <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5S14.757 2 12 2zM12 10c-1.654 0-3-1.346-3-3s1.346-3 3-3 3 1.346 3 3S13.654 10 12 10zM21 21v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h2v-1c0-2.757 2.243-5 5-5h4c2.757 0 5 2.243 5 5v1H21z" />
+              </svg>
+            </LinkComponent>
 
-            <Link href="/cart">
-              <a className="pl-3 inline-block no-underline hover:text-black">
-                <svg
-                  className="fill-current hover:text-black"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M21,7H7.462L5.91,3.586C5.748,3.229,5.392,3,5,3H2v2h2.356L9.09,15.414C9.252,15.771,9.608,16,10,16h8 c0.4,0,0.762-0.238,0.919-0.606l3-7c0.133-0.309,0.101-0.663-0.084-0.944C21.649,7.169,21.336,7,21,7z M17.341,14h-6.697L8.371,9 h11.112L17.341,14z" />
-                  <circle cx="10.5" cy="18.5" r="1.5" />
-                  <circle cx="17.5" cy="18.5" r="1.5" />
-                </svg>
-                <span className="absolute top-6 right-50 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
-                  {cartCount}
-                </span>
-              </a>
-            </Link>
+            <LinkComponent
+              linkhref="/cart"
+              classname="pl-3 inline-block no-underline hover:text-black"
+              linkname=""
+              datatest="Cart"
+              aria-label="Cart"
+              target="_self"
+            >
+              <svg
+                className="fill-current hover:text-black"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path d="M21,7H7.462L5.91,3.586C5.748,3.229,5.392,3,5,3H2v2h2.356L9.09,15.414C9.252,15.771,9.608,16,10,16h8 c0.4,0,0.762-0.238,0.919-0.606l3-7c0.133-0.309,0.101-0.663-0.084-0.944C21.649,7.169,21.336,7,21,7z M17.341,14h-6.697L8.371,9 h11.112L17.341,14z" />
+                <circle cx="10.5" cy="18.5" r="1.5" />
+                <circle cx="17.5" cy="18.5" r="1.5" />
+              </svg>
+              <span className="absolute top-6 right-50 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+                {cartCount}
+              </span>
+            </LinkComponent>
           </div>
         </div>
       </nav>

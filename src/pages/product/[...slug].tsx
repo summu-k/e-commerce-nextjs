@@ -56,6 +56,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const allProducts = await fetchAllProduct();
+  console.log('allProducts== ', allProducts);
   const paths = allProducts.results.map((post: ProductDataProps) => {
     let slugValue = `${post.name}`;
     slugValue = slugValue.replace(/\s+/g, '-').toLowerCase();

@@ -85,10 +85,6 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
     if (res.info.prev) {
       setPrev(getQueryString(res.info.prev));
     }
-
-    // setTimeout(() => {
-    //   setLoading(false);
-    // }, 1000);
   };
 
   React.useEffect(() => {

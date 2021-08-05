@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, FC } from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
 import { GetStaticProps } from 'next';
 // import { useAmp } from 'next/amp';
+import { fetchAllProduct } from '../../src/pages/api/product';
 import { ProductDataProps } from '../utils/interfaces';
 import ProductCardTheme from '../component/ProductCardTheme';
 import CardSkeleton from '../component/Skeleton';
@@ -42,11 +43,11 @@ const Home: FC<ProductDataProps> = ({ results }) => {
                 <div className="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
                   <p className="text-black text-2xl my-4">Stripy Zig Zag Jigsaw Pillow and Duvet Set</p>
                   <LinkComponent
-                    linkHref="/shop"
-                    anchorClassName="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black mb-4"
-                    linkName="Explore Products"
-                    dataTest="Explore Products"
-                    ariaLabel="Explore Products"
+                    linkhref="/shop"
+                    classname="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black mb-4"
+                    linkname="Explore Products"
+                    datatest="Explore Products"
+                    aria-label="Explore Products"
                     target="_self"
                   />
                 </div>
@@ -57,49 +58,63 @@ const Home: FC<ProductDataProps> = ({ results }) => {
                 <nav id="store" className="w-full z-30 top-0 px-6 py-1">
                   <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 pt-6">
                     <LinkComponent
-                      linkHref="/"
-                      anchorClassName="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl"
-                      linkName="Store"
-                      dataTest="Store"
-                      ariaLabel="Explore Store"
+                      linkhref="/"
+                      classname="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl"
+                      linkname="Store"
+                      datatest="Store"
+                      aria-label="Explore Store"
                       target="_self"
                     />
 
                     <div className="flex items-center" id="store-nav-content">
-                      <Link href="/">
-                        <a className="pl-3 inline-block no-underline hover:text-black">
-                          <svg
-                            className="fill-current hover:text-black"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                          >
-                            <path d="M7 11H17V13H7zM4 7H20V9H4zM10 15H14V17H10z" />
-                          </svg>
-                        </a>
-                      </Link>
+                      <LinkComponent
+                        linkhref="/"
+                        classname="pl-3 inline-block no-underline hover:text-black"
+                        linkname=""
+                        datatest="Index Filter"
+                        aria-label="Index Filter"
+                        target="_self"
+                      >
+                        <svg
+                          className="fill-current hover:text-black"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M7 11H17V13H7zM4 7H20V9H4zM10 15H14V17H10z" />
+                        </svg>
+                      </LinkComponent>
 
-                      <Link href="/">
-                        <a className="pl-3 inline-block no-underline hover:text-black">
-                          <svg
-                            className="fill-current hover:text-black"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                          >
-                            <path d="M10,18c1.846,0,3.543-0.635,4.897-1.688l4.396,4.396l1.414-1.414l-4.396-4.396C17.365,13.543,18,11.846,18,10 c0-4.411-3.589-8-8-8s-8,3.589-8,8S5.589,18,10,18z M10,4c3.309,0,6,2.691,6,6s-2.691,6-6,6s-6-2.691-6-6S6.691,4,10,4z" />
-                          </svg>
-                        </a>
-                      </Link>
+                      <LinkComponent
+                        linkhref="/"
+                        classname="pl-3 inline-block no-underline hover:text-black"
+                        linkname=""
+                        datatest="Index Search"
+                        aria-label="Index Search"
+                        target="_self"
+                      >
+                        <svg
+                          className="fill-current hover:text-black"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M10,18c1.846,0,3.543-0.635,4.897-1.688l4.396,4.396l1.414-1.414l-4.396-4.396C17.365,13.543,18,11.846,18,10 c0-4.411-3.589-8-8-8s-8,3.589-8,8S5.589,18,10,18z M10,4c3.309,0,6,2.691,6,6s-2.691,6-6,6s-6-2.691-6-6S6.691,4,10,4z" />
+                        </svg>
+                      </LinkComponent>
                     </div>
                   </div>
                 </nav>
               </div>
             </section>
           </div>
-          {loading && <CardSkeleton />}
+          {loading && (
+            <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12 productListWrapper">
+              <CardSkeleton />
+            </div>
+          )}
           {!loading && (
             <div
               className="container mx-auto flex items-center flex-wrap pt-16 pb-12 productListWrapper"
@@ -115,9 +130,7 @@ const Home: FC<ProductDataProps> = ({ results }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const url = `${process.env.NEXT_PUBLIC_WEB_APP_URL}character`;
-  const indexPageData = await fetch(url);
-  const { results } = await indexPageData.json();
+  const { results } = await fetchAllProduct();
   return {
     props: {
       results,
