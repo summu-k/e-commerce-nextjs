@@ -1,4 +1,5 @@
-import { Provider } from 'react-redux';
+import { Provider as ReduxProvider } from 'react-redux';
+import { Provider } from 'next-auth/client';
 import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 import type { AppProps } from 'next/app';
@@ -24,11 +25,13 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     <>
       {loading && <Loader />}
       <html lang="en">
-        <Provider store={store}>
-          <Layout>
-            <Seo pageTitle={pageProps.pageTitle} />
-            <Component {...pageProps} />
-          </Layout>
+        <Provider session={pageProps.session}>
+          <ReduxProvider store={store}>
+            <Layout>
+              <Seo pageTitle={pageProps.pageTitle} />
+              <Component {...pageProps} />
+            </Layout>
+          </ReduxProvider>
         </Provider>
       </html>
     </>

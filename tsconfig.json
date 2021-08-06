@@ -23,7 +23,8 @@
     "next.config.js",
     "**/src/**/*.ts",
     "**/test/**/*.ts",
-    "redux/cartSlice.ts"
+    "redux/cartSlice.ts",
+    "src/pages/index.jsx"
   ],
   "exclude": ["node_modules"]
 }
