@@ -1,9 +1,12 @@
+/* eslint-disable no-unused-expressions */
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
 import Router from 'next/router';
 import { isTablet, isDesktop } from 'react-device-detect';
-import LinkComponent from '../component/actionableButtons/LinkComponent';
+// import Link from 'next/link';
+import { signIn, signOut, useSession } from 'next-auth/client';
+import LinkComponent from './actionableButtons/LinkComponent';
 import { addToCart } from '../../redux/cartSlice';
 import { ProductDataProps } from '../utils/interfaces';
 import HeaderNav from './HeaderNav';
@@ -18,6 +21,7 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 type ComponentProps = React.PropsWithChildren<{}>;
 
 const Header = ({ children }: ComponentProps) => {
+  const [session] = useSession();
   let cartFromLocalStorage: ProductDataProps[] = [];
   const dispatch = useDispatch();
   const cart = useAppSelector((state) => state && state.cart);
@@ -50,6 +54,15 @@ const Header = ({ children }: ComponentProps) => {
   React.useEffect(() => {
     setCartCount(getItemsCount());
   }, [cart]);
+
+  // const intitateSignIn = () => {
+  //   console.log('intitateSignIn ');
+  //   signIn();
+  // };
+  // const intitateSignOut = () => {
+  //   console.log('intitateSignOut ');
+  //   signOut();
+  // };
 
   return (
     <>
@@ -103,25 +116,49 @@ const Header = ({ children }: ComponentProps) => {
             </LinkComponent>
           </div>
           <div className="order-2 md:order-3 flex items-center" id="nav-content">
-            <LinkComponent
-              linkhref="/"
-              classname="inline-block no-underline hover:text-black"
-              linkname=""
-              datatest="Profile"
-              aria-label="Profile"
-              target="_self"
-            >
-              <svg
-                className="fill-current hover:text-black"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <circle fill="none" cx="12" cy="7" r="3" />
-                <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5S14.757 2 12 2zM12 10c-1.654 0-3-1.346-3-3s1.346-3 3-3 3 1.346 3 3S13.654 10 12 10zM21 21v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h2v-1c0-2.757 2.243-5 5-5h4c2.757 0 5 2.243 5 5v1H21z" />
-              </svg>
-            </LinkComponent>
+            {!session && (
+              <>
+                <button type="button" onClick={() => signIn()}>
+                  Sign In
+                </button>
+              </>
+            )}
+            {session && (
+              <>
+                <button type="button" onClick={() => signOut()}>
+                  Sign out
+                </button>
+
+                <div className="ml-3 relative dropdown group">
+                  <div>
+                    <button
+                      type="button"
+                      className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                      id="user-menu-button"
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                    >
+                      <span className="sr-only">Open user menu</span>
+                      <img
+                        className="h-8 w-8 rounded-full"
+                        src={session?.user?.image ? session.user.image : ''}
+                        alt="User Profile"
+                      />
+                    </button>
+                  </div>
+                  <div
+                    className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none opacity-0 group-hover:opacity-100 dropdown-menu"
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-labelledby="user-menu-button"
+                  >
+                    <span className="block px-4 py-2 text-sm text-gray-700">
+                      {session?.user?.name ? session.user.name : ''}
+                    </span>
+                  </div>
+                </div>
+              </>
+            )}
 
             <LinkComponent
               linkhref="/cart"

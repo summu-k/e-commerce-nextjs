@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const withPWA = require('next-pwa');
 const runtimeCaching = require('next-pwa/cache');
 
