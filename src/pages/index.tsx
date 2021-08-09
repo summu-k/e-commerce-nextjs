@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, FC } from 'react';
 import { GetStaticProps } from 'next';
-import { useSession } from 'next-auth/client';
 import { fetchAllProduct } from './api/product';
 import { ProductDataProps } from '../utils/interfaces';
 import ProductCardTheme from '../component/ProductCardTheme';
@@ -11,7 +10,6 @@ import HeroSection from '../component/HeroSection';
 const Home: FC<ProductDataProps> = ({ results }) => {
   const [isLoading, setLoading] = useState<boolean>(true);
   const [productList, setProductList] = useState<Object[]>();
-  const [session] = useSession();
 
   React.useEffect(() => {
     const productListData = results.map((data: ProductDataProps) => <ProductCardTheme key={data.id} product={data} />);
@@ -27,25 +25,21 @@ const Home: FC<ProductDataProps> = ({ results }) => {
   return (
     <>
       <main>
-        {session && (
-          <>
-            <div className="index-height carousel relative mx-auto">
-              <HeroSection />
-            </div>
-            {isLoading && (
-              <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12 productListWrapper">
-                <CardSkeleton />
-              </div>
-            )}
-            {!isLoading && (
-              <div
-                className="container mx-auto flex items-center flex-wrap pt-16 pb-12 productListWrapper"
-                data-test-py="productListing"
-              >
-                {productList}
-              </div>
-            )}
-          </>
+        <div className="index-height carousel relative mx-auto">
+          <HeroSection />
+        </div>
+        {isLoading && (
+          <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12 productListWrapper">
+            <CardSkeleton />
+          </div>
+        )}
+        {!isLoading && (
+          <div
+            className="container mx-auto flex items-center flex-wrap pt-16 pb-12 productListWrapper"
+            data-test-py="productListing"
+          >
+            {productList}
+          </div>
         )}
       </main>
     </>
