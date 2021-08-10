@@ -4,7 +4,7 @@ import LinkComponent from '../component/actionableButtons/LinkComponent';
 export default function HeaderNav() {
   return (
     <nav>
-      <ul className="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
+      <ul className="md:flex items-center justify-between text-base text-gray-700 md:pt-0">
         <li>
           <LinkComponent
             linkhref="/"
