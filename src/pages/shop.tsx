@@ -165,7 +165,10 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const page = query.page || 1;
   const species = query.species || '';
   const gender = query.gender || '';
-  const { results, info } = await getAllFilterProduct(`character?page=${page}&species=${species}&gender=${gender}`);
+  const status = query.status || '';
+  const { results, info } = await getAllFilterProduct(
+    `character?page=${page}&species=${species}&gender=${gender}&status=${status}`
+  );
   return {
     props: {
       results,

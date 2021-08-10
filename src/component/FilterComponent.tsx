@@ -35,7 +35,7 @@ const FilterComponent = () => {
   };
 
   const handleFilterChange = () => {
-    filterSearch({ router, species: category, gender, page: 1 });
+    filterSearch({ router, species: category, gender, status, page: 1 });
   };
 
   return (
