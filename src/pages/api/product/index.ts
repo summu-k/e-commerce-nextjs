@@ -16,3 +16,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     res.status(200).json(products);
   }
 }
+
+export async function getAllFilterProduct(productUrl: string) {
+  // const url = `character/`;
+  const allProducts = await webAppAxios.get(productUrl);
+  return allProducts.data;
+}

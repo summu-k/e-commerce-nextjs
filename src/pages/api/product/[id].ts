@@ -19,3 +19,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     }
   }
 }
+
+export async function getFilteredProduct(productUrl: string): Promise<Response> {
+  const searchResult = await fetch(`${productUrl}`);
+  return searchResult;
+}

@@ -2,13 +2,19 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, FC } from 'react';
 import dynamic from 'next/dynamic';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import ReactPaginate from 'react-paginate';
+import { useRouter } from 'next/router';
 import Button from '../component/actionableButtons/Button';
 import { ProductDataProps, ProductDataPropsnfo } from '../utils/interfaces';
 import CardSkeleton from '../component/Skeleton';
-import { fetchAllProduct } from '../pages/api/product';
-import { getQueryString, apiQueryInterface } from '../utils/commonUtility';
+import { getAllFilterProduct } from '../pages/api/product';
+// import { getQueryString, apiQueryInterface } from '../utils/commonUtility';
+import { getQueryString } from '../utils/commonUtility';
+// import { getFilteredProduct } from '../pages/api/product/[id]';
+import filterSearch from '../utils/filterSearch';
+// import Filter from '../component/Filter';
+import FilterComponent from '../component/FilterComponent';
 
 // const Loader = dynamic(() => import('../component/Loader'));
 const ProductCardTheme = dynamic(() => import('../component/ProductCardTheme'));
@@ -18,7 +24,6 @@ type ProductListingProps = {
   info: ProductDataPropsnfo;
 };
 
-// export default function ProductListing({ results, info }: { results: ProductDataProps[]; info: ProductDataPropsnfo }) {
 const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
   const [productList, setProductList] = useState<Object[]>();
   const [pageNumber, setPageNumber] = useState<number>(0);
@@ -27,6 +32,7 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
   const [pageCount, setPageCount] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [productData, setProductData] = useState<ProductDataProps[]>();
+  const router = useRouter();
   const usersPerPage = 20;
 
   React.useEffect(() => {
@@ -74,18 +80,21 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
   };
 
   const getMorePaginatedProducts = async (pageNo: number) => {
-    const usp = new URLSearchParams();
-    usp.set('page', `${pageNo}`);
-    const productListUrl = `${process.env.NEXT_PUBLIC_WEB_APP_URL}character`;
-    const searchResult = await fetch(`${productListUrl}?${usp.toString()}`);
-    const res: { results: []; info: apiQueryInterface } = await searchResult.json();
-    setProductData(res.results);
-    if (res.info.next) {
-      setNext(getQueryString(res.info.next));
-    }
-    if (res.info.prev) {
-      setPrev(getQueryString(res.info.prev));
-    }
+    // const usp = new URLSearchParams();
+    // usp.set('page', `${pageNo}`);
+    // usp.set('species', 'ALIEN');
+    // const productListUrl = `${process.env.NEXT_PUBLIC_WEB_APP_URL}character`;
+    // const searchResult = await getFilteredProduct(`${productListUrl}?${usp.toString()}`);
+    // const res: { results: []; info: apiQueryInterface } = await searchResult.json();
+    // setProductData(res.results);
+    // if (res.info.next) {
+    //   setNext(getQueryString(res.info.next));
+    // }
+    // if (res.info.prev) {
+    //   setPrev(getQueryString(res.info.prev));
+    // }
+    // setPageCount(Math.ceil(info.count / usersPerPage));
+    filterSearch({ router, page: pageNo });
   };
 
   React.useEffect(() => {
@@ -98,6 +107,8 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
 
   return (
     <>
+      {/* <Filter /> */}
+      <FilterComponent />
       <div className="productListingWrapper mx-auto pt-4 pb-12 container">
         <div className="flex items-center flex-wrap">{loading ? <CardSkeleton /> : productList}</div>
       </div>
@@ -150,8 +161,11 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  const { results, info } = await fetchAllProduct();
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const page = query.page || 1;
+  const species = query.species || '';
+  const gender = query.gender || '';
+  const { results, info } = await getAllFilterProduct(`character?page=${page}&species=${species}&gender=${gender}`);
   return {
     props: {
       results,
