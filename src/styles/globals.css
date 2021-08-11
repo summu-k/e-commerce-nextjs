@@ -257,6 +257,12 @@ svg:not(:root) {
 .index-height {
   height: 65vh;
 }
+.drawer-compare {
+  margin-top: 8.8vh;
+}
+.compare-slider-content {
+  max-width: 1000px !important;
+}
 /* .productListWrapper { */
 /* height: 330vh; */
 /* } */

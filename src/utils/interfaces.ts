@@ -16,7 +16,7 @@ export interface ProductDataProps {
   category: string;
 }
 
-export interface ProductDataPropsnfo {
+export interface ProductInfo {
   count: number;
   pages: number;
   next: string;

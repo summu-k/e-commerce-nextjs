@@ -3,13 +3,12 @@ import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import LinkComponent from './actionableButtons/LinkComponent';
 import { addToCart } from '../../redux/cartSlice';
-import { addToCompare, removeFromCompare } from '../../redux/addToCompareSlice';
 import { addNotification } from '../../redux/notificationSlice';
 import { ProductDataProps } from '../utils/interfaces';
 import Button from '../component/actionableButtons/Button';
 
-const ProductCardTheme = ({
-  product: { id, image, name, status, species },
+const CompareProductList = ({
+  product: { id, image, name, status, species, gender, origin, location },
   product,
 }: {
   product: ProductDataProps;
@@ -23,28 +22,9 @@ const ProductCardTheme = ({
     dispatch(addNotification({ message: 'Item has been added successfully', type: 'success' }));
   };
 
-  const handleAddToCompare = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      dispatch(addToCompare({ products: product }));
-    } else {
-      dispatch(removeFromCompare({ products: product }));
-    }
-  };
-
   return (
     <>
       <div className="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-        <label className="custom-control">
-          <input
-            id={`custom-checkbox-${id}`}
-            name={`compare-${name}`}
-            type="checkbox"
-            value={id}
-            onChange={handleAddToCompare}
-            className="custom-control-input"
-          />
-          <div className="custom-control-label"> Add to Compare </div>
-        </label>
         <LinkComponent
           linkhref={`/product/${slug}/${id}`}
           classname=""
@@ -90,6 +70,9 @@ const ProductCardTheme = ({
             {species}
           </span>
         </div>
+        <div className="pt-1 text-gray-900">{gender}</div>
+        <div className="pt-1 text-gray-900">{origin.name}</div>
+        <div className="pt-1 text-gray-900">{location.name}</div>
         <Button
           buttonClass="bg-white-500 w-full hover:bg-gray-800 hover:text-white py-3 text-black font-bold py-2 px-4 border border-black-900 rounded"
           submitFunction={setCartItem}
@@ -101,4 +84,4 @@ const ProductCardTheme = ({
   );
 };
 
-export default ProductCardTheme;
+export default CompareProductList;

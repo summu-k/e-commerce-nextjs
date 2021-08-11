@@ -1,9 +1,9 @@
 {
   "noEmitOnError": true,
   "compilerOptions": {
-    "strict": true,
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "strict": false,
+    "target": "es6",
+    "lib": ["dom", "dom.iterable", "esnext", "es6"],
     "allowJs": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,

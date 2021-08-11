@@ -42,6 +42,7 @@ const cartSlice = createSlice({
     removeFromCart: (state, action) => {
       const index = state.findIndex((item: ProductDataProps) => item.id === action.payload);
       state.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(state));
     },
   },
 });

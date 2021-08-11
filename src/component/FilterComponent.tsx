@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
 import filterSearch from '../utils/filterSearch';
+import { showCompareModal } from '../../redux/addToCompareSlice';
 import { filter, characterGender, characterStatus } from '../../constants/filterValue';
 
 type filterProps = {
@@ -10,6 +12,7 @@ type filterProps = {
 
 const FilterComponent = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [category, setCategory] = useState('');
   const [gender, setGender] = useState('');
   const [status, setStatus] = useState('');
@@ -38,20 +41,41 @@ const FilterComponent = () => {
     filterSearch({ router, species: category, gender, status, page: 1 });
   };
 
+  const setCompareModal = () => {
+    dispatch(showCompareModal({ show: true }));
+  };
+
   return (
     <>
       <body className="overflow-hidden flex items-center justify-center" style={{ background: '#edf2f7' }}>
         <div className="productListingWrapper mx-auto pt-4 pb-8 container">
-          <div className="bg-grey col-12 mt-3 align-middle justify-content-center flex">
+          <div className="bg-grey col-12 mt-3 align-middle justify-content-center md:flex xl:flex">
             <button
               type="button"
-              className="btn btn-light mr-10 shadow-sm"
+              // className="btn btn-light md:mr-10 xl:mr-10 shadow-sm collapsed w-full p-2 flex-col mb-2"
+              className="btn btn-light md:mr-10 xl:mr-10 shadow-sm sm:collapsed sm:w-full sm:p-2 sm:flex-col sm:mb-2"
               data-toggle="collapse"
               data-target="#filters"
             >
               Filters <i className="fa fa-filter" />
             </button>
-            <input type="text" className="col-8 border-2 p-2" placeholder="Search Product..." id="search-filter" />
+            <input
+              type="text"
+              // className="border-2 p-2 w-full p-6 flex-col mb-2"
+              className="border-2 p-2 sm:w-full sm:p-6 sm:flex-col mb-2 xl:col-8 md:col-8"
+              placeholder="Search Product..."
+              id="search-filter"
+            />
+            <button
+              type="button"
+              // className="btn btn-light md:ml-10 xl:ml-10 shadow-sm w-full md:w-1/3 xl:w-1/4 flex-col"
+              className="btn btn-light md:ml-10 xl:ml-10 shadow-sm w-full md:w-1/3 xl:w-1/4 flex-col"
+              data-toggle="collapse"
+              data-target="#compare"
+              onClick={setCompareModal}
+            >
+              Compare
+            </button>
           </div>
 
           <div id="filters" className="collapse">

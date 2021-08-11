@@ -5,12 +5,7 @@ import { addToCart } from '../../redux/cartSlice';
 import { addNotification } from '../../redux/notificationSlice';
 import Button from './actionableButtons/Button';
 
-const ProductDataPropsnfo = ({
-  product: { name, gender, species, status },
-  product,
-}: {
-  product: ProductDataProps;
-}) => {
+const ProductInfo = ({ product: { name, gender, species, status }, product }: { product: ProductDataProps }) => {
   const dispatch = useDispatch();
   const setCartItem = () => {
     dispatch(addToCart(product));
@@ -48,4 +43,4 @@ const ProductDataPropsnfo = ({
   );
 };
 
-export default ProductDataPropsnfo;
+export default ProductInfo;

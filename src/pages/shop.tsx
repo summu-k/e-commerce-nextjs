@@ -6,7 +6,7 @@ import { GetServerSideProps } from 'next';
 import ReactPaginate from 'react-paginate';
 import { useRouter } from 'next/router';
 import Button from '../component/actionableButtons/Button';
-import { ProductDataProps, ProductDataPropsnfo } from '../utils/interfaces';
+import { ProductDataProps, ProductInfo } from '../utils/interfaces';
 import CardSkeleton from '../component/Skeleton';
 import { getAllFilterProduct } from '../pages/api/product';
 // import { getQueryString, apiQueryInterface } from '../utils/commonUtility';
@@ -15,13 +15,14 @@ import { getQueryString } from '../utils/commonUtility';
 import filterSearch from '../utils/filterSearch';
 // import Filter from '../component/Filter';
 import FilterComponent from '../component/FilterComponent';
+import SlideOver from '../component/SlideOver';
 
 // const Loader = dynamic(() => import('../component/Loader'));
 const ProductCardTheme = dynamic(() => import('../component/ProductCardTheme'));
 
 type ProductListingProps = {
   results: ProductDataProps[];
-  info: ProductDataPropsnfo;
+  info: ProductInfo;
 };
 
 const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
@@ -134,6 +135,7 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
           </>
         )}
       </div>
+      <SlideOver />
       <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between pagination justify-content-center">
         <div className="max-w-full flex-wrap">
           <ReactPaginate
