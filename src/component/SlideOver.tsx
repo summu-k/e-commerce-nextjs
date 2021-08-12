@@ -3,8 +3,8 @@ import { Dialog, Transition } from '@headlessui/react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
 import { showCompareModal } from '../../redux/addToCompareSlice';
-import { ProductDataProps } from '../utils/interfaces';
-import CompareProductList from '../component/CompareProductList';
+// import { ProductDataProps } from '../utils/interfaces';
+// import CompareProductList from '../component/CompareProductList';
 import type { RootState, AppDispatch } from '../../redux/store';
 import ComparisionTable from '../component/ComparisionTable';
 
@@ -12,7 +12,7 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export default function SlideOver() {
   const [open, setOpen] = useState(false);
-  const [compareList, setCompareList] = useState<Object[]>();
+  //   const [compareList, setCompareList] = useState<Object[]>();
   const dispatch = useDispatch();
   const compare = useAppSelector((state) => state && state.compare);
 
@@ -24,16 +24,14 @@ export default function SlideOver() {
     dispatch(showCompareModal({ show: false }));
   };
 
-  React.useEffect(() => {
-    if (compare.products.length > 0) {
-      const productListData = compare.products.map((data: ProductDataProps) => (
-        <CompareProductList key={data.id} product={data} />
-      ));
-      setCompareList(productListData);
-    }
-  }, [compare]);
-
-  console.log('compareList ', compareList);
+  //   React.useEffect(() => {
+  //     if (compare.products.length > 0) {
+  //       const productListData = compare.products.map((data: ProductDataProps) => (
+  //         <CompareProductList key={data.id} product={data} />
+  //       ));
+  //       setCompareList(productListData);
+  //     }
+  //   }, [compare]);
 
   return (
     <Transition.Root show={open} as={Fragment}>
