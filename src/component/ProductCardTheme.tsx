@@ -43,21 +43,7 @@ const ProductCardTheme = ({
 
   return (
     <>
-      <div className="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-        {path === '/shop' && (
-          <label className="custom-control">
-            <input
-              id={`custom-checkbox-${id}`}
-              name={`compare-${name}`}
-              type="checkbox"
-              value={id}
-              onChange={handleAddToCompare}
-              className="custom-control-input"
-            />
-            <div className="custom-control-label"> Add to Compare </div>
-          </label>
-        )}
-
+      <div className="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col product-information">
         <LinkComponent
           linkhref={`/product/${slug}/${id}`}
           classname=""
@@ -87,7 +73,7 @@ const ProductCardTheme = ({
             <h1 className="font-bold text-xl mb-2">{name}</h1>
           </LinkComponent>
           <svg
-            className="h-6 w-6 fill-current text-gray-500 hover:text-black"
+            className="h-6 w-6 fill-current text-gray-500 hover:text-red-500 cursor-pointer"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
           >
@@ -103,6 +89,19 @@ const ProductCardTheme = ({
             {species}
           </span>
         </div>
+        {path === '/shop' && (
+          <label className="custom-control">
+            <input
+              id={`custom-checkbox-${id}`}
+              name={`compare-${name}`}
+              type="checkbox"
+              value={id}
+              onChange={handleAddToCompare}
+              className="custom-control-input"
+            />
+            <div className="custom-control-label"> Add to Compare </div>
+          </label>
+        )}
         <Button
           buttonClass="bg-white-500 w-full hover:bg-gray-800 hover:text-white py-3 text-black font-bold py-2 px-4 border border-black-900 rounded"
           submitFunction={setCartItem}
