@@ -6,6 +6,7 @@ import { showCompareModal } from '../../redux/addToCompareSlice';
 import { ProductDataProps } from '../utils/interfaces';
 import CompareProductList from '../component/CompareProductList';
 import type { RootState, AppDispatch } from '../../redux/store';
+import ComparisionTable from '../component/ComparisionTable';
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
@@ -31,6 +32,8 @@ export default function SlideOver() {
       setCompareList(productListData);
     }
   }, [compare]);
+
+  console.log('compareList ', compareList);
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -86,7 +89,8 @@ export default function SlideOver() {
                   </div>
                   <div className="mt-6 relative flex-1 px-4 sm:px-6">
                     <div className="absolute inset-0 px-4 sm:px-6">
-                      <div className="h-full border-2 border-dashed border-gray-200" aria-hidden="true">
+                      <ComparisionTable products={compare.products} />
+                      {/* <div className="h-full border-2 border-dashed border-gray-200" aria-hidden="true">
                         {compare.products.length === 0 ? (
                           'Please select Products'
                         ) : (
@@ -97,7 +101,7 @@ export default function SlideOver() {
                             {compareList}
                           </div>
                         )}
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
 import LinkComponent from './actionableButtons/LinkComponent';
 import { addToCart } from '../../redux/cartSlice';
 import { addToCompare, removeFromCompare } from '../../redux/addToCompareSlice';
@@ -17,6 +18,7 @@ const ProductCardTheme = ({
   const dispatch = useDispatch();
   let slug = name;
   slug = slug.replace(/\s+/g, '-').toLowerCase();
+  const router = useRouter();
 
   const setCartItem = () => {
     dispatch(addToCart(product));
@@ -31,20 +33,31 @@ const ProductCardTheme = ({
     }
   };
 
+  const path = router.pathname;
+  React.useEffect(() => {
+    console.log(`router :`);
+    console.log(router);
+    console.log(`router path: ${path}`);
+    console.log(`router asPath: ${router.asPath}`);
+  }, [router]);
+
   return (
     <>
       <div className="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-        <label className="custom-control">
-          <input
-            id={`custom-checkbox-${id}`}
-            name={`compare-${name}`}
-            type="checkbox"
-            value={id}
-            onChange={handleAddToCompare}
-            className="custom-control-input"
-          />
-          <div className="custom-control-label"> Add to Compare </div>
-        </label>
+        {path === '/shop' && (
+          <label className="custom-control">
+            <input
+              id={`custom-checkbox-${id}`}
+              name={`compare-${name}`}
+              type="checkbox"
+              value={id}
+              onChange={handleAddToCompare}
+              className="custom-control-input"
+            />
+            <div className="custom-control-label"> Add to Compare </div>
+          </label>
+        )}
+
         <LinkComponent
           linkhref={`/product/${slug}/${id}`}
           classname=""

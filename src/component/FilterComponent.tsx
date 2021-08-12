@@ -13,9 +13,9 @@ type filterProps = {
 const FilterComponent = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [category, setCategory] = useState('');
-  const [gender, setGender] = useState('');
-  const [status, setStatus] = useState('');
+  const [category, setCategory] = useState<string>('');
+  const [gender, setGender] = useState<string>('');
+  const [status, setStatus] = useState<string>('');
   //   const [checkedState, setCheckedState] = useState(new Array(filter.length).fill(false));
   //   const handleOnChange = (position: number) => {
   //     const updatedCheckedState = checkedState.map((item, index) => (index === position ? !item : item));

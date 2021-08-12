@@ -1,21 +1,18 @@
 import React from 'react';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
-import LinkComponent from './actionableButtons/LinkComponent';
 import { addToCart } from '../../redux/cartSlice';
 import { addNotification } from '../../redux/notificationSlice';
 import { ProductDataProps } from '../utils/interfaces';
 import Button from '../component/actionableButtons/Button';
 
 const CompareProductList = ({
-  product: { id, image, name, status, species, gender, origin, location },
+  product: { image, name, status, species, gender, origin, location },
   product,
 }: {
   product: ProductDataProps;
 }) => {
   const dispatch = useDispatch();
-  let slug = name;
-  slug = slug.replace(/\s+/g, '-').toLowerCase();
 
   const setCartItem = () => {
     dispatch(addToCart(product));
@@ -25,34 +22,16 @@ const CompareProductList = ({
   return (
     <>
       <div className="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-        <LinkComponent
-          linkhref={`/product/${slug}/${id}`}
-          classname=""
-          linkname=""
-          datatest="Catalog Image"
-          aria-label="Catalog Image"
-          target="_self"
-        >
-          <Image
-            data-test-py="categoryProducts"
-            className="hover:grow hover:shadow-lg"
-            src={image}
-            height={300}
-            width={300}
-            alt="Product images"
-          />
-        </LinkComponent>
+        <Image
+          data-test-py="categoryProducts"
+          className="hover:grow hover:shadow-lg"
+          src={image}
+          height={300}
+          width={300}
+          alt="Product images"
+        />
         <div className="pt-3 flex items-center justify-between">
-          <LinkComponent
-            linkhref={`/product/${slug}/${id}`}
-            classname="w-full"
-            linkname=""
-            datatest="Product Name"
-            aria-label="Product Name"
-            target="_self"
-          >
-            <h1 className="font-bold text-xl mb-2">{name}</h1>
-          </LinkComponent>
+          <h1 className="font-bold text-xl mb-2">{name}</h1>
           <svg
             className="h-6 w-6 fill-current text-gray-500 hover:text-black"
             xmlns="http://www.w3.org/2000/svg"
