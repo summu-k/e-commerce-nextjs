@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import filterSearch from '../utils/filterSearch';
 import { showCompareModal } from '../../redux/addToCompareSlice';
-import { filter, characterGender, characterStatus } from '../../constants/filterValue';
+import { filter, characterGender, characterStatus } from '../constants/filterValue';
 
 type filterProps = {
   id: number;

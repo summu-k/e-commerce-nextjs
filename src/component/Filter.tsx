@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import filterSearch from '../utils/filterSearch';
-import { filter } from '../../constants/filterValue';
+import { filter } from '../constants/filterValue';
 
 type filterProps = {
   id: number;

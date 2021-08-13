@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export interface ProductDataProps {
   id: number;
   image: string;
@@ -35,4 +36,32 @@ export interface ProductProps {
 
 export interface SeoProps {
   pageTitle: string;
+}
+
+export interface WishlistProps {
+  initialWislist: [];
+}
+
+export type WishlistItemProps = {
+  id: string;
+  fields: {
+    name: string;
+    productId: number;
+  };
+};
+
+export type WishlistFieldProps = {
+  name: string;
+  productId: number;
+  image?: string;
+  status?: string;
+  species?: string;
+};
+
+export interface AuthContextType {
+  wishlists: WishlistItemProps[];
+  setWishlists: (input: WishlistItemProps[]) => void;
+  addWishlist: (wishlist: WishlistFieldProps) => void;
+  refreshWishlists: () => void;
+  deleteWishlist: (id: string) => void;
 }

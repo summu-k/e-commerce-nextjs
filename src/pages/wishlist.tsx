@@ -1,18 +1,31 @@
 /* eslint-disable no-unused-vars */
-import React, { FC } from 'react';
+import React, { FC, useEffect, useContext } from 'react';
 import { GetServerSideProps } from 'next';
 import { table, minifyRecords } from './api/utils/airtable';
-
-interface WishlistProps {
-  initialWislist: [];
-}
+import { WishlistProps, AuthContextType } from '../utils/interfaces';
+import { WishlistContext } from '../contexts/WishlistContext';
 
 const Wishlist: FC<WishlistProps> = ({ initialWislist }) => {
-  console.log('initialWislist => ');
-  console.log(initialWislist);
+  const { wishlists, setWishlists } = useContext(WishlistContext) as AuthContextType;
+
+  useEffect(() => {
+    setWishlists(initialWislist);
+  }, []);
+
+  React.useEffect(() => {
+    console.log('wishlists useEffect ', wishlists);
+  }, [wishlists]);
+
   return (
     <div>
       <h1>Wishlist Listing</h1>
+      {wishlists &&
+        wishlists.map((item) => (
+          <>
+            <span>{item.fields.name}</span>
+            <span>{item.fields.productId}</span>
+          </>
+        ))}
     </div>
   );
 };

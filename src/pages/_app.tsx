@@ -8,6 +8,7 @@ import '../styles/globals.css';
 import store from '../../redux/store';
 import Seo from '../component/Seo';
 import Layout from '../component/baseLayouts/Layout';
+import { WishlistProvider } from '../contexts/WishlistContext';
 
 const Loader = dynamic(() => import('../component/Loader'));
 
@@ -26,12 +27,14 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       {loading && <Loader />}
       <html lang="en">
         <Provider session={pageProps.session}>
-          <ReduxProvider store={store}>
-            <Layout>
-              <Seo pageTitle={pageProps.pageTitle} />
-              <Component {...pageProps} />
-            </Layout>
-          </ReduxProvider>
+          <WishlistProvider>
+            <ReduxProvider store={store}>
+              <Layout>
+                <Seo pageTitle={pageProps.pageTitle} />
+                <Component {...pageProps} />
+              </Layout>
+            </ReduxProvider>
+          </WishlistProvider>
         </Provider>
       </html>
     </>
