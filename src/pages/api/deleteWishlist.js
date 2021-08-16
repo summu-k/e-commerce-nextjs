@@ -1,3 +1,4 @@
+// import { withApiAuthRequired } from '@auth0/nextjs-auth0';
 import { table } from './utils/airtable.js';
 
 export default async (req, res) => {

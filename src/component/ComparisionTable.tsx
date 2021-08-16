@@ -11,14 +11,6 @@ interface ComparisionTableProps {
 }
 
 const ComparisionTable: FC<ComparisionTableProps> = ({ products }) => {
-  React.useEffect(() => {
-    if (products.length > 0) {
-      products.forEach((entry: ProductDataProps, index: number) => {
-        console.log(entry, index);
-      });
-    }
-  }, [products]);
-
   const dispatch = useDispatch();
 
   const setCartItem = (product: ProductDataProps) => {

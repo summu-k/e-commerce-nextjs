@@ -1,19 +1,24 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, FC } from 'react';
 import { GetStaticProps } from 'next';
+import { table, minifyRecords } from './api/utils/airtable';
 import { fetchAllProduct } from './api/product';
-import { ProductDataProps } from '../utils/interfaces';
+import { ProductDataProps, WishlistItemProps, WishlistMapType } from '../utils/interfaces';
 import ProductCardTheme from '../component/ProductCardTheme';
 import CardSkeleton from '../component/Skeleton';
 import HeroSection from '../component/HeroSection';
 
-const Home: FC<ProductDataProps> = ({ results }) => {
+const Home: FC<ProductDataProps> = ({ results, wishlistMap }) => {
   const [isLoading, setLoading] = useState<boolean>(true);
   const [productList, setProductList] = useState<Object[]>();
 
   React.useEffect(() => {
-    const productListData = results.map((data: ProductDataProps) => <ProductCardTheme key={data.id} product={data} />);
-    setProductList(productListData);
+    if (wishlistMap) {
+      const productListData = results.map((data: ProductDataProps) => (
+        <ProductCardTheme key={data.id} product={data} checkWishlist={!!wishlistMap[data.id]} />
+      ));
+      setProductList(productListData);
+    }
   }, []);
 
   React.useEffect(() => {
@@ -48,9 +53,17 @@ const Home: FC<ProductDataProps> = ({ results }) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const { results } = await fetchAllProduct();
+  const allWislist = await table.select({}).firstPage();
+
+  const wishlistMap: WishlistMapType = {};
+  minifyRecords(allWislist).forEach((data: WishlistItemProps) => {
+    wishlistMap[data.fields.productId] = data.id;
+  });
+
   return {
     props: {
       results,
+      wishlistMap,
       pageTitle: 'Shop Forver Bazaar',
     },
   };

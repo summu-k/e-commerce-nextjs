@@ -4,8 +4,9 @@ import dynamic from 'next/dynamic';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
 import Router from 'next/router';
 import { isTablet, isDesktop } from 'react-device-detect';
-// import Link from 'next/link';
-import { signIn, signOut, useSession } from 'next-auth/client';
+import { useUser } from '@auth0/nextjs-auth0';
+// import { signIn, signOut, useSession } from 'next-auth/client';
+import Link from 'next/link';
 import LinkComponent from './actionableButtons/LinkComponent';
 import { addToCart } from '../../redux/cartSlice';
 import { ProductDataProps } from '../utils/interfaces';
@@ -21,7 +22,8 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 type ComponentProps = React.PropsWithChildren<{}>;
 
 const Header = ({ children }: ComponentProps) => {
-  const [session] = useSession();
+  const { user } = useUser();
+
   let cartFromLocalStorage: ProductDataProps[] = [];
   const dispatch = useDispatch();
   const cart = useAppSelector((state) => state && state.cart);
@@ -54,15 +56,6 @@ const Header = ({ children }: ComponentProps) => {
   React.useEffect(() => {
     setCartCount(getItemsCount());
   }, [cart]);
-
-  // const intitateSignIn = () => {
-  //   console.log('intitateSignIn ');
-  //   signIn();
-  // };
-  // const intitateSignOut = () => {
-  //   console.log('intitateSignOut ');
-  //   signOut();
-  // };
 
   return (
     <>
@@ -115,20 +108,18 @@ const Header = ({ children }: ComponentProps) => {
               </svg>
             </LinkComponent>
           </div>
-          <div className="order-2 md:order-3 flex items-center" id="nav-content">
-            {!session && (
-              <>
-                <button type="button" onClick={() => signIn()}>
-                  Sign In
-                </button>
-              </>
-            )}
-            {session && (
-              <>
-                <button type="button" onClick={() => signOut()}>
-                  Sign out
-                </button>
 
+          <div className="order-2 md:order-3 flex items-center" id="nav-content">
+            {!user && (
+              <Link href="/api/auth/login">
+                <a>Login</a>
+              </Link>
+            )}
+            {user && (
+              <>
+                <Link href="/api/auth/logout">
+                  <a>Sign Out</a>
+                </Link>
                 <div className="ml-3 relative dropdown group">
                   <div>
                     <button
@@ -141,7 +132,7 @@ const Header = ({ children }: ComponentProps) => {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src={session?.user?.image ? session.user.image : ''}
+                        src={user?.picture ? user.picture : ''}
                         alt="User Profile"
                       />
                     </button>
@@ -152,9 +143,7 @@ const Header = ({ children }: ComponentProps) => {
                     aria-orientation="vertical"
                     aria-labelledby="user-menu-button"
                   >
-                    <span className="block px-4 py-2 text-sm text-gray-700">
-                      {session?.user?.name ? session.user.name : ''}
-                    </span>
+                    <span className="block px-4 py-2 text-sm text-gray-700">{user?.name ? user.name : ''}</span>
                   </div>
                 </div>
               </>

@@ -14,7 +14,9 @@ export interface ProductDataProps {
   location: { name: string; url: string };
   episode: string[];
   results: ProductDataProps[];
+  wishlistMap?: WishlistMapType;
   category: string;
+  checkWishlist?: boolean;
 }
 
 export interface ProductInfo {
@@ -64,4 +66,7 @@ export interface AuthContextType {
   addWishlist: (wishlist: WishlistFieldProps) => void;
   refreshWishlists: () => void;
   deleteWishlist: (id: string) => void;
+  fetchWishlist: (id: number) => void;
 }
+
+export type WishlistMapType = Record<number, string>;

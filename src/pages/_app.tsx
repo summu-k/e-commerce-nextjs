@@ -1,5 +1,6 @@
 import { Provider as ReduxProvider } from 'react-redux';
-import { Provider } from 'next-auth/client';
+// import { Provider } from 'next-auth/client';
+import { UserProvider } from '@auth0/nextjs-auth0';
 import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 import type { AppProps } from 'next/app';
@@ -26,7 +27,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     <>
       {loading && <Loader />}
       <html lang="en">
-        <Provider session={pageProps.session}>
+        <UserProvider>
           <WishlistProvider>
             <ReduxProvider store={store}>
               <Layout>
@@ -35,7 +36,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
               </Layout>
             </ReduxProvider>
           </WishlistProvider>
-        </Provider>
+        </UserProvider>
       </html>
     </>
   );

@@ -19,7 +19,6 @@ const FilterComponent = () => {
   //   const [checkedState, setCheckedState] = useState(new Array(filter.length).fill(false));
   //   const handleOnChange = (position: number) => {
   //     const updatedCheckedState = checkedState.map((item, index) => (index === position ? !item : item));
-  //     console.log('first updatedCheckedState ', updatedCheckedState);
   //     setCheckedState(updatedCheckedState);
   //   };
   const handleCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {

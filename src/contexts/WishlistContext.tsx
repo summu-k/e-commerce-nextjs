@@ -10,8 +10,23 @@ const WishlistProvider = ({ children }: ComponentProps) => {
   const refreshWishlists = async () => {
     try {
       const res = await fetch('/api/getWishlists');
-      const latestTodos = await res.json();
-      setWishlists(latestTodos);
+      const latestWishlists = await res.json();
+      setWishlists(latestWishlists);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const fetchWishlist = async (id: number) => {
+    try {
+      const res = await fetch('/api/getOneWishlist', {
+        method: 'GET',
+        body: JSON.stringify({ id }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+      const wishlist = await res.json();
+
+      setWishlists(wishlist);
     } catch (err) {
       console.error(err);
     }
@@ -25,9 +40,9 @@ const WishlistProvider = ({ children }: ComponentProps) => {
         headers: { 'Content-Type': 'application/json' },
       });
       const newWishlist = await res.json();
-      setWishlists((prevTodos) => {
-        const updatedTodos = [newWishlist, ...prevTodos];
-        return updatedTodos;
+      setWishlists((prevWishlists) => {
+        const updatedWishlists = [newWishlist, ...prevWishlists];
+        return updatedWishlists;
       });
     } catch (err) {
       console.error(err);
@@ -36,7 +51,7 @@ const WishlistProvider = ({ children }: ComponentProps) => {
 
   const deleteWishlist = async (id: string) => {
     try {
-      await fetch('/api/deleteTodo', {
+      await fetch('/api/deleteWishlist', {
         method: 'Delete',
         body: JSON.stringify({ id }),
         headers: { 'Content-Type': 'application/json' },
@@ -49,7 +64,9 @@ const WishlistProvider = ({ children }: ComponentProps) => {
   };
 
   return (
-    <WishlistContext.Provider value={{ wishlists, setWishlists, refreshWishlists, deleteWishlist, addWishlist }}>
+    <WishlistContext.Provider
+      value={{ wishlists, setWishlists, refreshWishlists, fetchWishlist, deleteWishlist, addWishlist }}
+    >
       {children}
     </WishlistContext.Provider>
   );

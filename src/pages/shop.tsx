@@ -5,8 +5,9 @@ import dynamic from 'next/dynamic';
 import { GetServerSideProps } from 'next';
 import ReactPaginate from 'react-paginate';
 import { useRouter } from 'next/router';
+import { table, minifyRecords } from './api/utils/airtable';
 import Button from '../component/actionableButtons/Button';
-import { ProductDataProps, ProductInfo } from '../utils/interfaces';
+import { ProductDataProps, ProductInfo, WishlistItemProps, WishlistMapType } from '../utils/interfaces';
 import CardSkeleton from '../component/Skeleton';
 import { getAllFilterProduct } from '../pages/api/product';
 // import { getQueryString, apiQueryInterface } from '../utils/commonUtility';
@@ -23,9 +24,10 @@ const ProductCardTheme = dynamic(() => import('../component/ProductCardTheme'));
 type ProductListingProps = {
   results: ProductDataProps[];
   info: ProductInfo;
+  wishlistMap?: WishlistMapType;
 };
 
-const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
+const ProductListing: FC<ProductListingProps> = ({ results, info, wishlistMap }) => {
   const [productList, setProductList] = useState<Object[]>();
   const [pageNumber, setPageNumber] = useState<number>(0);
   const [next, setNext] = useState<number>(0);
@@ -41,9 +43,9 @@ const ProductListing: FC<ProductListingProps> = ({ results, info }) => {
   }, [results]);
 
   React.useEffect(() => {
-    if (productData) {
+    if (productData && wishlistMap) {
       const productListData = productData.map((data: ProductDataProps) => (
-        <ProductCardTheme key={data.id} product={data} />
+        <ProductCardTheme key={data.id} product={data} checkWishlist={!!wishlistMap[data.id]} />
       ));
       setProductList(productListData);
     }
@@ -171,10 +173,18 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { results, info } = await getAllFilterProduct(
     `character?page=${page}&species=${species}&gender=${gender}&status=${status}`
   );
+  const allWislist = await table.select({}).firstPage();
+
+  const wishlistMap: WishlistMapType = {};
+  minifyRecords(allWislist).forEach((data: WishlistItemProps) => {
+    wishlistMap[data.fields.productId] = data.id;
+  });
+
   return {
     props: {
       results,
       info,
+      wishlistMap,
       pageTitle: 'Product Listing Shop',
     },
   };

@@ -1,6 +1,7 @@
+import { withApiAuthRequired } from '@auth0/nextjs-auth0';
 import { table, minifyRecords } from './utils/airtable.js';
 
-export default async (req, res) => {
+export default withApiAuthRequired(async (req, res) => {
   try {
     const records = await table.select({}).firstPage();
     const formattedRecords = minifyRecords(records);
@@ -10,4 +11,4 @@ export default async (req, res) => {
     res.statusCode = 500;
     res.json({ msg: error.message });
   }
-};
+});

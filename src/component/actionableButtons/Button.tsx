@@ -5,7 +5,7 @@ import React, { FC } from 'react';
 interface ButtonProps {
   buttonText?: string;
   buttonClass: string;
-  datatest: string;
+  datatest?: string;
   submitFunction?: any;
 }
 
