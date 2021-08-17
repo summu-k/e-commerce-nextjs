@@ -50,8 +50,8 @@ const CompareProductList = ({
           </span>
         </div>
         <div className="pt-1 text-gray-900">{gender}</div>
-        <div className="pt-1 text-gray-900">{origin.name}</div>
-        <div className="pt-1 text-gray-900">{location.name}</div>
+        <div className="pt-1 text-gray-900">{origin?.name}</div>
+        <div className="pt-1 text-gray-900">{location?.name}</div>
         <Button
           buttonClass="bg-white-500 w-full hover:bg-gray-800 hover:text-white py-3 text-black font-bold py-2 px-4 border border-black-900 rounded"
           submitFunction={setCartItem}

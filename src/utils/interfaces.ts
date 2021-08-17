@@ -5,17 +5,17 @@ export interface ProductDataProps {
   name: string;
   status: string;
   species: string;
-  type: string;
-  gender: string;
-  url: string;
-  created: string;
-  quantity: number;
-  origin: { name: string; url: string };
-  location: { name: string; url: string };
-  episode: string[];
-  results: ProductDataProps[];
+  type?: string;
+  gender?: string;
+  url?: string;
+  created?: string;
+  quantity?: number;
+  origin?: { name: string; url: string };
+  location?: { name: string; url: string };
+  episode?: string[];
+  results?: ProductDataProps[];
   wishlistMap?: WishlistMapType;
-  category: string;
+  category?: string;
   checkWishlist?: boolean;
 }
 
@@ -42,6 +42,7 @@ export interface SeoProps {
 
 export interface WishlistProps {
   initialWislist: [];
+  wishlistMap?: WishlistMapType;
 }
 
 export type WishlistItemProps = {
@@ -49,15 +50,18 @@ export type WishlistItemProps = {
   fields: {
     name: string;
     productId: number;
+    image: string;
+    status: string;
+    species: string;
   };
 };
 
 export type WishlistFieldProps = {
   name: string;
   productId: number;
-  image?: string;
-  status?: string;
-  species?: string;
+  image: string;
+  status: string;
+  species: string;
 };
 
 export interface AuthContextType {

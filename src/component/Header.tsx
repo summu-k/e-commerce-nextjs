@@ -32,7 +32,7 @@ const Header = ({ children }: ComponentProps) => {
 
   const getItemsCount = () =>
     cart.reduce((sum, { quantity }) => sum + quantity, 0) ||
-    cartFromLocalStorage.reduce((localSum, localItem) => localSum + localItem.quantity, 0);
+    cartFromLocalStorage.reduce((localSum, localItem) => localSum + (localItem.quantity ? localItem.quantity : 0), 0);
 
   Router.events.on('routeChangeStart', () => {
     setHideMenu(true);

@@ -300,6 +300,10 @@ svg:not(:root) {
   text-align: center;
 }
 
+.wishlist-list {
+  text-align: center;
+}
+
 /* .productListWrapper { */
 /* height: 330vh; */
 /* } */

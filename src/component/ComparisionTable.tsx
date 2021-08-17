@@ -105,7 +105,7 @@ const ComparisionTable: FC<ComparisionTableProps> = ({ products }) => {
             <td className="border border-gray-400 text-left px-4 py-6">Origin</td>
             {products.map(({ id, origin }) => (
               <td key={id} className="border border-gray-400 text-center px-4 py-6">
-                {origin.name}
+                {origin?.name}
               </td>
             ))}
           </tr>
@@ -113,7 +113,7 @@ const ComparisionTable: FC<ComparisionTableProps> = ({ products }) => {
             <td className="border border-gray-400 text-left px-4 py-6">Location</td>
             {products.map(({ id, location }) => (
               <td key={id} className="border border-gray-400 text-center px-4 py-6">
-                {location.name}
+                {location?.name}
               </td>
             ))}
           </tr>

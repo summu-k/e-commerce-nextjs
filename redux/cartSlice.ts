@@ -9,7 +9,7 @@ const cartSlice = createSlice({
       const itemExists: ProductDataProps | undefined = state.find(
         (item: ProductDataProps) => item.id === action.payload.id
       );
-      if (itemExists) {
+      if (itemExists && itemExists.quantity) {
         itemExists.quantity += 1;
       } else if (!itemExists) {
         state.push({ ...action.payload, quantity: 1 });
@@ -20,7 +20,7 @@ const cartSlice = createSlice({
       const itemIncFind: ProductDataProps | undefined = state.find(
         (itemInc: ProductDataProps) => itemInc.id === action.payload
       );
-      if (itemIncFind) {
+      if (itemIncFind && itemIncFind.quantity) {
         itemIncFind.quantity += 1;
         localStorage.setItem('cart', JSON.stringify(state));
       }
@@ -29,7 +29,7 @@ const cartSlice = createSlice({
       const itemDecFind: ProductDataProps | undefined = state.find(
         (item: ProductDataProps) => item.id === action.payload
       );
-      if (itemDecFind) {
+      if (itemDecFind && itemDecFind.quantity) {
         if (itemDecFind.quantity === 1) {
           const index = state.findIndex((item: ProductDataProps) => item.id === action.payload);
           state.splice(index, 1);

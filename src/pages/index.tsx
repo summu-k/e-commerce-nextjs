@@ -13,7 +13,7 @@ const Home: FC<ProductDataProps> = ({ results, wishlistMap }) => {
   const [productList, setProductList] = useState<Object[]>();
 
   React.useEffect(() => {
-    if (wishlistMap) {
+    if (wishlistMap && results) {
       const productListData = results.map((data: ProductDataProps) => (
         <ProductCardTheme key={data.id} product={data} checkWishlist={!!wishlistMap[data.id]} />
       ));
