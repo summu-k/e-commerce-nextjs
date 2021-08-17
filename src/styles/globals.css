@@ -201,6 +201,10 @@ li.pagination-active a {
   color: green;
 }
 
+.ant-message-warning .anticon {
+  color: red;
+}
+
 .anticon {
   display: inline-block;
   color: inherit;

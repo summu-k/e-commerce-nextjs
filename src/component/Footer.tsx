@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
 import { showCompareModal } from '../../redux/addToCompareSlice';
 import LinkComponent from '../component/actionableButtons/LinkComponent';
+import { addNotification } from '../../redux/notificationSlice';
 import type { RootState } from '../../redux/store';
 
 type ComponentProps = React.PropsWithChildren<{}>;
@@ -12,7 +13,14 @@ const Footer: FC<ComponentProps> = ({ children }) => {
   const [showCompare, setShowCompare] = useState<boolean>(false);
   const compare = useAppSelector((state) => state && state.compare);
   const setCompareModal = () => {
-    dispatch(showCompareModal({ show: true }));
+    if (compare && compare.products.length > 4) {
+      dispatch(addNotification({ message: 'Maximum 4 Products are allowed to compare', type: 'warning' }));
+      setTimeout(() => {
+        dispatch(addNotification({ message: '', type: '' }));
+      }, 10000);
+    } else {
+      dispatch(showCompareModal({ show: true }));
+    }
   };
 
   React.useEffect(() => {
@@ -27,7 +35,6 @@ const Footer: FC<ComponentProps> = ({ children }) => {
         <div className="relative">
           <button
             type="button"
-            // className="btn btn-light md:ml-10 xl:ml-10 shadow-sm w-full md:w-1/3 xl:w-1/4 flex-col"
             className="bg-blue-600 absolute text-sm rounded text-white inset-2 w-32 h-11"
             data-toggle="collapse"
             data-target="#compare"

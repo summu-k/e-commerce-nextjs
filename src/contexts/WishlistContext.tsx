@@ -36,7 +36,13 @@ const WishlistProvider = ({ children }: ComponentProps) => {
     try {
       const res = await fetch('/api/createWishlist', {
         method: 'POST',
-        body: JSON.stringify({ name: wishlist.name, productId: wishlist.productId }),
+        body: JSON.stringify({
+          name: wishlist.name,
+          productId: wishlist.productId,
+          image: wishlist.image,
+          status: wishlist.status,
+          species: wishlist.species,
+        }),
         headers: { 'Content-Type': 'application/json' },
       });
       const newWishlist = await res.json();

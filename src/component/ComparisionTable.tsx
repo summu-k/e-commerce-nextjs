@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../../redux/cartSlice';
 import { addNotification } from '../../redux/notificationSlice';
 import { ProductDataProps } from '../utils/interfaces';
-import Button from '../component/actionableButtons/Button';
+// import Button from '../component/actionableButtons/Button';
 
 interface ComparisionTableProps {
   products: ProductDataProps[];
@@ -20,20 +20,33 @@ const ComparisionTable: FC<ComparisionTableProps> = ({ products }) => {
 
   const comparisionHeader = (productArray: ProductDataProps[]) =>
     productArray.map((entry: ProductDataProps) => (
-      <th className="w-1/5 bg-gray-200 text-center border border-gray-400 font-normal px-4 py-6 sticky top-0">
+      <th
+        key={entry.id}
+        className="w-1/5 bg-gray-200 text-center border border-gray-400 font-normal px-4 py-6 sticky top-0"
+      >
         <div className="uppercase tracking-wide font-bold text-gray-700">{entry.name}</div>
         <div className="mt-3">
           <span className="text-lg">$</span>
           <span className="font-bold text-4xl ml-1">9.99</span>
         </div>
         <div className="mt-3">
+          <button
+            type="button"
+            onClick={() => setCartItem(entry)}
+            className="bg-blue-500 hover:bg-blue-700 text-white inline-block rounded w-4/5 px-4 py-3"
+            data-test-py="addToCart"
+          >
+            Cart
+          </button>
+        </div>
+        {/* <div className="mt-3">
           <Button
             buttonClass="bg-blue-500 hover:bg-blue-700 text-white inline-block rounded w-4/5 px-4 py-3"
             submitFunction={setCartItem(entry)}
             buttonText="Cart"
             datatest="addToCart"
           />
-        </div>
+        </div> */}
       </th>
     ));
 
@@ -51,8 +64,8 @@ const ComparisionTable: FC<ComparisionTableProps> = ({ products }) => {
         <tbody>
           <tr className="odd:bg-white even:bg-gray-100">
             <td className="border border-gray-400 text-left px-4 py-6">Image</td>
-            {products.map(({ image }) => (
-              <td className="border border-gray-400 text-center px-4 py-6">
+            {products.map(({ id, image }) => (
+              <td key={id} className="border border-gray-400 text-center px-4 py-6">
                 <Image
                   data-test-py="categoryProducts"
                   className="hover:grow hover:shadow-lg"
@@ -66,32 +79,42 @@ const ComparisionTable: FC<ComparisionTableProps> = ({ products }) => {
           </tr>
           <tr className="odd:bg-white even:bg-gray-100">
             <td className="border border-gray-400 text-left px-4 py-6">Status</td>
-            {products.map(({ status }) => (
-              <td className="border border-gray-400 text-center px-4 py-6">{status}</td>
+            {products.map(({ id, status }) => (
+              <td key={id} className="border border-gray-400 text-center px-4 py-6">
+                {status}
+              </td>
             ))}
           </tr>
           <tr className="odd:bg-white even:bg-gray-100">
             <td className="border border-gray-400 text-left px-4 py-6">Species</td>
-            {products.map(({ species }) => (
-              <td className="border border-gray-400 text-center px-4 py-6">{species}</td>
+            {products.map(({ id, species }) => (
+              <td key={id} className="border border-gray-400 text-center px-4 py-6">
+                {species}
+              </td>
             ))}
           </tr>
           <tr className="odd:bg-white even:bg-gray-100">
             <td className="border border-gray-400 text-left px-4 py-6">Gender</td>
-            {products.map(({ gender }) => (
-              <td className="border border-gray-400 text-center px-4 py-6">{gender}</td>
+            {products.map(({ id, gender }) => (
+              <td key={id} className="border border-gray-400 text-center px-4 py-6">
+                {gender}
+              </td>
             ))}
           </tr>
           <tr className="odd:bg-white even:bg-gray-100">
             <td className="border border-gray-400 text-left px-4 py-6">Origin</td>
-            {products.map(({ origin }) => (
-              <td className="border border-gray-400 text-center px-4 py-6">{origin.name}</td>
+            {products.map(({ id, origin }) => (
+              <td key={id} className="border border-gray-400 text-center px-4 py-6">
+                {origin.name}
+              </td>
             ))}
           </tr>
           <tr className="odd:bg-white even:bg-gray-100">
             <td className="border border-gray-400 text-left px-4 py-6">Location</td>
-            {products.map(({ location }) => (
-              <td className="border border-gray-400 text-center px-4 py-6">{location.name}</td>
+            {products.map(({ id, location }) => (
+              <td key={id} className="border border-gray-400 text-center px-4 py-6">
+                {location.name}
+              </td>
             ))}
           </tr>
         </tbody>

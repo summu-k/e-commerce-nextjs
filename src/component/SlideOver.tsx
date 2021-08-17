@@ -3,8 +3,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
 import { showCompareModal } from '../../redux/addToCompareSlice';
-// import { ProductDataProps } from '../utils/interfaces';
-// import CompareProductList from '../component/CompareProductList';
+import { addNotification } from '../../redux/notificationSlice';
 import type { RootState, AppDispatch } from '../../redux/store';
 import ComparisionTable from '../component/ComparisionTable';
 
@@ -21,6 +20,9 @@ export default function SlideOver() {
   }, [compare]);
 
   const toggleModal = () => {
+    setTimeout(() => {
+      dispatch(addNotification({ message: '', type: '' }));
+    }, 10000);
     dispatch(showCompareModal({ show: false }));
   };
 
