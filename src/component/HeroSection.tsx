@@ -36,7 +36,6 @@ export default function HeroSection() {
                 aria-label="Explore Store"
                 target="_self"
               />
-
             </div>
           </nav>
         </div>
