@@ -1,16 +1,18 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, FC } from 'react';
+import React, { useState, FC, useContext } from 'react';
 import { GetStaticProps } from 'next';
 import { table, minifyRecords } from './api/utils/airtable';
 import { fetchAllProduct } from './api/product';
-import { ProductDataProps, WishlistItemProps, WishlistMapType } from '../utils/interfaces';
+import { ProductDataProps, WishlistItemProps, WishlistMapType, AuthContextType } from '../utils/interfaces';
 import ProductCardTheme from '../component/ProductCardTheme';
 import CardSkeleton from '../component/Skeleton';
 import HeroSection from '../component/HeroSection';
+import { WishlistContext } from '../contexts/WishlistContext';
 
-const Home: FC<ProductDataProps> = ({ results, wishlistMap }) => {
+const Home: FC<ProductDataProps> = ({ results, wishlistMap, wishlistCount }) => {
   const [isLoading, setLoading] = useState<boolean>(true);
   const [productList, setProductList] = useState<Object[]>();
+  const { setWishlistsCount } = useContext(WishlistContext) as AuthContextType;
 
   React.useEffect(() => {
     if (wishlistMap && results) {
@@ -20,6 +22,12 @@ const Home: FC<ProductDataProps> = ({ results, wishlistMap }) => {
       setProductList(productListData);
     }
   }, []);
+
+  React.useEffect(() => {
+    if (wishlistCount) {
+      setWishlistsCount(wishlistCount);
+    }
+  }, [wishlistCount]);
 
   React.useEffect(() => {
     if (productList?.length !== 0) {
@@ -64,6 +72,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       results,
       wishlistMap,
+      wishlistCount: allWislist.length,
       pageTitle: 'Shop Forver Bazaar',
     },
   };

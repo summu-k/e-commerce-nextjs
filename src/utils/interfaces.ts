@@ -15,6 +15,7 @@ export interface ProductDataProps {
   episode?: string[];
   results?: ProductDataProps[];
   wishlistMap?: WishlistMapType;
+  wishlistCount?: number;
   category?: string;
   checkWishlist?: boolean;
 }
@@ -66,6 +67,8 @@ export type WishlistFieldProps = {
 
 export interface AuthContextType {
   wishlists: WishlistItemProps[];
+  wishlistsCount: number;
+  setWishlistsCount(input: number): void;
   setWishlists: (input: WishlistItemProps[]) => void;
   addWishlist: (wishlist: WishlistFieldProps) => void;
   refreshWishlists: () => void;

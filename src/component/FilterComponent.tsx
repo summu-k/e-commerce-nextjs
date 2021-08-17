@@ -52,7 +52,6 @@ const FilterComponent = () => {
             </button>
             <input
               type="text"
-              // className="border-2 p-2 w-full p-6 flex-col mb-2"
               className="border-2 p-2 sm:w-full sm:p-6 sm:flex-col mb-2 xl:col-8 md:col-8"
               placeholder="Search Product..."
               id="search-filter"

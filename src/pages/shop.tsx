@@ -1,13 +1,19 @@
 /* eslint-disable react/jsx-curly-brace-presence */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, FC } from 'react';
+import React, { useState, FC, useContext } from 'react';
 import dynamic from 'next/dynamic';
 import { GetServerSideProps } from 'next';
 import ReactPaginate from 'react-paginate';
 import { useRouter } from 'next/router';
 import { table, minifyRecords } from './api/utils/airtable';
 import Button from '../component/actionableButtons/Button';
-import { ProductDataProps, ProductInfo, WishlistItemProps, WishlistMapType } from '../utils/interfaces';
+import {
+  ProductDataProps,
+  ProductInfo,
+  WishlistItemProps,
+  WishlistMapType,
+  AuthContextType,
+} from '../utils/interfaces';
 import CardSkeleton from '../component/Skeleton';
 import { getAllFilterProduct } from '../pages/api/product';
 // import { getQueryString, apiQueryInterface } from '../utils/commonUtility';
@@ -17,6 +23,7 @@ import filterSearch from '../utils/filterSearch';
 // import Filter from '../component/Filter';
 import FilterComponent from '../component/FilterComponent';
 import SlideOver from '../component/SlideOver';
+import { WishlistContext } from '../contexts/WishlistContext';
 
 // const Loader = dynamic(() => import('../component/Loader'));
 const ProductCardTheme = dynamic(() => import('../component/ProductCardTheme'));
@@ -25,9 +32,10 @@ type ProductListingProps = {
   results: ProductDataProps[];
   info: ProductInfo;
   wishlistMap?: WishlistMapType;
+  wishlistCount?: number;
 };
 
-const ProductListing: FC<ProductListingProps> = ({ results, info, wishlistMap }) => {
+const ProductListing: FC<ProductListingProps> = ({ results, info, wishlistMap, wishlistCount }) => {
   const [productList, setProductList] = useState<Object[]>();
   const [pageNumber, setPageNumber] = useState<number>(0);
   const [next, setNext] = useState<number>(0);
@@ -37,6 +45,7 @@ const ProductListing: FC<ProductListingProps> = ({ results, info, wishlistMap })
   const [productData, setProductData] = useState<ProductDataProps[]>();
   const router = useRouter();
   const usersPerPage = 20;
+  const { setWishlistsCount } = useContext(WishlistContext) as AuthContextType;
 
   React.useEffect(() => {
     setProductData(results);
@@ -50,6 +59,12 @@ const ProductListing: FC<ProductListingProps> = ({ results, info, wishlistMap })
       setProductList(productListData);
     }
   }, [productData]);
+
+  React.useEffect(() => {
+    if (wishlistCount) {
+      setWishlistsCount(wishlistCount);
+    }
+  }, [wishlistCount]);
 
   React.useEffect(() => {
     if (productList && productList.length > 0) {
@@ -71,32 +86,16 @@ const ProductListing: FC<ProductListingProps> = ({ results, info, wishlistMap })
 
   const changePage = ({ selected }: { selected: number }) => {
     setPageNumber(selected + 1);
-    // setLoading(false);
   };
 
   const mobileChangePage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, pgNum: number) => {
     e.preventDefault();
     if (pgNum !== 0) {
-      // setLoading(false);
       setPageNumber(pgNum);
     }
   };
 
   const getMorePaginatedProducts = async (pageNo: number) => {
-    // const usp = new URLSearchParams();
-    // usp.set('page', `${pageNo}`);
-    // usp.set('species', 'ALIEN');
-    // const productListUrl = `${process.env.NEXT_PUBLIC_WEB_APP_URL}character`;
-    // const searchResult = await getFilteredProduct(`${productListUrl}?${usp.toString()}`);
-    // const res: { results: []; info: apiQueryInterface } = await searchResult.json();
-    // setProductData(res.results);
-    // if (res.info.next) {
-    //   setNext(getQueryString(res.info.next));
-    // }
-    // if (res.info.prev) {
-    //   setPrev(getQueryString(res.info.prev));
-    // }
-    // setPageCount(Math.ceil(info.count / usersPerPage));
     filterSearch({ router, page: pageNo });
   };
 
@@ -110,7 +109,6 @@ const ProductListing: FC<ProductListingProps> = ({ results, info, wishlistMap })
 
   return (
     <>
-      {/* <Filter /> */}
       <FilterComponent />
       <div className="productListingWrapper mx-auto pt-4 pb-12 container">
         <div className="flex items-center flex-wrap">{loading ? <CardSkeleton /> : productList}</div>
@@ -185,6 +183,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       results,
       info,
       wishlistMap,
+      wishlistCount: allWislist.length,
       pageTitle: 'Product Listing Shop',
     },
   };

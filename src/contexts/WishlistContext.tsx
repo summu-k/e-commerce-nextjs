@@ -6,6 +6,7 @@ type ComponentProps = React.PropsWithChildren<{}>;
 
 const WishlistProvider = ({ children }: ComponentProps) => {
   const [wishlists, setWishlists] = useState<WishlistItemProps[]>([]);
+  const [wishlistsCount, setWishlistsCount] = useState<number>(0);
 
   const refreshWishlists = async () => {
     try {
@@ -71,7 +72,16 @@ const WishlistProvider = ({ children }: ComponentProps) => {
 
   return (
     <WishlistContext.Provider
-      value={{ wishlists, setWishlists, refreshWishlists, fetchWishlist, deleteWishlist, addWishlist }}
+      value={{
+        wishlists,
+        setWishlists,
+        wishlistsCount,
+        setWishlistsCount,
+        refreshWishlists,
+        fetchWishlist,
+        deleteWishlist,
+        addWishlist,
+      }}
     >
       {children}
     </WishlistContext.Provider>

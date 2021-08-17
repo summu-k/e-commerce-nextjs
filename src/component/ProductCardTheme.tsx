@@ -19,7 +19,9 @@ const ProductCardTheme = ({
   product: ProductDataProps;
   checkWishlist?: boolean;
 }) => {
-  const { addWishlist, deleteWishlist } = useContext(WishlistContext) as AuthContextType;
+  const { addWishlist, deleteWishlist, wishlistsCount, setWishlistsCount } = useContext(
+    WishlistContext
+  ) as AuthContextType;
   const dispatch = useDispatch();
   let slug = name;
   slug = slug.replace(/\s+/g, '-').toLowerCase();
@@ -49,6 +51,7 @@ const ProductCardTheme = ({
       deleteWishlist(singleWishlist[0].id);
       setWishlistAdded(false);
     } else {
+      setWishlistsCount(wishlistsCount + 1);
       addWishlist({ productId: id, image, name, status, species });
       setWishlistAdded(true);
     }
@@ -94,11 +97,9 @@ const ProductCardTheme = ({
             <h1 className="font-bold text-xl mb-2">{name}</h1>
           </LinkComponent>
           <svg
-            // wishlistAdded
             className={`h-6 w-6 fill-current text-gray-500 hover:text-red-500  cursor-pointer ${
               wishlistAdded ? 'text-red-500' : ''
             }`}
-            // className="h-6 w-6 fill-current text-gray-500 hover:text-red-500  cursor-pointer"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             onClick={() => addRemoveWishlistProduct()}
