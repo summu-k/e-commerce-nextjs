@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
 import filterSearch from '../utils/filterSearch';
-import { showCompareModal } from '../../redux/addToCompareSlice';
 import { filter, characterGender, characterStatus } from '../constants/filterValue';
 
 type filterProps = {
@@ -12,7 +10,6 @@ type filterProps = {
 
 const FilterComponent = () => {
   const router = useRouter();
-  const dispatch = useDispatch();
   const [category, setCategory] = useState<string>('');
   const [gender, setGender] = useState<string>('');
   const [status, setStatus] = useState<string>('');
@@ -40,10 +37,6 @@ const FilterComponent = () => {
     filterSearch({ router, species: category, gender, status, page: 1 });
   };
 
-  const setCompareModal = () => {
-    dispatch(showCompareModal({ show: true }));
-  };
-
   return (
     <>
       <body className="overflow-hidden flex items-center justify-center" style={{ background: '#edf2f7' }}>
@@ -65,16 +58,6 @@ const FilterComponent = () => {
               placeholder="Search Product..."
               id="search-filter"
             />
-            <button
-              type="button"
-              // className="btn btn-light md:ml-10 xl:ml-10 shadow-sm w-full md:w-1/3 xl:w-1/4 flex-col"
-              className="btn btn-light md:ml-10 xl:ml-10 shadow-sm w-full md:w-1/3 xl:w-1/4 flex-col"
-              data-toggle="collapse"
-              data-target="#compare"
-              onClick={setCompareModal}
-            >
-              Compare
-            </button>
           </div>
 
           <div id="filters" className="collapse">
