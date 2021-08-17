@@ -1,6 +1,8 @@
+import type { NextApiRequest, NextApiResponse } from 'next';
+
 import { table, minifyRecords } from './utils/airtable.js';
 
-export default async (req, res) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { id } = req.query;
   try {
     const record = await table.select({ filterByFormula: `productId = '${id}'` }).firstPage();
