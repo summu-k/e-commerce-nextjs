@@ -16,16 +16,12 @@ import {
 } from '../utils/interfaces';
 import CardSkeleton from '../component/Skeleton';
 import { getAllFilterProduct } from '../pages/api/product';
-// import { getQueryString, apiQueryInterface } from '../utils/commonUtility';
 import { getQueryString } from '../utils/commonUtility';
-// import { getFilteredProduct } from '../pages/api/product/[id]';
 import filterSearch from '../utils/filterSearch';
-// import Filter from '../component/Filter';
 import FilterComponent from '../component/FilterComponent';
 import SlideOver from '../component/SlideOver';
 import { WishlistContext } from '../contexts/WishlistContext';
 
-// const Loader = dynamic(() => import('../component/Loader'));
 const ProductCardTheme = dynamic(() => import('../component/ProductCardTheme'));
 
 type ProductListingProps = {
@@ -33,9 +29,10 @@ type ProductListingProps = {
   info: ProductInfo;
   wishlistMap?: WishlistMapType;
   wishlistCount?: number;
+  query: { species: string; gender: string; status: string };
 };
 
-const ProductListing: FC<ProductListingProps> = ({ results, info, wishlistMap, wishlistCount }) => {
+const ProductListing: FC<ProductListingProps> = ({ results, info, wishlistMap, wishlistCount, query }) => {
   const [productList, setProductList] = useState<Object[]>();
   const [pageNumber, setPageNumber] = useState<number>(0);
   const [next, setNext] = useState<number>(0);
@@ -50,6 +47,11 @@ const ProductListing: FC<ProductListingProps> = ({ results, info, wishlistMap, w
   React.useEffect(() => {
     setProductData(results);
   }, [results]);
+
+  React.useEffect(() => {
+    console.log('query con ');
+    console.log(query);
+  }, [query]);
 
   React.useEffect(() => {
     if (productData && wishlistMap) {
@@ -110,6 +112,17 @@ const ProductListing: FC<ProductListingProps> = ({ results, info, wishlistMap, w
   return (
     <>
       <FilterComponent />
+      {Object.keys(query).length > 1 && (
+        <>
+          <div className="productListingWrapper mx-auto container">
+            Applied filters
+            <span className={'filterTags'}>{query.species}</span>
+            <span className={'filterTags'}>{query.status}</span>
+            <span className={'filterTags'}>{query.gender}</span>
+          </div>
+        </>
+      )}
+
       <div className="productListingWrapper mx-auto pt-4 pb-12 container">
         <div className="flex items-center flex-wrap">{loading ? <CardSkeleton /> : productList}</div>
       </div>
@@ -182,6 +195,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     props: {
       results,
       info,
+      query,
       wishlistMap,
       wishlistCount: allWislist.length,
       pageTitle: 'Product Listing Shop',
