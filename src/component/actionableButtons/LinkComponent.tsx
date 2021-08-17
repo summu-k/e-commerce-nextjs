@@ -3,9 +3,9 @@ import Link from 'next/link';
 
 interface LinkProps {
   linkhref: string;
-  classname: string;
-  linkname: string;
-  datatest: string;
+  classname?: string;
+  linkname?: string;
+  datatest?: string;
   target?: string;
 }
 

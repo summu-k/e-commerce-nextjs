@@ -44,7 +44,6 @@ const FilterComponent = () => {
           <div className="bg-grey col-12 mt-3 align-middle justify-content-center md:flex xl:flex">
             <button
               type="button"
-              // className="btn btn-light md:mr-10 xl:mr-10 shadow-sm collapsed w-full p-2 flex-col mb-2"
               className="btn btn-light md:mr-10 xl:mr-10 shadow-sm sm:collapsed sm:w-full sm:p-2 sm:flex-col sm:mb-2"
               data-toggle="collapse"
               data-target="#filters"

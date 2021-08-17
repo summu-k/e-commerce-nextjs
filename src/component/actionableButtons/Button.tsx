@@ -4,14 +4,22 @@ import React, { FC } from 'react';
 
 interface ButtonProps {
   buttonText?: string;
+  buttonId?: string;
   buttonClass: string;
   datatest?: string;
   submitFunction?: any;
 }
 
-const Button: FC<ButtonProps> = ({ buttonText, buttonClass, datatest, submitFunction }) => (
-  <button type="button" onClick={(e) => submitFunction(e)} className={buttonClass} data-test-py={datatest}>
+const Button: FC<ButtonProps> = ({ buttonText, buttonClass, datatest, submitFunction, buttonId, children }) => (
+  <button
+    type="button"
+    id={buttonId}
+    onClick={(e) => submitFunction(e)}
+    className={buttonClass}
+    data-test-py={datatest}
+  >
     {buttonText}
+    {children}
   </button>
 );
 

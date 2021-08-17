@@ -1,23 +1,12 @@
 import React, { FC } from 'react';
 import Image from 'next/image';
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../../redux/cartSlice';
-import { addNotification } from '../../redux/notificationSlice';
 import { ProductDataProps } from '../utils/interfaces';
-// import Button from '../component/actionableButtons/Button';
 
 interface ComparisionTableProps {
   products: ProductDataProps[];
 }
 
 const ComparisionTable: FC<ComparisionTableProps> = ({ products }) => {
-  const dispatch = useDispatch();
-
-  const setCartItem = (product: ProductDataProps) => {
-    dispatch(addToCart(product));
-    dispatch(addNotification({ message: 'Item has been added successfully', type: 'success' }));
-  };
-
   const comparisionHeader = (productArray: ProductDataProps[]) =>
     productArray.map((entry: ProductDataProps) => (
       <th
@@ -29,30 +18,12 @@ const ComparisionTable: FC<ComparisionTableProps> = ({ products }) => {
           <span className="text-lg">$</span>
           <span className="font-bold text-4xl ml-1">9.99</span>
         </div>
-        <div className="mt-3">
-          <button
-            type="button"
-            onClick={() => setCartItem(entry)}
-            className="bg-blue-500 hover:bg-blue-700 text-white inline-block rounded w-4/5 px-4 py-3"
-            data-test-py="addToCart"
-          >
-            Cart
-          </button>
-        </div>
-        {/* <div className="mt-3">
-          <Button
-            buttonClass="bg-blue-500 hover:bg-blue-700 text-white inline-block rounded w-4/5 px-4 py-3"
-            submitFunction={setCartItem(entry)}
-            buttonText="Cart"
-            datatest="addToCart"
-          />
-        </div> */}
       </th>
     ));
 
   return (
     <div>
-      <table className="hidden lg:block w-full text-base">
+      <table className="lg:block w-full text-base">
         <thead>
           <tr>
             <th className="w-1/5 bg-gray-100 text-left font-normal align-top px-4 py-6 sticky top-0">
@@ -120,7 +91,7 @@ const ComparisionTable: FC<ComparisionTableProps> = ({ products }) => {
         </tbody>
       </table>
 
-      <div className="mobile-table mx-4 md:mx-32 mt-16 lg:hidden">
+      {/* <div className="mobile-table mx-4 md:mx-32 mt-16 lg:hidden">
         <div className="text-center border border-gray-400 text-base">
           <div className="bg-gray-300 px-4 py-4">
             <div className="uppercase tracking-wide font-bold text-gray-700">Hobby</div>
@@ -182,7 +153,7 @@ const ComparisionTable: FC<ComparisionTableProps> = ({ products }) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { showCompareModal } from '../../redux/addToCompareSlice';
 import LinkComponent from '../component/actionableButtons/LinkComponent';
 import { addNotification } from '../../redux/notificationSlice';
 import type { RootState } from '../../redux/store';
+import Button from '../component/actionableButtons/Button';
 
 type ComponentProps = React.PropsWithChildren<{}>;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
@@ -33,12 +34,9 @@ const Footer: FC<ComponentProps> = ({ children }) => {
     <>
       <div className={`${showCompare ? 'block' : 'hidden'} fixed z-10 compare-btn-parent`}>
         <div className="relative">
-          <button
-            type="button"
-            className="bg-blue-600 absolute text-sm rounded text-white inset-2 w-32 h-11"
-            data-toggle="collapse"
-            data-target="#compare"
-            onClick={setCompareModal}
+          <Button
+            buttonClass="bg-blue-600 absolute text-sm rounded text-white inset-2 w-32 h-11"
+            submitFunction={setCompareModal}
           >
             <span className="compare-btn">
               <span>COMPARE</span>
@@ -46,7 +44,7 @@ const Footer: FC<ComponentProps> = ({ children }) => {
             <div className="compare-btn-wrapper">
               <span className="compare-btn-child">{compare && compare.products.length}</span>
             </div>
-          </button>
+          </Button>
         </div>
       </div>
       <footer className="container mx-auto bg-white py-8 mt-8 border-t border-gray-400">

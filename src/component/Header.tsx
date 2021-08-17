@@ -5,13 +5,12 @@ import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
 import Router from 'next/router';
 import { isTablet, isDesktop } from 'react-device-detect';
 import { useUser } from '@auth0/nextjs-auth0';
-// import { signIn, signOut, useSession } from 'next-auth/client';
-import Link from 'next/link';
 import LinkComponent from './actionableButtons/LinkComponent';
 import { addToCart } from '../../redux/cartSlice';
 import { ProductDataProps } from '../utils/interfaces';
 import HeaderNav from './HeaderNav';
 import { addNotification } from '../../redux/notificationSlice';
+import Button from '../component/actionableButtons/Button';
 
 import type { RootState, AppDispatch } from '../../redux/store';
 
@@ -110,24 +109,16 @@ const Header = ({ children }: ComponentProps) => {
           </div>
 
           <div className="order-2 md:order-3 flex items-center" id="nav-content">
-            {!user && (
-              <Link href="/api/auth/login">
-                <a>Login</a>
-              </Link>
-            )}
+            {!user && <LinkComponent linkhref="/api/auth/login" linkname="Login" />}
             {user && (
               <>
-                <Link href="/api/auth/logout">
-                  <a>Sign Out</a>
-                </Link>
+                <LinkComponent linkhref="/api/auth/logout" linkname="Log Out" />
                 <div className="ml-3 relative dropdown group">
                   <div>
-                    <button
-                      type="button"
-                      className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                      id="user-menu-button"
-                      aria-expanded="false"
-                      aria-haspopup="true"
+                    <Button
+                      buttonClass="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                      buttonId="user-menu-button"
+                      datatest="Apply Coupon"
                     >
                       <span className="sr-only">Open user menu</span>
                       <img
@@ -135,7 +126,7 @@ const Header = ({ children }: ComponentProps) => {
                         src={user?.picture ? user.picture : ''}
                         alt="User Profile"
                       />
-                    </button>
+                    </Button>
                   </div>
                   <div
                     className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none opacity-0 group-hover:opacity-100 dropdown-menu"
