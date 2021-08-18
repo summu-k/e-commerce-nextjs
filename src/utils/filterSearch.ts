@@ -1,7 +1,8 @@
 import { FC } from 'react';
+import { NextRouter } from 'next/router';
 
 interface FilterSearchProps {
-  router: any;
+  router: NextRouter;
   page?: number;
   species?: string;
   gender?: string;
@@ -12,7 +13,7 @@ const filterSearch: FC<FilterSearchProps> = ({ router, page, species, gender, st
   const path = router.pathname;
   const { query } = router;
 
-  if (page) query.page = page;
+  if (page) query.page = page.toString();
   if (species) query.species = species;
   if (gender) query.gender = gender;
   if (status) query.status = status;
