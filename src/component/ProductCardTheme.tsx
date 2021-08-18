@@ -6,10 +6,10 @@ import { useRouter } from 'next/router';
 import LinkComponent from './actionableButtons/LinkComponent';
 import { addToCart } from '../../redux/cartSlice';
 import { addToCompare, removeFromCompare } from '../../redux/addToCompareSlice';
-import { addNotification } from '../../redux/notificationSlice';
 import { ProductDataProps, AuthContextType } from '../utils/interfaces';
 import Button from '../component/actionableButtons/Button';
 import { WishlistContext } from '../contexts/WishlistContext';
+import showToast from '../utils/showToast';
 
 const ProductCardTheme = ({
   product: { id, image, name, status, species },
@@ -30,7 +30,7 @@ const ProductCardTheme = ({
 
   const setCartItem = () => {
     dispatch(addToCart(product));
-    dispatch(addNotification({ message: 'Item has been added successfully', type: 'success' }));
+    showToast({ message: 'Item has been added successfully ', type: 'success', dispatch });
   };
 
   const handleAddToCompare = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,14 +46,19 @@ const ProductCardTheme = ({
     usp.set('id', `${id}`);
     const singleWishlistUrl = '/api/getOneWishlist';
     const res = await fetch(`${singleWishlistUrl}?${usp.toString()}`);
-    const singleWishlist = await res.json();
-    if (singleWishlist && singleWishlist.length > 0) {
-      deleteWishlist(singleWishlist[0].id);
-      setWishlistAdded(false);
+
+    if (res.status === 401) {
+      showToast({ message: 'Please Login to add Wishlist !!! ', type: 'warning', dispatch });
     } else {
-      setWishlistsCount(wishlistsCount + 1);
-      addWishlist({ productId: id, image, name, status, species });
-      setWishlistAdded(true);
+      const singleWishlist = await res.json();
+      if (singleWishlist && singleWishlist.length > 0) {
+        deleteWishlist(singleWishlist[0].id);
+        setWishlistAdded(false);
+      } else {
+        setWishlistsCount(wishlistsCount + 1);
+        addWishlist({ productId: id, image, name, status, species });
+        setWishlistAdded(true);
+      }
     }
   };
 

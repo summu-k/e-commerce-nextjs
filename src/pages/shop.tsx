@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { GetServerSideProps } from 'next';
 import ReactPaginate from 'react-paginate';
 import { useRouter } from 'next/router';
+import { getSession } from '@auth0/nextjs-auth0';
 import { table, minifyRecords } from './api/utils/airtable';
 import Button from '../component/actionableButtons/Button';
 import {
@@ -47,11 +48,6 @@ const ProductListing: FC<ProductListingProps> = ({ results, info, wishlistMap, w
   React.useEffect(() => {
     setProductData(results);
   }, [results]);
-
-  React.useEffect(() => {
-    console.log('query con ');
-    console.log(query);
-  }, [query]);
 
   React.useEffect(() => {
     if (productData && wishlistMap) {
@@ -176,7 +172,8 @@ const ProductListing: FC<ProductListingProps> = ({ results, info, wishlistMap, w
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { query } = context;
   const page = query.page || 1;
   const species = query.species || '';
   const gender = query.gender || '';
@@ -184,7 +181,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { results, info } = await getAllFilterProduct(
     `character?page=${page}&species=${species}&gender=${gender}&status=${status}`
   );
-  const allWislist = await table.select({}).firstPage();
+  const session = getSession(context.req, context.res);
+  const allWislist = await table.select({ filterByFormula: `userId = '${session?.user?.sub}'` }).firstPage();
 
   const wishlistMap: WishlistMapType = {};
   minifyRecords(allWislist).forEach((data: WishlistItemProps) => {

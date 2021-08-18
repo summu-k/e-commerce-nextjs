@@ -45,12 +45,14 @@ const Wishlist: FC<WishlistProps> = ({ initialWislist, wishlistMap }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  console.log('wishlist context ');
+  console.log(context);
   const session = getSession(context.req, context.res);
   let allWislist;
   const wishlistMap: WishlistMapType = {};
   try {
     if (session?.user) {
-      allWislist = await table.select({ filterByFormula: `userId = '${session.user.sub}'` }).firstPage();
+      allWislist = await table.select({ filterByFormula: `userId = '${session?.user?.sub}'` }).firstPage();
 
       minifyRecords(allWislist).forEach((data: WishlistItemProps) => {
         wishlistMap[data.fields.productId] = data.id;

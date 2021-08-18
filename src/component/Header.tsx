@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, FC } from 'react';
 import dynamic from 'next/dynamic';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
 import Router from 'next/router';
@@ -21,7 +21,7 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 type ComponentProps = React.PropsWithChildren<{}>;
 
-const Header = ({ children }: ComponentProps) => {
+const Header: FC<ComponentProps> = ({ children }) => {
   const { user } = useUser();
   const { wishlistsCount } = useContext(WishlistContext) as AuthContextType;
 

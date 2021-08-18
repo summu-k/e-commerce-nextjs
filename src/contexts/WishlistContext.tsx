@@ -1,10 +1,10 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, FC } from 'react';
 import { WishlistItemProps, WishlistFieldProps } from '../utils/interfaces';
 
 const WishlistContext = createContext({});
 type ComponentProps = React.PropsWithChildren<{}>;
 
-const WishlistProvider = ({ children }: ComponentProps) => {
+const WishlistProvider: FC<ComponentProps> = ({ children }) => {
   const [wishlists, setWishlists] = useState<WishlistItemProps[]>([]);
   const [wishlistsCount, setWishlistsCount] = useState<number>(0);
 
