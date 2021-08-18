@@ -1,8 +1,10 @@
 /* eslint-disable react/jsx-curly-brace-presence */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, FC, useContext } from 'react';
+import React, { useState, FC, useContext, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { GetServerSideProps } from 'next';
+import { FieldSet } from 'airtable/lib/field_set';
+import { Records } from 'airtable/lib/records';
 import ReactPaginate from 'react-paginate';
 import { useRouter } from 'next/router';
 import { getSession } from '@auth0/nextjs-auth0';
@@ -45,11 +47,11 @@ const ProductListing: FC<ProductListingProps> = ({ results, info, wishlistMap, w
   const usersPerPage = 20;
   const { setWishlistsCount } = useContext(WishlistContext) as AuthContextType;
 
-  React.useEffect(() => {
+  useEffect(() => {
     setProductData(results);
   }, [results]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (productData && wishlistMap) {
       const productListData = productData.map((data: ProductDataProps) => (
         <ProductCardTheme key={data.id} product={data} checkWishlist={!!wishlistMap[data.id]} />
@@ -58,19 +60,19 @@ const ProductListing: FC<ProductListingProps> = ({ results, info, wishlistMap, w
     }
   }, [productData]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (wishlistCount) {
       setWishlistsCount(wishlistCount);
     }
   }, [wishlistCount]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (productList && productList.length > 0) {
       setLoading(false);
     }
   }, [productList]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (info) {
       if (info.next) {
         setNext(getQueryString(info.next));
@@ -97,7 +99,7 @@ const ProductListing: FC<ProductListingProps> = ({ results, info, wishlistMap, w
     filterSearch({ router, page: pageNo });
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (pageNumber) {
       getMorePaginatedProducts(pageNumber);
       setLoading(true);
@@ -182,7 +184,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     `character?page=${page}&species=${species}&gender=${gender}&status=${status}`
   );
   const session = getSession(context.req, context.res);
-  const allWislist = await table.select({ filterByFormula: `userId = '${session?.user?.sub}'` }).firstPage();
+  const allWislist: Records<FieldSet> = await table
+    .select({ filterByFormula: `userId = '${session?.user?.sub}'` })
+    .firstPage();
 
   const wishlistMap: WishlistMapType = {};
   minifyRecords(allWislist).forEach((data: WishlistItemProps) => {

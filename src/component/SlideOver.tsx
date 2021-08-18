@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
@@ -15,7 +15,7 @@ export default function SlideOver() {
   const dispatch = useDispatch();
   const compare = useAppSelector((state) => state && state.compare);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setOpen(compare.show);
   }, [compare]);
 

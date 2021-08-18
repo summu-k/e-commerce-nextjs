@@ -1,7 +1,8 @@
-/* eslint-disable no-unused-vars */
 import React, { FC, useEffect, useContext } from 'react';
 import { GetServerSideProps } from 'next';
 import { getSession } from '@auth0/nextjs-auth0';
+import { FieldSet } from 'airtable/lib/field_set';
+import { Records } from 'airtable/lib/records';
 import { table, minifyRecords } from './api/utils/airtable';
 import { WishlistProps, AuthContextType, WishlistItemProps, WishlistMapType } from '../utils/interfaces';
 import { WishlistContext } from '../contexts/WishlistContext';
@@ -24,19 +25,17 @@ const Wishlist: FC<WishlistProps> = ({ initialWislist, wishlistMap }) => {
           {wishlists &&
             wishlistMap &&
             wishlists.map((item) => (
-              <>
-                <ProductCardTheme
-                  key={item.id}
-                  product={{
-                    id: item.fields.productId,
-                    name: item.fields.name,
-                    status: item.fields.status,
-                    species: item.fields.species,
-                    image: item.fields.image,
-                  }}
-                  checkWishlist={!!wishlistMap[item.fields.productId]}
-                />
-              </>
+              <ProductCardTheme
+                key={item.id}
+                product={{
+                  id: item.fields.productId,
+                  name: item.fields.name,
+                  status: item.fields.status,
+                  species: item.fields.species,
+                  image: item.fields.image,
+                }}
+                checkWishlist={!!wishlistMap[item.fields.productId]}
+              />
             ))}
         </div>
       </div>
@@ -46,7 +45,7 @@ const Wishlist: FC<WishlistProps> = ({ initialWislist, wishlistMap }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = getSession(context.req, context.res);
-  let allWislist;
+  let allWislist: Records<FieldSet>;
   const wishlistMap: WishlistMapType = {};
   try {
     if (session?.user) {

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
 import { showCompareModal } from '../../redux/addToCompareSlice';
 import LinkComponent from '../component/actionableButtons/LinkComponent';
@@ -21,7 +21,7 @@ const Footer: FC<ComponentProps> = ({ children }) => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (compare && compare.products.length > 1) {
       setShowCompare(true);
     }

@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, FC, useContext } from 'react';
+import React, { useState, FC, useContext, useEffect } from 'react';
 import { GetStaticProps } from 'next';
+import { FieldSet } from 'airtable/lib/field_set';
+import { Records } from 'airtable/lib/records';
 import { table, minifyRecords } from './api/utils/airtable';
 import { fetchAllProduct } from './api/product';
 import { ProductDataProps, WishlistItemProps, WishlistMapType, AuthContextType } from '../utils/interfaces';
@@ -14,7 +16,7 @@ const Home: FC<ProductDataProps> = ({ results, wishlistMap, wishlistCount }) => 
   const [productList, setProductList] = useState<Object[]>();
   const { setWishlistsCount } = useContext(WishlistContext) as AuthContextType;
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (wishlistMap && results) {
       const productListData = results.map((data: ProductDataProps) => (
         <ProductCardTheme key={data.id} product={data} checkWishlist={!!wishlistMap[data.id]} />
@@ -23,13 +25,13 @@ const Home: FC<ProductDataProps> = ({ results, wishlistMap, wishlistCount }) => 
     }
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (wishlistCount) {
       setWishlistsCount(wishlistCount);
     }
   }, [wishlistCount]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (productList?.length !== 0) {
       setLoading(false);
     }
@@ -59,7 +61,7 @@ const Home: FC<ProductDataProps> = ({ results, wishlistMap, wishlistCount }) => 
 
 export const getStaticProps: GetStaticProps = async () => {
   const { results } = await fetchAllProduct();
-  const allWislist = await table.select({}).firstPage();
+  const allWislist: Records<FieldSet> = await table.select({}).firstPage();
 
   const wishlistMap: WishlistMapType = {};
   minifyRecords(allWislist).forEach((data: WishlistItemProps) => {
