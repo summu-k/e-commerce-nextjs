@@ -2,9 +2,9 @@ import React, { FC, useState } from 'react';
 import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
 import { showCompareModal } from '../../redux/addToCompareSlice';
 import LinkComponent from '../component/actionableButtons/LinkComponent';
-import { addNotification } from '../../redux/notificationSlice';
 import type { RootState } from '../../redux/store';
 import Button from '../component/actionableButtons/Button';
+import showToast from '../utils/showToast';
 
 type ComponentProps = React.PropsWithChildren<{}>;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
@@ -15,10 +15,7 @@ const Footer: FC<ComponentProps> = ({ children }) => {
   const compare = useAppSelector((state) => state && state.compare);
   const setCompareModal = () => {
     if (compare && compare.products.length > 4) {
-      dispatch(addNotification({ message: 'Maximum 4 Products are allowed to compare', type: 'warning' }));
-      setTimeout(() => {
-        dispatch(addNotification({ message: '', type: '' }));
-      }, 10000);
+      showToast({ message: 'Maximum 4 Products are allowed to compare', type: 'warning', dispatch });
     } else {
       dispatch(showCompareModal({ show: true }));
     }

@@ -2,9 +2,9 @@ import React from 'react';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../redux/cartSlice';
-import { addNotification } from '../../redux/notificationSlice';
 import { ProductDataProps } from '../utils/interfaces';
 import Button from '../component/actionableButtons/Button';
+import showToast from '../utils/showToast';
 
 const CompareProductList = ({
   product: { image, name, status, species, gender, origin, location },
@@ -16,7 +16,7 @@ const CompareProductList = ({
 
   const setCartItem = () => {
     dispatch(addToCart(product));
-    dispatch(addNotification({ message: 'Item has been added successfully', type: 'success' }));
+    showToast({ message: 'Item has been added successfully ', type: 'success', dispatch });
   };
 
   return (

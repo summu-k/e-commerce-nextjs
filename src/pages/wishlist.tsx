@@ -45,8 +45,6 @@ const Wishlist: FC<WishlistProps> = ({ initialWislist, wishlistMap }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  console.log('wishlist context ');
-  console.log(context);
   const session = getSession(context.req, context.res);
   let allWislist;
   const wishlistMap: WishlistMapType = {};

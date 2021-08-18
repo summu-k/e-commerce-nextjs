@@ -36,26 +36,24 @@ const Home: FC<ProductDataProps> = ({ results, wishlistMap, wishlistCount }) => 
   }, [productList]);
 
   return (
-    <>
-      <main>
-        <div className="index-height carousel relative mx-auto">
-          <HeroSection />
+    <main>
+      <div className="index-height carousel relative mx-auto">
+        <HeroSection />
+      </div>
+      {isLoading && (
+        <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12 productListWrapper">
+          <CardSkeleton />
         </div>
-        {isLoading && (
-          <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12 productListWrapper">
-            <CardSkeleton />
-          </div>
-        )}
-        {!isLoading && (
-          <div
-            className="container mx-auto flex items-center flex-wrap pt-16 pb-12 productListWrapper"
-            data-test-py="productListing"
-          >
-            {productList}
-          </div>
-        )}
-      </main>
-    </>
+      )}
+      {!isLoading && (
+        <div
+          className="container mx-auto flex items-center flex-wrap pt-16 pb-12 productListWrapper"
+          data-test-py="productListing"
+        >
+          {productList}
+        </div>
+      )}
+    </main>
   );
 };
 

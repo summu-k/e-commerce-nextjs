@@ -12,7 +12,6 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export default function SlideOver() {
   const [open, setOpen] = useState(false);
-  //   const [compareList, setCompareList] = useState<Object[]>();
   const dispatch = useDispatch();
   const compare = useAppSelector((state) => state && state.compare);
 
@@ -21,20 +20,9 @@ export default function SlideOver() {
   }, [compare]);
 
   const toggleModal = () => {
-    setTimeout(() => {
-      dispatch(addNotification({ message: '', type: '' }));
-    }, 10000);
+    dispatch(addNotification({ message: '', type: '' }));
     dispatch(showCompareModal({ show: false }));
   };
-
-  //   React.useEffect(() => {
-  //     if (compare.products.length > 0) {
-  //       const productListData = compare.products.map((data: ProductDataProps) => (
-  //         <CompareProductList key={data.id} product={data} />
-  //       ));
-  //       setCompareList(productListData);
-  //     }
-  //   }, [compare]);
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -90,18 +78,6 @@ export default function SlideOver() {
                   <div className="mt-6 relative flex-1 px-4 sm:px-6">
                     <div className="absolute inset-0 px-4 sm:px-6">
                       <ComparisionTable products={compare.products} />
-                      {/* <div className="h-full border-2 border-dashed border-gray-200" aria-hidden="true">
-                        {compare.products.length === 0 ? (
-                          'Please select Products'
-                        ) : (
-                          <div
-                            className="container mx-auto flex items-center flex-wrap pt-16 pb-12 productListWrapper"
-                            data-test-py="productListing"
-                          >
-                            {compareList}
-                          </div>
-                        )}
-                      </div> */}
                     </div>
                   </div>
                 </div>

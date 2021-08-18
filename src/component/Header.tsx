@@ -10,7 +10,6 @@ import { addToCart } from '../../redux/cartSlice';
 import { ProductDataProps, AuthContextType } from '../utils/interfaces';
 import { WishlistContext } from '../contexts/WishlistContext';
 import HeaderNav from './HeaderNav';
-import { addNotification } from '../../redux/notificationSlice';
 import Button from '../component/actionableButtons/Button';
 
 import type { RootState, AppDispatch } from '../../redux/store';
@@ -37,9 +36,6 @@ const Header: FC<ComponentProps> = ({ children }) => {
 
   Router.events.on('routeChangeStart', () => {
     setHideMenu(true);
-    setTimeout(() => {
-      dispatch(addNotification({ message: '', type: '' }));
-    }, 10000);
   });
 
   React.useEffect(() => {

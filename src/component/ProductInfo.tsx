@@ -2,18 +2,14 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { ProductDataProps } from '../utils/interfaces';
 import { addToCart } from '../../redux/cartSlice';
-import { addNotification } from '../../redux/notificationSlice';
 import Button from './actionableButtons/Button';
+import showToast from '../utils/showToast';
 
 const ProductInfo = ({ product: { name, gender, species, status }, product }: { product: ProductDataProps }) => {
   const dispatch = useDispatch();
   const setCartItem = () => {
     dispatch(addToCart(product));
-    dispatch(addNotification({ message: 'Item has been added successfully', type: 'success' }));
-
-    setTimeout(() => {
-      dispatch(addNotification({ message: '', type: '' }));
-    }, 10000);
+    showToast({ message: 'Item has been added successfully', type: 'success', dispatch });
   };
 
   return (
