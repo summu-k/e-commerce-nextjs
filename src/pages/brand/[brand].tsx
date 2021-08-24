@@ -2,25 +2,26 @@ import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { getProductsByCategory, getProductCount } from '../api/category/[category]';
+import { getProductByBrands } from '../api/category/[category]';
 import { ProductMapProps } from '../../utils/interfaces';
+import { brandMap } from '../../utils/commonUtility';
 
 const ProductCardTheme = dynamic(() => import('../../component/ProductCardTheme'), {
   loading: () => <p>Loading...</p>,
 });
 
-const CategoryPage = ({ products, productCount }: { products: ProductMapProps[]; productCount: number }) => {
+const BrandPage = ({ products, productCount }: { products: ProductMapProps[]; productCount: number }) => {
   const router = useRouter();
 
   const [data, setData] = useState(products);
   const [hasMore, setHasMore] = useState(true);
-  const [queryParams] = useState(router.query.category);
+  const [queryParams] = useState(router.query.brand);
 
   const getMoreResults = async () => {
-    const { category } = router.query;
-    if (typeof category === 'string') {
-      const newProducts = getProductsByCategory(category, products.length, products.length + 6);
-      setData((dataPrev: any) => [...dataPrev, ...newProducts]);
+    const { brand } = router.query;
+    if (typeof brand === 'string') {
+      const { results } = await getProductByBrands(brandMap[brand], 20, data.length + 1);
+      setData((dataPrev: any) => [...dataPrev, ...results]);
     }
   };
 
@@ -58,11 +59,12 @@ const CategoryPage = ({ products, productCount }: { products: ProductMapProps[];
   );
 };
 
-export default CategoryPage;
-// export async function getServerSideProps(ctx: { query: { category: string; start: number; limit: number } }) {
-export async function getServerSideProps(ctx: { query: { category: string } }) {
-  const { category } = ctx.query;
-  const products = getProductsByCategory(category, 0, 6);
-  const productCount = getProductCount(category);
-  return { props: { products, productCount: +productCount, pageTitle: category.toUpperCase() } };
+export default BrandPage;
+export async function getServerSideProps(ctx: { query: { brand: string } }) {
+  const { brand } = ctx.query;
+
+  const { results, info } = await getProductByBrands(brandMap[brand], 20, 0);
+  // const productCount = getProductCount(category);
+  // return { props: { products, productCount: products.length, pageTitle: category.toUpperCase() } };
+  return { props: { products: results, productCount: info.count, pageTitle: brand.toUpperCase() } };
 }

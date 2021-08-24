@@ -5,6 +5,12 @@ export interface apiQueryInterface {
   page: number;
 }
 
+export const brandMap = {
+  neo: 'CORE / NEO',
+  originals: 'ORIGINALS',
+  'sport-performance': 'SPORT PERFORMANCE',
+};
+
 // function getQueryString(url: apiQueryInterface, uriKey: string): number {
 //   const key = 'next';
 //   if (url[key]) {

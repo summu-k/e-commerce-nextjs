@@ -17,11 +17,11 @@ export default function HeaderNav() {
         </li>
         <li>
           <LinkComponent
-            linkhref="/category"
+            linkhref="/brand"
             classname="inline-block no-underline hover:text-black hover:underline py-2 px-4"
-            linkname="Category"
-            datatest="category"
-            aria-label="Category Page"
+            linkname="Brand"
+            datatest="brand"
+            aria-label="Brand Page"
             target="_self"
           />
         </li>

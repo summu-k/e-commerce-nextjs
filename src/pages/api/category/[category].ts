@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import webAppAxios from '../../../httpClient/index';
 import data from './data.json';
 
 export function getProductsByCategory(category: string, start: number, limit: number) {
@@ -22,4 +23,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 export function getProductCount(cat: string) {
   const products = data.filter((product) => product.category === cat);
   return products.length;
+}
+
+export async function getProductByBrands(brand: string, limit: number, offset: number) {
+  const productUrl = `products/brands?brand=${brand}&limit=${limit}&offset=${offset}`;
+  const allProducts = await webAppAxios.get(productUrl);
+  return allProducts.data;
 }
