@@ -10,13 +10,7 @@ import { useRouter } from 'next/router';
 import { getSession } from '@auth0/nextjs-auth0';
 import { table, minifyRecords } from './api/utils/airtable';
 import Button from '../component/actionableButtons/Button';
-import {
-  ProductDataProps,
-  ProductInfo,
-  WishlistItemProps,
-  WishlistMapType,
-  AuthContextType,
-} from '../utils/interfaces';
+import { ProductInfo, WishlistItemProps, WishlistMapType, AuthContextType, ProductMapProps } from '../utils/interfaces';
 import CardSkeleton from '../component/Skeleton';
 import { getAllFilterProduct } from '../pages/api/product';
 import { getQueryString } from '../utils/commonUtility';
@@ -28,7 +22,7 @@ import { WishlistContext } from '../contexts/WishlistContext';
 const ProductCardTheme = dynamic(() => import('../component/ProductCardTheme'));
 
 type ProductListingProps = {
-  results: ProductDataProps[];
+  results: ProductMapProps[];
   info: ProductInfo;
   wishlistMap?: WishlistMapType;
   wishlistCount?: number;
@@ -42,7 +36,7 @@ const ProductListing: FC<ProductListingProps> = ({ results, info, wishlistMap, w
   const [prev, setPrev] = useState<number>(0);
   const [pageCount, setPageCount] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
-  const [productData, setProductData] = useState<ProductDataProps[]>();
+  const [productData, setProductData] = useState<ProductMapProps[]>();
   const router = useRouter();
   const usersPerPage = 20;
   const { setWishlistsCount } = useContext(WishlistContext) as AuthContextType;
@@ -53,7 +47,7 @@ const ProductListing: FC<ProductListingProps> = ({ results, info, wishlistMap, w
 
   useEffect(() => {
     if (productData && wishlistMap) {
-      const productListData = productData.map((data: ProductDataProps) => (
+      const productListData = productData.map((data: ProductMapProps) => (
         <ProductCardTheme key={data.id} product={data} checkWishlist={!!wishlistMap[data.id]} />
       ));
       setProductList(productListData);
@@ -181,7 +175,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const gender = query.gender || '';
   const status = query.status || '';
   const { results, info } = await getAllFilterProduct(
-    `character?page=${page}&species=${species}&gender=${gender}&status=${status}`
+    `products?page=${page}&species=${species}&gender=${gender}&status=${status}`
   );
   const session = getSession(context.req, context.res);
   const allWislist: Records<FieldSet> = await table

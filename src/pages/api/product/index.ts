@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import webAppAxios from '../../../httpClient/index';
 
 export async function fetchAllProduct() {
-  const url = `character/`;
+  const url = `products/`;
   const allProducts = await webAppAxios.get(url);
   return allProducts.data;
 }
@@ -18,7 +18,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 }
 
 export async function getAllFilterProduct(productUrl: string) {
-  // const url = `character/`;
   const allProducts = await webAppAxios.get(productUrl);
   return allProducts.data;
 }

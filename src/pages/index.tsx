@@ -5,20 +5,26 @@ import { FieldSet } from 'airtable/lib/field_set';
 import { Records } from 'airtable/lib/records';
 import { table, minifyRecords } from './api/utils/airtable';
 import { fetchAllProduct } from './api/product';
-import { ProductDataProps, WishlistItemProps, WishlistMapType, AuthContextType } from '../utils/interfaces';
+import {
+  // ProductDataProps,
+  ProductMapProps,
+  WishlistItemProps,
+  WishlistMapType,
+  AuthContextType,
+} from '../utils/interfaces';
 import ProductCardTheme from '../component/ProductCardTheme';
 import CardSkeleton from '../component/Skeleton';
 import HeroSection from '../component/HeroSection';
 import { WishlistContext } from '../contexts/WishlistContext';
 
-const Home: FC<ProductDataProps> = ({ results, wishlistMap, wishlistCount }) => {
+const Home: FC<ProductMapProps> = ({ results, wishlistMap, wishlistCount }) => {
   const [isLoading, setLoading] = useState<boolean>(true);
   const [productList, setProductList] = useState<Object[]>();
   const { setWishlistsCount } = useContext(WishlistContext) as AuthContextType;
 
   useEffect(() => {
     if (wishlistMap && results) {
-      const productListData = results.map((data: ProductDataProps) => (
+      const productListData = results.map((data: ProductMapProps) => (
         <ProductCardTheme key={data.id} product={data} checkWishlist={!!wishlistMap[data.id]} />
       ));
       setProductList(productListData);

@@ -29,6 +29,7 @@
     "postbuild": "next-sitemap"
   },
   "dependencies": {
+    "@appbaseio/reactivesearch": "^3.22.0",
     "@auth0/nextjs-auth0": "^1.5.0",
     "@headlessui/react": "^1.4.0",
     "@reduxjs/toolkit": "^1.6.0",

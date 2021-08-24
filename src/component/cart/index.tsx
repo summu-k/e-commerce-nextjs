@@ -1,13 +1,14 @@
+/* eslint-disable camelcase */
 import React, { FC } from 'react';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import LinkComponent from '../../component/actionableButtons/LinkComponent';
 import { incrementQuantity, decrementQuantity } from '../../../redux/cartSlice';
-import { ProductDataProps } from '../../utils/interfaces';
+import { ProductMapProps } from '../../utils/interfaces';
 import Button from '../actionableButtons/Button';
 
 type ProductListingProps = {
-  cart: ProductDataProps[];
+  cart: ProductMapProps[];
 };
 
 const CartProductInfo: FC<ProductListingProps> = ({ cart }) => {
@@ -16,14 +17,14 @@ const CartProductInfo: FC<ProductListingProps> = ({ cart }) => {
     <div className="col-span-2 p-5">
       <h1 className="text-xl font-medium">Shopping Cart</h1>
       {cart.map((item) => {
-        const { id, image, quantity, name, species } = item;
+        const { id, images, quantity, product_name } = item;
         return (
           <div className="flex justify-between items-center mt-6 pt-6" key={id}>
             <div className="flex items-center">
-              <Image src={image} className="rounded-full" height="90" width="65" />
+              <Image src={images[0]} className="rounded-full" height="90" width="65" />
               <div className="flex flex-col ml-3">
-                <span className="md:text-md font-medium">{name}</span>
-                <span className="text-xs font-light text-gray-400">{species}</span>
+                <span className="md:text-md font-medium">{product_name}</span>
+                {/* <span className="text-xs font-light text-gray-400">{species}</span> */}
               </div>
             </div>
             <div className="xl:flex md:flex justify-center items-center">

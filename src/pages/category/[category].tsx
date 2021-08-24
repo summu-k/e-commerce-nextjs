@@ -3,13 +3,13 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { getProductsByCategory, getProductCount } from '../api/category/[category]';
-import { ProductDataProps } from '../../utils/interfaces';
+import { ProductMapProps } from '../../utils/interfaces';
 
 const ProductCardTheme = dynamic(() => import('../../component/ProductCardTheme'), {
   loading: () => <p>Loading...</p>,
 });
 
-const CategoryPage = ({ products, productCount }: { products: ProductDataProps[]; productCount: number }) => {
+const CategoryPage = ({ products, productCount }: { products: ProductMapProps[]; productCount: number }) => {
   const router = useRouter();
 
   const [data, setData] = useState(products);
