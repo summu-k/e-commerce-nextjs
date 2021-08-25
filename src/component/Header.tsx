@@ -111,7 +111,7 @@ const Header: FC<ComponentProps> = ({ children }) => {
             {user && (
               <>
                 <LinkComponent linkhref="/api/auth/logout" linkname="Log Out" />
-                <div className="ml-3 relative dropdown group">
+                <div className="ml-3 relative dropdown group hidden md:block xl:block lg:block">
                   <div>
                     <Button
                       buttonClass="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
