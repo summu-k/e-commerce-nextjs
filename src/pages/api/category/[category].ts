@@ -30,3 +30,9 @@ export async function getProductByBrands(brand: string, limit: number, offset: n
   const allProducts = await webAppAxios.get(productUrl);
   return allProducts.data;
 }
+
+export async function getSearchProduct(brand: string, priceRange: string, limit: number, offset: number) {
+  const productUrl = `products/search?brand=${brand}&priceRange=${priceRange}&limit=${limit}&offset=${offset}`;
+  const allProducts = await webAppAxios.get(productUrl);
+  return allProducts.data;
+}

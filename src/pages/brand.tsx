@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { GetStaticProps } from 'next';
-import CategoryCard from '../component/BrandCard';
+import BrandCard from '../component/BrandCard';
 
 const Category: FC = () => (
   <main className="container mx-auto flex items-center flex-wrap pt-4 pb-12">
@@ -19,15 +19,15 @@ const Category: FC = () => (
       />
     </div> */}
     <div className="large">
-      <CategoryCard
+      <BrandCard
         image="https://content.adidas.co.in/static/Product-B44832/Women_CORE_RUNNING_SHOES_LOW_B44832_4.jpg"
         name="NEO"
       />
-      <CategoryCard
+      <BrandCard
         image="https://content.adidas.co.in/static/Product-F34485/Women_CORE_SHOES_LOW_F34485_6.jpg"
         name="ORIGINALS"
       />
-      <CategoryCard
+      <BrandCard
         image="https://content.adidas.co.in/static/Product-CL7374/Women_CORE_RUNNING_SHOES_LOW_CL7374_1.jpg"
         name="SPORT PERFORMANCE"
       />
