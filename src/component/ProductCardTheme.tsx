@@ -57,7 +57,7 @@ const ProductCardTheme = ({
         setWishlistAdded(false);
       } else {
         setWishlistsCount(wishlistsCount + 1);
-        addWishlist({ productId: id, image: images, product_name, sale_price, brand });
+        addWishlist({ productId: id, images, product_name, sale_price, brand });
         setWishlistAdded(true);
       }
     }

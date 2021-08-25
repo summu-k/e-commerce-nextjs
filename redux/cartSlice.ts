@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ProductDataProps } from '../src/utils/interfaces';
+import { ProductMapProps } from '../src/utils/interfaces';
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState: [],
   reducers: {
-    addToCart: (state: ProductDataProps[], action) => {
-      const itemExists: ProductDataProps | undefined = state.find(
-        (item: ProductDataProps) => item.id === action.payload.id
+    addToCart: (state: ProductMapProps[], action) => {
+      const itemExists: ProductMapProps | undefined = state.find(
+        (item: ProductMapProps) => item.id === action.payload.id
       );
       if (itemExists && itemExists.quantity) {
         itemExists.quantity += 1;
@@ -16,22 +16,22 @@ const cartSlice = createSlice({
       }
       localStorage.setItem('cart', JSON.stringify(state));
     },
-    incrementQuantity: (state: ProductDataProps[], action) => {
-      const itemIncFind: ProductDataProps | undefined = state.find(
-        (itemInc: ProductDataProps) => itemInc.id === action.payload
+    incrementQuantity: (state: ProductMapProps[], action) => {
+      const itemIncFind: ProductMapProps | undefined = state.find(
+        (itemInc: ProductMapProps) => itemInc.id === action.payload
       );
       if (itemIncFind && itemIncFind.quantity) {
         itemIncFind.quantity += 1;
         localStorage.setItem('cart', JSON.stringify(state));
       }
     },
-    decrementQuantity: (state: ProductDataProps[], action) => {
-      const itemDecFind: ProductDataProps | undefined = state.find(
-        (item: ProductDataProps) => item.id === action.payload
+    decrementQuantity: (state: ProductMapProps[], action) => {
+      const itemDecFind: ProductMapProps | undefined = state.find(
+        (item: ProductMapProps) => item.id === action.payload
       );
       if (itemDecFind && itemDecFind.quantity) {
         if (itemDecFind.quantity === 1) {
-          const index = state.findIndex((item: ProductDataProps) => item.id === action.payload);
+          const index = state.findIndex((item: ProductMapProps) => item.id === action.payload);
           state.splice(index, 1);
         } else {
           itemDecFind.quantity -= 1;
@@ -40,7 +40,7 @@ const cartSlice = createSlice({
       }
     },
     removeFromCart: (state, action) => {
-      const index = state.findIndex((item: ProductDataProps) => item.id === action.payload);
+      const index = state.findIndex((item: ProductMapProps) => item.id === action.payload);
       state.splice(index, 1);
       localStorage.setItem('cart', JSON.stringify(state));
     },

@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Image from 'next/image';
 import { fetchSingleProduct } from '../api/product/[id]';
-// import fetchAllProduct from '../../actions/shopping/asyncHooks';
 import { fetchAllProduct } from '../../pages/api/product';
 import { ProductMapProps, ProductPropsMap } from '../../utils/interfaces';
 import BackToProductButton from '../../component/BackToProductButton';

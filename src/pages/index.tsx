@@ -5,13 +5,7 @@ import { FieldSet } from 'airtable/lib/field_set';
 import { Records } from 'airtable/lib/records';
 import { table, minifyRecords } from './api/utils/airtable';
 import { fetchAllProduct } from './api/product';
-import {
-  // ProductDataProps,
-  ProductMapProps,
-  WishlistItemProps,
-  WishlistMapType,
-  AuthContextType,
-} from '../utils/interfaces';
+import { ProductMapProps, WishlistItemProps, WishlistMapType, AuthContextType } from '../utils/interfaces';
 import ProductCardTheme from '../component/ProductCardTheme';
 import CardSkeleton from '../component/Skeleton';
 import HeroSection from '../component/HeroSection';

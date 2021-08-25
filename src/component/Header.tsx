@@ -7,7 +7,7 @@ import { isTablet, isDesktop } from 'react-device-detect';
 import { useUser } from '@auth0/nextjs-auth0';
 import LinkComponent from './actionableButtons/LinkComponent';
 import { addToCart } from '../../redux/cartSlice';
-import { ProductDataProps, AuthContextType } from '../utils/interfaces';
+import { ProductMapProps, AuthContextType } from '../utils/interfaces';
 import { WishlistContext } from '../contexts/WishlistContext';
 import HeaderNav from './HeaderNav';
 import Button from '../component/actionableButtons/Button';
@@ -24,7 +24,7 @@ const Header: FC<ComponentProps> = ({ children }) => {
   const { user } = useUser();
   const { wishlistsCount } = useContext(WishlistContext) as AuthContextType;
 
-  let cartFromLocalStorage: ProductDataProps[] = [];
+  let cartFromLocalStorage: ProductMapProps[] = [];
   const dispatch = useDispatch();
   const cart = useAppSelector((state) => state && state.cart);
   const [cartCount, setCartCount] = useState(0);

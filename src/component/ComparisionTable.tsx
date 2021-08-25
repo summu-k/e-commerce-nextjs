@@ -1,22 +1,22 @@
 import React, { FC } from 'react';
 import Image from 'next/image';
-import { ProductDataProps } from '../utils/interfaces';
+import { ProductMapProps } from '../utils/interfaces';
 
 interface ComparisionTableProps {
-  products: ProductDataProps[];
+  products: ProductMapProps[];
 }
 
 const ComparisionTable: FC<ComparisionTableProps> = ({ products }) => {
-  const comparisionHeader = (productArray: ProductDataProps[]) =>
-    productArray.map((entry: ProductDataProps) => (
+  const comparisionHeader = (productArray: ProductMapProps[]) =>
+    productArray.map((entry: ProductMapProps) => (
       <th
         key={entry.id}
         className="w-1/5 bg-gray-200 text-center border border-gray-400 font-normal px-4 py-6 sticky top-0"
       >
-        <div className="uppercase tracking-wide font-bold text-gray-700">{entry.name}</div>
+        <div className="uppercase tracking-wide font-bold text-gray-700">{entry.product_name}</div>
         <div className="mt-3">
           <span className="text-lg">$</span>
-          <span className="font-bold text-4xl ml-1">9.99</span>
+          <span className="font-bold text-4xl ml-1">{entry.sale_price}</span>
         </div>
       </th>
     ));
@@ -35,12 +35,12 @@ const ComparisionTable: FC<ComparisionTableProps> = ({ products }) => {
         <tbody>
           <tr className="odd:bg-white even:bg-gray-100">
             <td className="border border-gray-400 text-left px-4 py-6">Image</td>
-            {products.map(({ id, image }) => (
+            {products.map(({ id, images }) => (
               <td key={id} className="border border-gray-400 text-center px-4 py-6">
                 <Image
                   data-test-py="categoryProducts"
                   className="hover:grow hover:shadow-lg"
-                  src={image}
+                  src={images[0]}
                   height={300}
                   width={300}
                   alt="Product images"
@@ -49,42 +49,26 @@ const ComparisionTable: FC<ComparisionTableProps> = ({ products }) => {
             ))}
           </tr>
           <tr className="odd:bg-white even:bg-gray-100">
-            <td className="border border-gray-400 text-left px-4 py-6">Status</td>
-            {products.map(({ id, status }) => (
+            <td className="border border-gray-400 text-left px-4 py-6">Brand</td>
+            {products.map(({ id, brand }) => (
               <td key={id} className="border border-gray-400 text-center px-4 py-6">
-                {status}
+                {brand}
               </td>
             ))}
           </tr>
           <tr className="odd:bg-white even:bg-gray-100">
-            <td className="border border-gray-400 text-left px-4 py-6">Species</td>
-            {products.map(({ id, species }) => (
+            <td className="border border-gray-400 text-left px-4 py-6">Description</td>
+            {products.map(({ id, description }) => (
               <td key={id} className="border border-gray-400 text-center px-4 py-6">
-                {species}
+                {description}
               </td>
             ))}
           </tr>
           <tr className="odd:bg-white even:bg-gray-100">
-            <td className="border border-gray-400 text-left px-4 py-6">Gender</td>
-            {products.map(({ id, gender }) => (
+            <td className="border border-gray-400 text-left px-4 py-6">Rating</td>
+            {products.map(({ id, rating }) => (
               <td key={id} className="border border-gray-400 text-center px-4 py-6">
-                {gender}
-              </td>
-            ))}
-          </tr>
-          <tr className="odd:bg-white even:bg-gray-100">
-            <td className="border border-gray-400 text-left px-4 py-6">Origin</td>
-            {products.map(({ id, origin }) => (
-              <td key={id} className="border border-gray-400 text-center px-4 py-6">
-                {origin?.name}
-              </td>
-            ))}
-          </tr>
-          <tr className="odd:bg-white even:bg-gray-100">
-            <td className="border border-gray-400 text-left px-4 py-6">Location</td>
-            {products.map(({ id, location }) => (
-              <td key={id} className="border border-gray-400 text-center px-4 py-6">
-                {location?.name}
+                {rating}
               </td>
             ))}
           </tr>

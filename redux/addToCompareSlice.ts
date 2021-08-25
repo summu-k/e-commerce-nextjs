@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import { ProductDataProps } from '../src/utils/interfaces';
+import { ProductMapProps } from '../src/utils/interfaces';
 
 interface CompareProductProps {
-  products: ProductDataProps[];
+  products: ProductMapProps[];
   show: boolean;
 }
 
@@ -15,7 +15,7 @@ const addToCompareSlice = createSlice({
       state.products.push({ ...action.payload.products, quantity: 1 });
     },
     removeFromCompare: (state: CompareProductProps, action) => {
-      const index = state.products.findIndex((item: ProductDataProps) => item.id === action.payload);
+      const index = state.products.findIndex((item: ProductMapProps) => item.id === action.payload);
       state.products.splice(index, 1);
     },
     showCompareModal: (state: CompareProductProps, action) => {
