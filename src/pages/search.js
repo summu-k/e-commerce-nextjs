@@ -34,7 +34,7 @@ const ProductCardTheme = dynamic(() => import('../component/ProductCardTheme'), 
 function Search({ products, productCount }) {
   const router = useRouter();
   const { query = 'all', brand = 'all', price = 'all', sort = 'featured' } = router.query;
-  const [data] = useState(products);
+  const [data, setData] = useState([]);
   const [hasMore, setHasMore] = useState(true);
 
   const filterSearch = ({ page, brand, limit, offset, sort, min, max, searchQuery, price, rating }) => {
@@ -57,10 +57,8 @@ function Search({ products, productCount }) {
     });
   };
 
-  const pageHandler = (e, page) => {
-    console.log('page---- ');
-    console.log(page);
-    filterSearch({ page });
+  const pageHandler = () => {
+    filterSearch({ limit: 20, offset: data.length + 1 });
   };
 
   //   const getMoreResults = async () => {
@@ -71,23 +69,17 @@ function Search({ products, productCount }) {
   //     }
   //   };
 
-  //   useEffect(() => {
-  //     if (products) {
-  //       setData(products);
-  //     }
-  //   }, [products]);
+  useEffect(() => {
+    if (products) {
+      setData(products);
+    }
+  }, [products]);
 
   useEffect(() => {
     if (data) {
-      console.log('productCount prev ', productCount);
-      console.log('data.length prev ', data.length);
       setHasMore(productCount > data.length);
     }
   }, [data]);
-
-  useEffect(() => {
-    console.log('hasMore val ', hasMore);
-  }, [hasMore]);
 
   const brandHandler = (e) => {
     filterSearch({ brand: e.target.value });
@@ -102,7 +94,7 @@ function Search({ products, productCount }) {
   };
 
   return (
-    <Grid className="mt1 productListingWrapper mx-auto pt-4 pb-12 container" container spacing={1}>
+    <Grid className="mt-1 productListingWrapper mx-auto pt-4 pb-12 container" container spacing={1}>
       <Grid item md={3}>
         <List>
           <ListItem>
@@ -160,7 +152,7 @@ function Search({ products, productCount }) {
             </Select>
           </Grid>
         </Grid>
-        <Grid container spacing={3}>
+        <Grid className="mt-3" container spacing={3}>
           <InfiniteScroll
             dataLength={data.length}
             next={pageHandler}
