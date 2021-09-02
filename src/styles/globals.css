@@ -314,18 +314,8 @@ svg:not(:root) {
   text-align: center;
 }
 
-/* .productListWrapper { */
-/* height: 330vh; */
-/* } */
-
-/* .productListingWrapper {
-  height: 330vh;
-} */
-
-/* @media only screen and (max-width: 600px) {
-  .productListWrapper,
-  .productListingWrapper {
-    height: 1250vh;
-  }
-} */
+.loginForm {
+  max-width: 800;
+  margin: 0 auto;
+}
 @tailwind utilities;
