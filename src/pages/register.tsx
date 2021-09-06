@@ -1,20 +1,15 @@
 import { List, ListItem, Typography, TextField, Button, Link, Grid } from '@material-ui/core';
-import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState, useContext, useEffect, FC } from 'react';
+import NextLink from 'next/link';
+import React, { useContext, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
-import GoogleButton from 'react-google-button';
 import { AuthContextType } from '../utils/interfaces';
-import { authenticateUser } from './api/users';
 import { WishlistContext } from '../contexts/WishlistContext';
+import { registerUser } from './api/users';
 
-type ComponentProps = React.PropsWithChildren<{}>;
-
-const Login: FC<ComponentProps> = () => {
+export default function Register() {
   const router = useRouter();
   const { redirect } = router.query;
-  console.log('redirect onneee ');
-  console.log(redirect);
   const { state, dispatch } = useContext(WishlistContext) as AuthContextType;
   const { userInfo } = state;
   useEffect(() => {
@@ -22,12 +17,23 @@ const Login: FC<ComponentProps> = () => {
       router.push('/');
     }
   }, []);
+
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const submitHandler = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      alert("passwords don't match");
+      return;
+    }
     try {
-      const { data } = await authenticateUser(email, password);
+      const  data  = await registerUser({ body: { name, email, password } });
+
+      console.log('data register ');
+      console.log(data);
+
       dispatch({ type: 'USER_LOGIN', payload: data });
       Cookies.set('userInfo', JSON.stringify(data));
       router.push((redirect || '/') as string);
@@ -37,9 +43,21 @@ const Login: FC<ComponentProps> = () => {
   };
   return (
     <Grid className="mt-1 productListingWrapper mx-auto pt-4 pb-12" container>
-      <form onSubmit={submitHandler} className="loginForm">
-        <Typography>Login</Typography>
+      <form onSubmit={submitHandler} className="form">
+        <Typography component="h1" variant="h1">
+          Register
+        </Typography>
         <List>
+          <ListItem>
+            <TextField
+              variant="outlined"
+              fullWidth
+              id="name"
+              label="Name"
+              inputProps={{ type: 'text' }}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </ListItem>
           <ListItem>
             <TextField
               variant="outlined"
@@ -61,27 +79,28 @@ const Login: FC<ComponentProps> = () => {
             />
           </ListItem>
           <ListItem>
+            <TextField
+              variant="outlined"
+              fullWidth
+              id="confirmPassword"
+              label="Confirm Password"
+              inputProps={{ type: 'password' }}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </ListItem>
+          <ListItem>
             <Button variant="contained" type="submit" fullWidth color="primary">
-              Login
+              Register
             </Button>
           </ListItem>
           <ListItem>
-            Don&apos;t have an account? &nbsp;
-            <NextLink href={`/register?redirect=${redirect || '/'}`} passHref>
-              <Link>Register</Link>
+            Already have an account? &nbsp;
+            <NextLink href={`/login?redirect=${redirect || '/'}`} passHref>
+              <Link>Login</Link>
             </NextLink>
-          </ListItem>
-          <ListItem>
-            <GoogleButton
-              onClick={() => {
-                router.push('/api/auth/login');
-              }}
-            />
           </ListItem>
         </List>
       </form>
     </Grid>
   );
-};
-
-export default Login;
+}

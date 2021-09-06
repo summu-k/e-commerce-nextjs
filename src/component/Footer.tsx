@@ -1,8 +1,8 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
-import { showCompareModal } from '../../redux/addToCompareSlice';
+import { showCompareModal } from '../redux/addToCompareSlice';
 import LinkComponent from '../component/actionableButtons/LinkComponent';
-import type { RootState } from '../../redux/store';
+import type { RootState } from '../redux/store';
 import Button from '../component/actionableButtons/Button';
 import showToast from '../utils/showToast';
 

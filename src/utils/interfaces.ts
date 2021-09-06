@@ -91,6 +91,31 @@ export type WishlistFieldProps = {
   images: Array<string>;
 };
 
+export type ProductProps = {
+  brand: string;
+  description: string;
+  discount: number;
+  id: number;
+  images: Array<string>;
+  listing_price: 14999;
+  product_id: number;
+  product_name: string;
+  product_url: string;
+  rating: number;
+  reviews: number;
+  sale_price: number;
+};
+
+export interface userProps {
+  body: {
+    id?: number;
+    name: string;
+    email: string;
+    password: string;
+    is_admin?: boolean;
+  };
+}
+
 export interface AuthContextType {
   wishlists: WishlistItemProps[];
   wishlistsCount: number;
@@ -100,6 +125,8 @@ export interface AuthContextType {
   refreshWishlists: () => void;
   deleteWishlist: (id: string) => void;
   fetchWishlist: (id: number) => void;
+  state: any;
+  dispatch: any;
 }
 
 export type WishlistMapType = Record<number, string>;

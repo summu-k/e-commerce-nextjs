@@ -1,18 +1,22 @@
 /* eslint-disable no-unused-expressions */
 import React, { useState, useContext, useEffect, FC } from 'react';
+import { Button as ButtonUI, Menu, MenuItem, Link } from '@material-ui/core';
+import Router, { useRouter } from 'next/router';
+import NextLink from 'next/link';
+import Cookies from 'js-cookie';
 import dynamic from 'next/dynamic';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
-import Router from 'next/router';
+
 import { isTablet, isDesktop } from 'react-device-detect';
-import { useUser } from '@auth0/nextjs-auth0';
+// import { useUser } from '@auth0/nextjs-auth0';
 import LinkComponent from './actionableButtons/LinkComponent';
-import { addToCart } from '../../redux/cartSlice';
+import { addToCart } from '../redux/cartSlice';
 import { ProductMapProps, AuthContextType } from '../utils/interfaces';
 import { WishlistContext } from '../contexts/WishlistContext';
 import HeaderNav from './HeaderNav';
-import Button from '../component/actionableButtons/Button';
+// import Button from '../component/actionableButtons/Button';
 
-import type { RootState, AppDispatch } from '../../redux/store';
+import type { RootState, AppDispatch } from '../redux/store';
 
 const Notification = dynamic(() => import('./Notification'));
 
@@ -21,12 +25,14 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 type ComponentProps = React.PropsWithChildren<{}>;
 
 const Header: FC<ComponentProps> = ({ children }) => {
-  const { user } = useUser();
-  const { wishlistsCount } = useContext(WishlistContext) as AuthContextType;
+  // const { user } = useUser();
+  const router = useRouter();
+  const { wishlistsCount, state, dispatch } = useContext(WishlistContext) as AuthContextType;
+  const { userInfo } = state;
 
   let cartFromLocalStorage: ProductMapProps[] = [];
-  const dispatch = useDispatch();
-  const cart = useAppSelector((state) => state && state.cart);
+  const dispatchRedux = useDispatch();
+  const cart = useAppSelector((stateT = state) => stateT && stateT.cart);
   const [cartCount, setCartCount] = useState(0);
   const [hideMenu, setHideMenu] = useState(true as boolean);
 
@@ -38,6 +44,21 @@ const Header: FC<ComponentProps> = ({ children }) => {
     setHideMenu(true);
   });
 
+  const [anchorEl, setAnchorEl] = useState(null);
+  const loginClickHandler = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
+  const loginMenuCloseHandler = () => {
+    setAnchorEl(null);
+  };
+  const logoutClickHandler = () => {
+    setAnchorEl(null);
+    dispatch({ type: 'USER_LOGOUT' });
+    Cookies.remove('userInfo');
+    Cookies.remove('cartItems');
+    router.push('/');
+  };
+
   useEffect(() => {
     const returnUrl = localStorage.getItem('cart');
     if (returnUrl) {
@@ -46,7 +67,7 @@ const Header: FC<ComponentProps> = ({ children }) => {
       cartFromLocalStorage = [];
     }
     cartFromLocalStorage.forEach((cartItem) => {
-      dispatch(addToCart(cartItem));
+      dispatchRedux(addToCart(cartItem));
     });
   }, []);
 
@@ -107,7 +128,35 @@ const Header: FC<ComponentProps> = ({ children }) => {
           </div>
 
           <div className="order-2 md:order-3 flex items-center" id="nav-content">
-            {!user && <LinkComponent linkhref="/api/auth/login" linkname="Login" />}
+            {userInfo ? (
+              <>
+                <ButtonUI
+                  aria-controls="simple-menu"
+                  aria-haspopup="true"
+                  onClick={loginClickHandler}
+                  className="navbarButton"
+                >
+                  {userInfo.name.split(' ')[0]}
+                </ButtonUI>
+                <Menu
+                  id="simple-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={loginMenuCloseHandler}
+                >
+                  <MenuItem onClick={loginMenuCloseHandler}>Profile</MenuItem>
+                  <MenuItem onClick={loginMenuCloseHandler}>My account</MenuItem>
+                  <MenuItem onClick={logoutClickHandler}>Logout</MenuItem>
+                </Menu>
+              </>
+            ) : (
+              <NextLink href="/login" passHref>
+                <Link>Login</Link>
+              </NextLink>
+            )}
+
+            {/* {!user && <LinkComponent linkhref="/login" linkname="Login" />}
             {user && (
               <>
                 <LinkComponent linkhref="/api/auth/logout" linkname="Log Out" />
@@ -136,7 +185,7 @@ const Header: FC<ComponentProps> = ({ children }) => {
                   </div>
                 </div>
               </>
-            )}
+            )} */}
             <LinkComponent
               linkhref="/cart"
               classname="pl-3 inline-block no-underline hover:text-black"

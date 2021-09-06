@@ -171,12 +171,7 @@ const ProductListing: FC<ProductListingProps> = ({ results, info, wishlistMap, w
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { query } = context;
   const page = query.page || 1;
-  const species = query.species || '';
-  const gender = query.gender || '';
-  const status = query.status || '';
-  const { results, info } = await getAllFilterProduct(
-    `products?page=${page}&species=${species}&gender=${gender}&status=${status}`
-  );
+  const { results, info } = await getAllFilterProduct(`products?page=${page}`);
   const session = getSession(context.req, context.res);
   const allWislist: Records<FieldSet> = await table
     .select({ filterByFormula: `userId = '${session?.user?.sub}'` })

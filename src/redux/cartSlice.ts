@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ProductMapProps } from '../src/utils/interfaces';
+import { ProductMapProps } from '../utils/interfaces';
 
 const cartSlice = createSlice({
   name: 'cart',

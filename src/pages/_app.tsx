@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import type { AppProps } from 'next/app';
 import Router from 'next/router';
 import '../styles/globals.css';
-import store from '../../redux/store';
+import store from '../redux/store';
 import Seo from '../component/Seo';
 import Layout from '../component/baseLayouts/Layout';
 import { WishlistProvider } from '../contexts/WishlistContext';

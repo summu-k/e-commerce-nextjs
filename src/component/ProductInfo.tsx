@@ -2,7 +2,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { ProductMapProps } from '../utils/interfaces';
-import { addToCart } from '../../redux/cartSlice';
+import { addToCart } from '../redux/cartSlice';
 import Button from './actionableButtons/Button';
 import showToast from '../utils/showToast';
 

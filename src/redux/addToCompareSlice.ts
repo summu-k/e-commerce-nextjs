@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import { ProductMapProps } from '../src/utils/interfaces';
+import { ProductMapProps } from '../utils/interfaces';
 
 interface CompareProductProps {
   products: ProductMapProps[];

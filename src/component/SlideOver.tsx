@@ -2,9 +2,9 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
-import { showCompareModal } from '../../redux/addToCompareSlice';
-import { addNotification } from '../../redux/notificationSlice';
-import type { RootState, AppDispatch } from '../../redux/store';
+import { showCompareModal } from '../redux/addToCompareSlice';
+import { addNotification } from '../redux/notificationSlice';
+import type { RootState, AppDispatch } from '../redux/store';
 import ComparisionTable from '../component/ComparisionTable';
 import Button from '../component/actionableButtons/Button';
 

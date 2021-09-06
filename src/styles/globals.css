@@ -318,4 +318,9 @@ svg:not(:root) {
   max-width: 800;
   margin: 0 auto;
 }
+.navbarButton {
+  color: '#ffffff';
+  text-transform: initial;
+}
+
 @tailwind utilities;

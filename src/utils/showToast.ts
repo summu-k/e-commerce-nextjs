@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import type { AppDispatch } from '../../redux/store';
-import { addNotification } from '../../redux/notificationSlice';
+import type { AppDispatch } from '../redux/store';
+import { addNotification } from '../redux/notificationSlice';
 
 interface ToastProps {
   message: string;

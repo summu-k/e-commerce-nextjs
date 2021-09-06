@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import LinkComponent from '../../component/actionableButtons/LinkComponent';
-import { incrementQuantity, decrementQuantity } from '../../../redux/cartSlice';
+import { incrementQuantity, decrementQuantity } from '../../redux/cartSlice';
 import { ProductMapProps } from '../../utils/interfaces';
 import Button from '../actionableButtons/Button';
 

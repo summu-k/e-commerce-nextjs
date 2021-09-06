@@ -21,3 +21,8 @@ export async function getAllFilterProduct(productUrl: string) {
   const allProducts = await webAppAxios.get(productUrl);
   return allProducts.data;
 }
+
+export async function getAllFilterProductWithToken(productUrl: string, token: Object) {
+  const allProducts = await webAppAxios.get(productUrl, token);
+  return allProducts.data;
+}

@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
 import { CartProductInfo, CartOrderSummary } from '../component/cart';
 
-import type { RootState, AppDispatch } from '../../redux/store';
+import type { RootState, AppDispatch } from '../redux/store';
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

@@ -1,12 +1,33 @@
-import React, { createContext, useState, FC } from 'react';
+import React, { createContext, useReducer, useState, FC } from 'react';
+import Cookies from 'js-cookie';
 import { WishlistItemProps, WishlistFieldProps } from '../utils/interfaces';
 
 const WishlistContext = createContext({});
 type ComponentProps = React.PropsWithChildren<{}>;
 
+const initialState = {
+  userInfo: Cookies.get('userInfo') ? JSON.parse(Cookies.get('userInfo')) : null,
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'USER_LOGIN':
+      return { ...state, userInfo: action.payload };
+    case 'USER_LOGOUT':
+      return {
+        ...state,
+        userInfo: null,
+      };
+
+    default:
+      return state;
+  }
+}
+
 const WishlistProvider: FC<ComponentProps> = ({ children }) => {
   const [wishlists, setWishlists] = useState<WishlistItemProps[]>([]);
   const [wishlistsCount, setWishlistsCount] = useState<number>(0);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const refreshWishlists = async () => {
     try {
@@ -74,6 +95,8 @@ const WishlistProvider: FC<ComponentProps> = ({ children }) => {
     <WishlistContext.Provider
       value={{
         wishlists,
+        state,
+        dispatch,
         setWishlists,
         wishlistsCount,
         setWishlistsCount,
