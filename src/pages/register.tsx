@@ -29,11 +29,7 @@ export default function Register() {
       return;
     }
     try {
-      const  data  = await registerUser({ body: { name, email, password } });
-
-      console.log('data register ');
-      console.log(data);
-
+      const data = await registerUser({ body: { name, email, password } });
       dispatch({ type: 'USER_LOGIN', payload: data });
       Cookies.set('userInfo', JSON.stringify(data));
       router.push((redirect || '/') as string);

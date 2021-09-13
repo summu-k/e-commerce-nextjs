@@ -13,8 +13,6 @@ type ComponentProps = React.PropsWithChildren<{}>;
 const Login: FC<ComponentProps> = () => {
   const router = useRouter();
   const { redirect } = router.query;
-  console.log('redirect onneee ');
-  console.log(redirect);
   const { state, dispatch } = useContext(WishlistContext) as AuthContextType;
   const { userInfo } = state;
   useEffect(() => {

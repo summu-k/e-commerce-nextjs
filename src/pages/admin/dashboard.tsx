@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import React, { useEffect, useContext, useReducer } from 'react';
+import Image from 'next/image';
 import {
   Grid,
   List,
@@ -76,13 +77,6 @@ function AdminDashboard() {
         const { results, info } = await getAllFilterProductWithToken(`products?page=${page}`, {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
-
-        console.log('results: ');
-        console.log(results);
-
-        console.log('info: ');
-        console.log(info);
-
         dispatch({ type: 'FETCH_SUCCESS', payload: results, info });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: err });
@@ -168,9 +162,10 @@ function AdminDashboard() {
                     <TableRow>
                       <TableCell>ID</TableCell>
                       <TableCell>NAME</TableCell>
+                      <TableCell>IMAGE</TableCell>
                       <TableCell>BRAND</TableCell>
                       <TableCell>SALES PRICE</TableCell>
-                      <TableCell>DESCRIPTION</TableCell>
+                      {/* <TableCell>DESCRIPTION</TableCell> */}
                       <TableCell>DISCOUNT</TableCell>
                       <TableCell>RATING</TableCell>
                       <TableCell>ACTIONS</TableCell>
@@ -180,10 +175,13 @@ function AdminDashboard() {
                     {products.map((product: ProductProps) => (
                       <TableRow key={product.id}>
                         <TableCell>{product.id}</TableCell>
-                        <TableCell>{product.product_name}</TableCell>
+                        <TableCell style={{ width: '10%' }}>{product.product_name}</TableCell>
+                        <TableCell style={{ width: '10%' }}>
+                          <Image src={product.images[0]} height={300} width={300} alt="Product images" />
+                        </TableCell>
                         <TableCell>{product.brand}</TableCell>
                         <TableCell>${product.sale_price}</TableCell>
-                        <TableCell>{product.description}</TableCell>
+                        {/* <TableCell style={{ width: '25%' }}>{product.description}</TableCell> */}
                         <TableCell>{product.discount}</TableCell>
                         <TableCell>{product.rating}</TableCell>
                         <TableCell>

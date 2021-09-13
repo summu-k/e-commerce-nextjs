@@ -5,8 +5,6 @@ import { userProps } from '../../../utils/interfaces';
 export async function authenticateUser(email: string, password: string) {
   const url = '/api/users/authenticate';
   const userInfo = await webAppAxios.post(url, { email, password });
-  console.log('userInfo response ');
-  console.log(userInfo);
   return userInfo;
 }
 

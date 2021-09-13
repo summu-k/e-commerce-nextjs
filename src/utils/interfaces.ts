@@ -97,7 +97,7 @@ export type ProductProps = {
   discount: number;
   id: number;
   images: Array<string>;
-  listing_price: 14999;
+  listing_price: number;
   product_id: number;
   product_name: string;
   product_url: string;
@@ -114,6 +114,16 @@ export interface userProps {
     password: string;
     is_admin?: boolean;
   };
+}
+
+export interface productProps {
+  id?: number;
+  product_name: string;
+  brand: string;
+  sale_price: number;
+  images: Array<string>;
+  discount: number;
+  rating: number;
 }
 
 export interface AuthContextType {

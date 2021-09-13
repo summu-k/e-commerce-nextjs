@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import webAppAxios from '../../../httpClient/index';
+import { productProps } from '../../../utils/interfaces';
 
 export async function fetchSingleProduct(id: string | undefined) {
   const url = `products/${id}`;
@@ -23,4 +24,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 export async function getFilteredProduct(productUrl: string): Promise<Response> {
   const searchResult = await fetch(`${productUrl}`);
   return searchResult;
+}
+
+export async function updateProduct(id: string, payload: productProps) {
+  const updateUrl = `/api/products/updateProduct/${id}`;
+  const updatedProduct = await webAppAxios.post(updateUrl, payload);
+  return updatedProduct;
+}
+
+export async function uploadProductImage(body: any, payload: any) {
+  const updateUrl = '/api/products/uploadSingle';
+  const updatedProduct = await webAppAxios.post(updateUrl, body, payload);
+  return updatedProduct;
 }

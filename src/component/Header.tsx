@@ -9,6 +9,7 @@ import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
 
 import { isTablet, isDesktop } from 'react-device-detect';
 // import { useUser } from '@auth0/nextjs-auth0';
+import { UrlObject } from 'url';
 import LinkComponent from './actionableButtons/LinkComponent';
 import { addToCart } from '../redux/cartSlice';
 import { ProductMapProps, AuthContextType } from '../utils/interfaces';
@@ -45,11 +46,14 @@ const Header: FC<ComponentProps> = ({ children }) => {
   });
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const loginClickHandler = (e) => {
+  const loginClickHandler = (e: { currentTarget: any }) => {
     setAnchorEl(e.currentTarget);
   };
-  const loginMenuCloseHandler = () => {
+  const loginMenuCloseHandler = (redirect: string | UrlObject) => {
     setAnchorEl(null);
+    if (redirect) {
+      router.push(redirect);
+    }
   };
   const logoutClickHandler = () => {
     setAnchorEl(null);
@@ -143,10 +147,11 @@ const Header: FC<ComponentProps> = ({ children }) => {
                   anchorEl={anchorEl}
                   keepMounted
                   open={Boolean(anchorEl)}
-                  onClose={loginMenuCloseHandler}
+                  onClose={() => loginMenuCloseHandler(null)}
                 >
-                  <MenuItem onClick={loginMenuCloseHandler}>Profile</MenuItem>
-                  <MenuItem onClick={loginMenuCloseHandler}>My account</MenuItem>
+                  {userInfo.is_admin && (
+                    <MenuItem onClick={() => loginMenuCloseHandler('/admin/dashboard')}>Admin Dashboard</MenuItem>
+                  )}
                   <MenuItem onClick={logoutClickHandler}>Logout</MenuItem>
                 </Menu>
               </>
